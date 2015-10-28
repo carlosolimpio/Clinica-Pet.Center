@@ -37,10 +37,8 @@ public class RepositorioConsultas {
 		}
 		if(r != null) 
 			return r;
-		else {
-			ONExistenteException one = new ONExistenteException(idConsulta);
-			throw one;
-		}
+		else 
+			throw new ONExistenteException(idConsulta);
 	}
 	
 	public ArrayList<Consulta> lista() {
@@ -56,18 +54,14 @@ public class RepositorioConsultas {
 				break;
 			}
 		}
-		if(!r) {
-			ONExistenteException one = new ONExistenteException(idConsulta);
-			throw one;
-		}
+		if(!r) 
+			throw new ONExistenteException(idConsulta);
 	}
 	
 	private void jaExiste(Consulta c) throws OExistenteException {
 		for(Consulta r : consultas) {
-			if(r.equals(c)) {
-				OExistenteException oee = new OExistenteException(c);
-				throw oee;
-			}
+			if(r.equals(c))
+				throw new OExistenteException(c);
 		}
 	}
 }

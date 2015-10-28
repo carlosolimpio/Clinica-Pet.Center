@@ -38,20 +38,15 @@ public class CadastroAnimal {
 	public void removeAnimal(String id) throws ONExistenteException, IDIException {
 		if(Util.isID(id))
 			repositorioAnimal.remove(id);
-		else {
-			IDIException iie = new IDIException(id);
-			throw iie;
-		}
+		else 
+			throw new IDIException(id);
 	}
 	
 	public void alteraAnimal(String id, Animal novo) throws OExistenteException, ONExistenteException, IDIException {
-		if(novo != null && Util.isID(id)) {
+		if(novo != null && Util.isID(id))
 			repositorioAnimal.atualiza(novo, id);
-		}
-		else {
-			IDIException iie = new IDIException(id);
-			throw iie;
-		}
+		else
+			throw new IDIException(id);
 	}
 	
 //	@Override

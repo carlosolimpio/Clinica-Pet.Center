@@ -68,20 +68,6 @@ public class CadastroFuncionario {
 			throw new IDIException(id);
 	}
 	
-	private boolean checkIDFuncionario(String id) {
-		boolean r = false;
-		if(id != null && !id.isEmpty())
-			r = id.startsWith("VT") || id.startsWith("OP");
-		return r;
-	}
-	
-	private boolean isFuncionario(Object obj) {
-		boolean r = false;
-		if(obj != null)
-			r = obj instanceof Funcionario;
-		return r;
-	}
-	
 //	@Override
 //	public String toString(){
 //		return String.format("EXISTEM %d FUNCIONÁRIOS NO SISTEMA",  repositorioFuncionario.lista().size());

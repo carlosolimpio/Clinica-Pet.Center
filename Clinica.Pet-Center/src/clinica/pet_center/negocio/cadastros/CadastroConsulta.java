@@ -20,19 +20,15 @@ public class CadastroConsulta {
 	public void cadastraConsulta(Consulta c) throws OExistenteException, IDIException {
 		if(Util.isID(c.getIdConsulta()))
 			repositorioConsulta.insere(c);
-		else {
-			IDIException iie = new IDIException(c.getIdConsulta());
-			throw iie;
-		}
+		else
+			throw new IDIException(c.getIdConsulta());
 	}
 	
 	public Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		if(Util.isID(idConsulta)) {
+		if(Util.isID(idConsulta))
 			return repositorioConsulta.busca(idConsulta);
-		} else {
-			IDIException iie = new IDIException(idConsulta);
-			throw iie;
-		}
+		else 
+			throw new IDIException(idConsulta);
 	}
 	
 	public ArrayList<Consulta> listaConsultas() {
@@ -42,10 +38,8 @@ public class CadastroConsulta {
 	public void removeConsulta(String idConsulta) throws ONExistenteException, IDIException {
 		if(Util.isID(idConsulta))
 			repositorioConsulta.remove(idConsulta);
-		else {
-			IDIException iie = new IDIException(idConsulta);
-			throw iie;
-		}
+		else 
+			throw new IDIException(idConsulta);
 	}
 	
 //	//será uma consulta se todos parametros de consulta forem != null

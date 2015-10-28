@@ -36,10 +36,8 @@ public class RepositorioAnimais {
 		}
 		if(r != null)
 			return r;
-		else {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}
+		else 
+			throw new ONExistenteException(id);
 	}
 	
 	public ArrayList<Animal> lista() { //fazer exceção
@@ -55,10 +53,8 @@ public class RepositorioAnimais {
 				break;
 			}
 		}
-		if(!r) {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}	
+		if(!r) 
+			throw new ONExistenteException(id);
 	}
 	
 	public void atualiza(Animal novo, String idVelho) throws OExistenteException, ONExistenteException {
@@ -69,10 +65,8 @@ public class RepositorioAnimais {
 	
 	private void jaExiste(Animal animal) throws OExistenteException {
 		for(Animal a : animais) {
-			if(a.equals(animal)) {
-				OExistenteException oee = new OExistenteException(animal);
-				throw oee;
-			}
+			if(a.equals(animal)) 
+				throw new OExistenteException(animal);
 		}
 	}
 	

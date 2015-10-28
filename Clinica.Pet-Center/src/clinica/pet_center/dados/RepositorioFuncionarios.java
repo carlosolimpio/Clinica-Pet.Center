@@ -36,10 +36,8 @@ public class RepositorioFuncionarios {
 		}
 		if(r != null)
 			return r;
-		else {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}
+		else
+			throw new ONExistenteException(id);
 	}
 	
 	public ArrayList<Funcionario> lista() {
@@ -55,10 +53,8 @@ public class RepositorioFuncionarios {
 				break;
 			}
 		}
-		if(!r) {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}
+		if(!r) 
+			throw new ONExistenteException(id);
 	}
 	
 //	public boolean atualiza() {
@@ -67,10 +63,8 @@ public class RepositorioFuncionarios {
 	
 	private void jaExiste(Funcionario func) throws OExistenteException {
 		for(Funcionario f : funcionarios) {
-			if(f.equals(func)) {
-				OExistenteException oee = new OExistenteException(func.getId());
-				throw oee;
-			}
+			if(f.equals(func))
+				throw new OExistenteException(func);
 		}
 	}
 }
