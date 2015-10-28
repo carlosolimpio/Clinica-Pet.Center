@@ -6,7 +6,7 @@ import clinica.pet_center.negocio.basicas.Funcionario;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-public class RepositorioFuncionarios {
+public class RepositorioFuncionarios implements IRepositorioFuncionarios{
 
 	private static RepositorioFuncionarios repositorioFuncionarios;
 	private ArrayList<Funcionario> funcionarios;
@@ -21,11 +21,13 @@ public class RepositorioFuncionarios {
 		return repositorioFuncionarios;
 	}
 	
+	@Override
 	public void insere(Funcionario func) throws OExistenteException {
 		jaExiste(func);
 		funcionarios.add(func);
 	}
 	
+	@Override
 	public Funcionario busca(String id) throws ONExistenteException {
 		Funcionario r = null;
 		for(Funcionario f : funcionarios) {
@@ -40,10 +42,12 @@ public class RepositorioFuncionarios {
 			throw new ONExistenteException(id);
 	}
 	
+	@Override
 	public ArrayList<Funcionario> lista() {
 		return funcionarios;
 	}
 	
+	@Override
 	public void remove(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<funcionarios.size(); i++) {

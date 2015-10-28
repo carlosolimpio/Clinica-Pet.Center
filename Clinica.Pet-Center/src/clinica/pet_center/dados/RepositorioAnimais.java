@@ -6,7 +6,7 @@ import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-public class RepositorioAnimais {
+public class RepositorioAnimais implements IRepositorioAnimais {
 
 	private static RepositorioAnimais repositorioAnimais;
 	private ArrayList<Animal> animais;
@@ -21,11 +21,13 @@ public class RepositorioAnimais {
 		return repositorioAnimais;
 	}
 	
+	@Override
 	public void insere(Animal animal) throws OExistenteException {
 		jaExiste(animal);
 		animais.add(animal);
 	}
 	
+	@Override
 	public Animal busca(String id) throws ONExistenteException {
 		Animal r = null;
 		for(Animal a: animais){
@@ -40,10 +42,12 @@ public class RepositorioAnimais {
 			throw new ONExistenteException(id);
 	}
 	
+	@Override
 	public ArrayList<Animal> lista() { //fazer exceção
 		return animais;
 	}
 	
+	@Override
 	public void remove(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<animais.size(); i++){
@@ -57,6 +61,7 @@ public class RepositorioAnimais {
 			throw new ONExistenteException(id);
 	}
 	
+	@Override
 	public void atualiza(Animal novo, String idVelho) throws OExistenteException, ONExistenteException {
 		jaExiste(novo);
 		remove(idVelho);

@@ -7,7 +7,7 @@ import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-public class RepositorioConsultas {
+public class RepositorioConsultas implements IRepositorioConsultas{
 
 	private static RepositorioConsultas repositorioConsultas;
 	private ArrayList<Consulta> consultas;
@@ -22,11 +22,13 @@ public class RepositorioConsultas {
 		return repositorioConsultas;
 	}
 	
+	@Override
 	public void insere(Consulta c) throws OExistenteException {
 		jaExiste(c);
 		consultas.add(c);
 	}
 	
+	@Override
 	public Consulta busca(String idConsulta) throws ONExistenteException, IDIException {
 		Consulta r = null;
 		for(Consulta c : consultas) {
@@ -41,10 +43,12 @@ public class RepositorioConsultas {
 			throw new ONExistenteException(idConsulta);
 	}
 	
+	@Override
 	public ArrayList<Consulta> lista() {
 		return consultas;
 	}
 	
+	@Override
 	public void remove(String idConsulta) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<consultas.size(); i++) {

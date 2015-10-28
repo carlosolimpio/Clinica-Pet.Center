@@ -6,7 +6,7 @@ import clinica.pet_center.negocio.basicas.Cliente;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-public class RepositorioClientes {
+public class RepositorioClientes implements IRepositorioClientes{
 
 	private static RepositorioClientes repositorioClientes;
 	private ArrayList<Cliente> clientes;
@@ -21,11 +21,13 @@ public class RepositorioClientes {
 		return repositorioClientes;
 	}
 	
+	@Override
 	public void insere(Cliente cliente) throws OExistenteException {
 		jaExiste(cliente);
 		clientes.add(cliente);
 	}
 	
+	@Override
 	public Cliente busca(String id) throws ONExistenteException {
 		Cliente r = null;
 		for(Cliente c : clientes) {
@@ -42,10 +44,12 @@ public class RepositorioClientes {
 		}
 	}
 	
+	@Override
 	public ArrayList<Cliente> lista() {
 		return clientes;
 	}
 	
+	@Override
 	public void remove(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<clientes.size(); i++) {
