@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import clinica.pet_center.dados.RepositorioClientes;
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.basicas.Cliente;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Util;
 
 public class CadastroCliente {
 
@@ -14,45 +18,44 @@ public class CadastroCliente {
 		repositorioCliente = RepositorioClientes.getInstancia();
 	}
 	
-	public boolean cadastraCliente(Cliente cliente) {
-		boolean r = false;
-		if(cliente != null && repositorioCliente.insere(cliente))
-			r = true;	
-		return r;
+	public void cadastraCliente(Cliente cliente) throws OExistenteException, IDIException {
+		if(Util.isID(cliente.getId())) {
+			repositorioCliente.insere(cliente);
+		} else {
+			IDIException iie = new IDIException(cliente.getId());
+			throw iie;
+		}
 	}
 	
-	public Cliente buscaCliente(String id) {
-		Cliente r = null;
-		if(checkIdCliente(id))
-			r = repositorioCliente.busca(id);
-		return r;
+	public Cliente buscaCliente(String id) throws ONExistenteException, IDIException {
+		if(Util.isID(id)) {
+			return repositorioCliente.busca(id);
+		} else {
+			IDIException iie = new IDIException(id);
+			throw iie;
+		}
 	}
 	
 	public ArrayList<Cliente> listaClientes() {
 		return repositorioCliente.lista();
 	}
 	
-	public ArrayList<Animal> listaAnimaisCliente(String id) {
+	public ArrayList<Animal> listaAnimaisCliente(String id) throws ONExistenteException, IDIException {
 		return buscaCliente(id).getAnimais();
 	}
 	
-	public boolean removeCliente(String id) {
-		boolean r = false;
-		if(checkIdCliente(id))
-			r = repositorioCliente.remove(id);
-		return r;
+	public void removeCliente(String id) throws ONExistenteException, IDIException {
+		if(Util.isID(id)) {
+			repositorioCliente.remove(id);
+		} else {
+			IDIException iie = new IDIException(id);
+			throw iie;
+		}
 	}
 	
 //	public boolean alteraCliente() {
 //		
 //	}
-	
-	public boolean checkIdCliente(String id) {
-		boolean r = false;
-		if(id != null && !id.equals("") && id.startsWith("CL"))
-			r = true;
-		return r;
-	}
 	
 //	@Override
 //	public String toString(){

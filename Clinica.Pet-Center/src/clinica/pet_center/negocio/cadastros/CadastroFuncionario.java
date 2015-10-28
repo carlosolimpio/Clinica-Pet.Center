@@ -6,6 +6,10 @@ import clinica.pet_center.dados.RepositorioFuncionarios;
 import clinica.pet_center.negocio.basicas.Funcionario;
 import clinica.pet_center.negocio.basicas.OperadorSistema;
 import clinica.pet_center.negocio.basicas.Veterinario;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Util;
 
 public class CadastroFuncionario {
 
@@ -15,18 +19,18 @@ public class CadastroFuncionario {
 		repositorioFuncionario = RepositorioFuncionarios.getInstancia();
 	}
 	
-	public boolean cadastraFuncionario(Funcionario func) {
-		boolean r = false;
-		if(isFuncionario(func))
-			r = repositorioFuncionario.insere(func);
-		return r;
+	public void cadastraFuncionario(Funcionario func) throws OExistenteException, IDIException {
+		if(Util.isID(func.getId()))
+			repositorioFuncionario.insere(func);
+		else 
+			throw new IDIException(func.getId());
 	}
 	
-	public Funcionario buscaFuncionario(String id) {
-		Funcionario r = null;
-		if(checkIDFuncionario(id))
-		r = repositorioFuncionario.busca(id);
-		return r;
+	public Funcionario buscaFuncionario(String id) throws ONExistenteException, IDIException {
+		if(Util.isID(id))
+			return repositorioFuncionario.busca(id);
+		else
+			throw new IDIException(id);
 	}
 	
 	public ArrayList<Funcionario> listaFuncionarios() {
@@ -57,11 +61,11 @@ public class CadastroFuncionario {
 //		return r;
 //	}
 	
-	public boolean removeFuncionario(String id) {
-		boolean r = false;
-		if(checkIDFuncionario(id))
-		r = repositorioFuncionario.remove(id);
-		return r;
+	public void removeFuncionario(String id) throws ONExistenteException, IDIException {
+		if(Util.isID(id))
+			repositorioFuncionario.remove(id);
+		else
+			throw new IDIException(id);
 	}
 	
 	private boolean checkIDFuncionario(String id) {

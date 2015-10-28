@@ -27,14 +27,12 @@ public class CadastroConsulta {
 	}
 	
 	public Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		Consulta r = null;
 		if(Util.isID(idConsulta)) {
-			r = repositorioConsulta.busca(idConsulta);
+			return repositorioConsulta.busca(idConsulta);
 		} else {
 			IDIException iie = new IDIException(idConsulta);
 			throw iie;
 		}
-		return r;
 	}
 	
 	public ArrayList<Consulta> listaConsultas() {

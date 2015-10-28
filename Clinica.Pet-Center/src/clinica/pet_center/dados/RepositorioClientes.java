@@ -3,6 +3,8 @@ package clinica.pet_center.dados;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Cliente;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public class RepositorioClientes {
 
@@ -19,16 +21,12 @@ public class RepositorioClientes {
 		return repositorioClientes;
 	}
 	
-	public boolean insere(Cliente cliente) {
-		boolean r = false;
-		if(!jaExiste(cliente)) {
-			clientes.add(cliente);
-			r = true;
-		}
-		return r;
+	public void insere(Cliente cliente) throws OExistenteException {
+		jaExiste(cliente);
+		clientes.add(cliente);
 	}
 	
-	public Cliente busca(String id) {
+	public Cliente busca(String id) throws ONExistenteException {
 		Cliente r = null;
 		for(Cliente c : clientes) {
 			if(c.getId().equals(id)) {
@@ -36,14 +34,19 @@ public class RepositorioClientes {
 				break;
 			}
 		}
-		return r;
+		if(r != null)
+			return r;
+		else {
+			ONExistenteException one = new ONExistenteException(id);
+			throw one;
+		}
 	}
 	
 	public ArrayList<Cliente> lista() {
 		return clientes;
 	}
 	
-	public boolean remove(String id) {
+	public void remove(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<clientes.size(); i++) {
 			if(clientes.get(i).getId().equals(id)) {
@@ -52,7 +55,10 @@ public class RepositorioClientes {
 				break;
 			}
 		}
-		return r;
+		if(!r) {
+			ONExistenteException one = new ONExistenteException(id);
+			throw one;
+		}	
 	}
 	
 	//ver aqui depois
@@ -60,14 +66,12 @@ public class RepositorioClientes {
 //		
 //	}
 	
-	public boolean jaExiste(Cliente cliente) {
-		boolean r = false;
+	public void jaExiste(Cliente cliente) throws OExistenteException {
 		for(Cliente c : clientes) {
 			if(c.equals(cliente)) {
-				r = true;
-				break;
+				OExistenteException oee = new OExistenteException(cliente);
+				throw oee;
 			}
 		}
-		return r;
 	}
 }

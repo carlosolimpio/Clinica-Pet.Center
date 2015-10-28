@@ -20,21 +20,15 @@ public class CadastroAnimal {
 	public void cadastraAnimal(Animal animal) throws OExistenteException, IDIException {
 		if(Util.isID(animal.getId()))
 			repositorioAnimal.insere(animal);
-		else {
-			IDIException iie = new IDIException(animal.getId());
-			throw iie;
-		}
+		else
+			throw new IDIException(animal.getId());
 	}
 	
 	public Animal buscaAnimalId(String id) throws ONExistenteException, IDIException {
-		Animal r = null;
 		if(Util.isID(id))
-			r = repositorioAnimal.busca(id);
-		else {
-			IDIException iie = new IDIException(id);
-			throw iie;
-		}
-		return r;
+			return repositorioAnimal.busca(id);
+		else
+			throw new IDIException(id);
 	}
 	
 	public ArrayList<Animal> listaAnimais() {
@@ -42,9 +36,8 @@ public class CadastroAnimal {
 	}
 	
 	public void removeAnimal(String id) throws ONExistenteException, IDIException {
-		if(Util.isID(id)) {
+		if(Util.isID(id))
 			repositorioAnimal.remove(id);
-		}
 		else {
 			IDIException iie = new IDIException(id);
 			throw iie;

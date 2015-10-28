@@ -3,6 +3,8 @@ package clinica.pet_center.dados;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Funcionario;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public class RepositorioFuncionarios {
 
@@ -19,15 +21,12 @@ public class RepositorioFuncionarios {
 		return repositorioFuncionarios;
 	}
 	
-	public boolean insere(Funcionario func) {
-		boolean r = false;
-		
-		if(!jaExiste(func))
-			r = funcionarios.add(func);
-		return r;
+	public void insere(Funcionario func) throws OExistenteException {
+		jaExiste(func);
+		funcionarios.add(func);
 	}
 	
-	public Funcionario busca(String id) {
+	public Funcionario busca(String id) throws ONExistenteException {
 		Funcionario r = null;
 		for(Funcionario f : funcionarios) {
 			if(f.getId().equals(id)) {
@@ -35,14 +34,19 @@ public class RepositorioFuncionarios {
 				break;
 			}
 		}
-		return r;
+		if(r != null)
+			return r;
+		else {
+			ONExistenteException one = new ONExistenteException(id);
+			throw one;
+		}
 	}
 	
 	public ArrayList<Funcionario> lista() {
 		return funcionarios;
 	}
 	
-	public boolean remove(String id) {
+	public void remove(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<funcionarios.size(); i++) {
 			if(funcionarios.get(i).getId().equals(id)) {
@@ -51,22 +55,22 @@ public class RepositorioFuncionarios {
 				break;
 			}
 		}
-		return r;
+		if(!r) {
+			ONExistenteException one = new ONExistenteException(id);
+			throw one;
+		}
 	}
 	
 //	public boolean atualiza() {
 //		
 //	}
 	
-	private boolean jaExiste(Funcionario func) {
-		boolean r = false;
-		
+	private void jaExiste(Funcionario func) throws OExistenteException {
 		for(Funcionario f : funcionarios) {
 			if(f.equals(func)) {
-				r = true;
-				break;
+				OExistenteException oee = new OExistenteException(func.getId());
+				throw oee;
 			}
 		}
-		return r;
 	}
 }
