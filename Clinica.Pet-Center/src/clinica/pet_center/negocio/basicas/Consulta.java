@@ -1,5 +1,7 @@
 package clinica.pet_center.negocio.basicas;
 
+import clinica.pet_center.utilidades.Contadores;
+
 public class Consulta {
 	
 	private Veterinario veterinario;
@@ -10,7 +12,6 @@ public class Consulta {
 	private String receita;
 	private String data;
 	private String idConsulta;
-	private static int contador = 0;
 	
 	/**
 	 * 
@@ -84,7 +85,7 @@ public class Consulta {
 	}
 	
 	private void geraIdConsulta() {
-		this.idConsulta = String.format("CONSULTA|" + contador);
+		this.idConsulta = String.format("CONSULTA|" + Contadores.getQtdConsultas());
 	}
 	
 	public String getIdConsulta() {
