@@ -61,9 +61,12 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios{
 			throw new ONExistenteException(id);
 	}
 	
-//	public boolean atualiza() {
-//		
-//	}
+	@Override
+	public void atualiza(Funcionario funcionario, String id) throws OExistenteException, ONExistenteException {
+		jaExiste(funcionario);
+		remove(id);
+		insere(funcionario);
+	}
 	
 	private void jaExiste(Funcionario func) throws OExistenteException {
 		for(Funcionario f : funcionarios) {

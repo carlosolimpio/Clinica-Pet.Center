@@ -8,8 +8,10 @@ import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public interface IRepositorioConsultas {
+	
 	void insere(Consulta c) throws OExistenteException;
 	Consulta busca(String idConsulta) throws ONExistenteException, IDIException;
 	ArrayList<Consulta> lista();
 	void remove(String idConsulta) throws ONExistenteException;
+	void atualiza(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException;
 }

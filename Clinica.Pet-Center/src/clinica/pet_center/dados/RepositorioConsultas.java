@@ -62,6 +62,7 @@ public class RepositorioConsultas implements IRepositorioConsultas{
 			throw new ONExistenteException(idConsulta);
 	}
 	
+	@Override
 	public void atualiza(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException {
 		jaExiste(novaConsulta);
 		remove(idConsulta);
