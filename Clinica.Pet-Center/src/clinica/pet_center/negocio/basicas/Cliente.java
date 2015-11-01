@@ -2,7 +2,9 @@ package clinica.pet_center.negocio.basicas;
 
 import java.util.ArrayList;
 
+import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
+import clinica.pet_center.utilidades.Util;
 
 public class Cliente extends Pessoa {
 	
@@ -11,6 +13,11 @@ public class Cliente extends Pessoa {
 	public Cliente(String nome, String CPF, String dataNascimento, String email) {
 		super(nome, CPF, dataNascimento, email);
 		geraId();
+	}
+	
+	public Cliente(String id, String nome, String CPF, String dataNascimento, String email) throws IDIException {
+		super(nome, CPF, dataNascimento, email);
+		setId(id);
 	}
 	
 	public void setAnimais(ArrayList<Animal> animais) {
@@ -31,8 +38,14 @@ public class Cliente extends Pessoa {
 		return animais.size();
 	}
 	
+	protected void setId(String id) throws IDIException {
+		if(Util.isID(id))
+			super.id = id;
+		else
+			throw new IDIException(id);
+	}
+
 	public void geraId() {
-		//formato: CL + contadorPessoas (exemplo: CL002) ver aqui depois
 		super.id = String.format("CL" + Contadores.getQtdPessoas());
 	}
 	

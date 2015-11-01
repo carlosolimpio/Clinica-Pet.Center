@@ -19,21 +19,17 @@ public class CadastroCliente {
 	}
 	
 	public void cadastraCliente(Cliente cliente) throws OExistenteException, IDIException {
-		if(Util.isID(cliente.getId())) {
+		if(Util.isID(cliente.getId()))
 			repositorioCliente.insere(cliente);
-		} else {
-			IDIException iie = new IDIException(cliente.getId());
-			throw iie;
-		}
+		else
+			throw new IDIException(cliente.getId());
 	}
 	
 	public Cliente buscaCliente(String id) throws ONExistenteException, IDIException {
-		if(Util.isID(id)) {
+		if(Util.isID(id))
 			return repositorioCliente.busca(id);
-		} else {
-			IDIException iie = new IDIException(id);
-			throw iie;
-		}
+		else
+			throw new IDIException(id);
 	}
 	
 	public ArrayList<Cliente> listaClientes() {
@@ -45,17 +41,18 @@ public class CadastroCliente {
 	}
 	
 	public void removeCliente(String id) throws ONExistenteException, IDIException {
-		if(Util.isID(id)) {
+		if(Util.isID(id))
 			repositorioCliente.remove(id);
-		} else {
-			IDIException iie = new IDIException(id);
-			throw iie;
-		}
+		else 
+			throw new IDIException(id);
 	}
 	
-//	public boolean alteraCliente() {
-//		
-//	}
+	public void alteraCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, IDIException {
+		if(novo != null && Util.isID(id))
+			repositorioCliente.atualiza(novo, id);
+		else
+			throw new IDIException(id);
+	}
 	
 //	@Override
 //	public String toString(){

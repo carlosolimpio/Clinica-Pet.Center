@@ -38,10 +38,8 @@ public class RepositorioClientes implements IRepositorioClientes{
 		}
 		if(r != null)
 			return r;
-		else {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}
+		else
+			throw new ONExistenteException(id);
 	}
 	
 	@Override
@@ -59,23 +57,20 @@ public class RepositorioClientes implements IRepositorioClientes{
 				break;
 			}
 		}
-		if(!r) {
-			ONExistenteException one = new ONExistenteException(id);
-			throw one;
-		}	
+		if(!r)
+			throw new ONExistenteException(id);
 	}
 	
-	//ver aqui depois
-//	public boolean atualiza() {
-//		
-//	}
+	public void atualiza(Cliente novo, String id) throws OExistenteException, ONExistenteException {
+		jaExiste(novo);
+		remove(id);
+		insere(novo);
+	}
 	
 	public void jaExiste(Cliente cliente) throws OExistenteException {
 		for(Cliente c : clientes) {
-			if(c.equals(cliente)) {
-				OExistenteException oee = new OExistenteException(cliente);
-				throw oee;
-			}
+			if(c.equals(cliente))
+				throw new OExistenteException(cliente);
 		}
 	}
 }

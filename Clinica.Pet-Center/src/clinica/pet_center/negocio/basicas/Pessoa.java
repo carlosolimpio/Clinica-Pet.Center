@@ -1,5 +1,6 @@
 package clinica.pet_center.negocio.basicas;
 
+import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
 
 public abstract class Pessoa {
@@ -62,8 +63,9 @@ public abstract class Pessoa {
 		return id;
 	}
 	
-	//gera id pessoal
 	public abstract void geraId();
+	
+	protected abstract void setId(String id) throws IDIException;
 	
 	public abstract boolean equals(Object obj);
 	
