@@ -31,12 +31,14 @@ public interface IFachadaCadastro {
 	ArrayList<Cliente> listaClientes();
 	ArrayList<Animal> listaAnimaisCliente(String id) throws ONExistenteException, IDIException;
 	void removeCliente(String id) throws ONExistenteException, IDIException;
+	void alteraCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, IDIException;
 	
 	//Consulta
 	void cadastraConsulta(Consulta c) throws OExistenteException, IDIException;
 	Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException;
 	ArrayList<Consulta> listaConsultas();
 	void removeConsulta(String idConsulta) throws ONExistenteException, IDIException;
+	void alteraConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException, IDIException; 
 	
 	//Funcionario
 	void cadastraFuncionario(Funcionario func) throws OExistenteException, IDIException;
@@ -45,4 +47,5 @@ public interface IFachadaCadastro {
 	ArrayList<Veterinario> listaVeterinarios();
 	ArrayList<OperadorSistema> listaOperadoresSistema();
 	void removeFuncionario(String id) throws ONExistenteException, IDIException;
+	void alteraFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException;
 }

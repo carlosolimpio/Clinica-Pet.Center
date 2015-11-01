@@ -55,11 +55,12 @@ public class CadastroFuncionario {
 		return r;
 	}
 	
-//	public boolean alteraFuncionario(String id) {
-//		boolean r = false;
-//		
-//		return r;
-//	}
+	public void alteraFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException {
+		if(novo != null && Util.isID(id))
+			repositorioFuncionario.atualiza(novo, id);
+		else
+			throw new IDIException(id);
+	}
 	
 	public void removeFuncionario(String id) throws ONExistenteException, IDIException {
 		if(Util.isID(id))
