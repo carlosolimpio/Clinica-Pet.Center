@@ -1,6 +1,7 @@
 
 package clinica.pet_center.negocio.basicas;
 
+import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
 import clinica.pet_center.utilidades.Util;
 
@@ -8,9 +9,18 @@ public class OperadorSistema extends Funcionario {
 	
 	public OperadorSistema(String nome, String CPF, String dataNascimento,
 			String email, String dataAdmissao, double salarioBase, String senha) {
+		
 		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
 		setSenha(senha);
 		geraId();
+	}
+	
+	public OperadorSistema(String id, String nome, String CPF, String dataNascimento,
+			String email, String dataAdmissao, double salarioBase, String senha) throws IDIException {
+		
+		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
+		setSenha(senha);
+		setId(id);
 	}
 
 	public double calculaSalario(int horasTrabalhadas) {
@@ -27,10 +37,16 @@ public class OperadorSistema extends Funcionario {
 			super.senha = senha;
 	}
 	
-	public void geraId(){
+	public void geraId() {
 		super.id = String.format("OP" + Contadores.getQtdPessoas());
 	}
 	
+	protected void setId(String id) throws IDIException {
+		if(Util.isID(id))
+			super.id = id;
+		else
+			throw new IDIException(id);
+	}
 	
 	@Override
 	public String toString() {

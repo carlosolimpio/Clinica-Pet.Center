@@ -1,5 +1,6 @@
 package clinica.pet_center.negocio.basicas;
 
+import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
 import clinica.pet_center.utilidades.Util;
 
@@ -11,8 +12,18 @@ public class Veterinario extends Funcionario {
 			String dataAdmissao, double salarioBase, String crmv, String senha) {
 		
 		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
+		setSenha(senha);
 		setCrmv(crmv);
 		geraId();
+	}
+	
+	public Veterinario(String id, String nome, String CPF, String dataNascimento, String email, 
+			String dataAdmissao, double salarioBase, String crmv, String senha) throws IDIException {
+		
+		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
+		setSenha(senha);
+		setCrmv(crmv);
+		setId(id);
 	}
 
 	private void setCrmv(String crmv) {
@@ -37,8 +48,14 @@ public class Veterinario extends Funcionario {
 			super.senha = senha;
 	}
 	
+	protected void setId(String id) throws IDIException {
+		if(Util.isID(id))
+			super.id = id;
+		else
+			throw new IDIException(id);
+	}
+	
 	public void geraId() {
-		//formato: VT + contadorPessoas (exemplo: VT002) ver aqui depois
 		super.id = String.format("VT" + Contadores.getQtdPessoas());
 	}
 	
