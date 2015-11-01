@@ -42,6 +42,13 @@ public class CadastroConsulta {
 			throw new IDIException(idConsulta);
 	}
 	
+	public void alteraConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException, IDIException {
+		if(novaConsulta != null && Util.isID(idConsulta))
+			repositorioConsulta.atualiza(novaConsulta, idConsulta);
+		else
+			throw new IDIException(idConsulta);
+	}
+	
 //	//será uma consulta se todos parametros de consulta forem != null
 //	private boolean isConsulta(Consulta c) {
 //		boolean r = false;

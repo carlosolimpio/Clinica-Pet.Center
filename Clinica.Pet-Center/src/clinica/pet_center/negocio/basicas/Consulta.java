@@ -1,6 +1,8 @@
 package clinica.pet_center.negocio.basicas;
 
+import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
+import clinica.pet_center.utilidades.Util;
 
 public class Consulta {
 	
@@ -30,6 +32,14 @@ public class Consulta {
 		setAnimal(animal);
 		setData(data);
 		geraIdConsulta();
+	}
+	
+	public Consulta(String idConsulta, Veterinario veterinario, Cliente cliente, Animal animal, String data) throws IDIException {
+		setIdConsulta(idConsulta);
+		setVeterinario(veterinario);
+		setCliente(cliente);
+		setAnimal(animal);
+		setData(data);
 	}
 
 	public void setVeterinario(Veterinario veterinario) {
@@ -82,6 +92,13 @@ public class Consulta {
 
 	public void setData(String data) {
 		this.data = data != null ? data : this.data;
+	}
+	
+	private void setIdConsulta(String idConsulta) throws IDIException {
+		if(Util.isID(idConsulta))
+			this.idConsulta = idConsulta;
+		else
+			throw new IDIException(idConsulta);
 	}
 	
 	private void geraIdConsulta() {
