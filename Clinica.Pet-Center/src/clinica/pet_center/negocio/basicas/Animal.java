@@ -13,7 +13,7 @@ public class Animal {
 	
 	/**
 	 * 
-	 * @param nome - nome do bicho
+	 * @param nome - n ome do bicho
 	 * @param especie - tipo do animal(gato, cachorro...)
 	 * @param raca - raça
 	 * @param idade - ano de nascimento
