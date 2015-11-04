@@ -7,7 +7,7 @@ public class Util {
 	public static final int HORAS = 40;
 	
 	private static final String LOGIN = "ADMIN";
-	private static final String SENHA = "123";
+	private static final String SENHA = "1234";
 	
 	public static boolean isADM(String login, String senha) {
 		boolean r = false;
