@@ -2,16 +2,16 @@ package clinica.pet_center.negocio.basicas;
 
 public class SolicitacaoCirurgica {
 	private Veterinario crmv;
-	private String codigoCirurgia;
+	private Cirurgia codigoCirurgia;
 	private String dataSolicitacao;
 	private String descricaoCirurgica;
 	
-	public SolicitacaoCirurgica(Veterinario crmv, String codigoCirurgia,
+	public SolicitacaoCirurgica(Veterinario crmv, Cirurgia codigoCirurgia,
 			String dataSolicitacao, String descricaoCirurgica) {
-		this.crmv = crmv;
-		this.codigoCirurgia = codigoCirurgia;
-		this.dataSolicitacao = dataSolicitacao;
-		this.descricaoCirurgica = descricaoCirurgica;
+		setCrmv(crmv);
+		setCodigoCirurgia(codigoCirurgia);
+		setDataSolicitacao(dataSolicitacao);
+		setDescricaoCirurgica(descricaoCirurgica);
 	}
 
 	public Veterinario getCrmv() {
@@ -22,11 +22,11 @@ public class SolicitacaoCirurgica {
 		this.crmv = crmv;
 	}
 
-	public String getCodigoCirurgia() {
+	public Cirurgia getCodigoCirurgia() {
 		return codigoCirurgia;
 	}
 
-	public void setCodigoCirurgia(String codigoCirurgia) {
+	public void setCodigoCirurgia(Cirurgia codigoCirurgia) {
 		this.codigoCirurgia = codigoCirurgia;
 	}
 

@@ -1,48 +1,47 @@
 package clinica.pet_center.negocio.basicas;
 
 public class IntervencaoCirurgica {
-	private String codEquipeMedica;
-	private String codCirurgia;
-	private String idAnimal;
-	private String idDono;
+	private EquipeMedica codEquipeMedica;
+	private Cirurgia codCirurgia;
+	private Animal idAnimal;
+	private Cliente idDono;
 	
-	public IntervencaoCirurgica(String codEquipeMedica, String codCirurgia,
-			String idAnimal, String idDono) {
+	public IntervencaoCirurgica(EquipeMedica codEquipeMedica,
+			Cirurgia codCirurgia, Animal idAnimal, Cliente idDono) {
 		this.codEquipeMedica = codEquipeMedica;
 		this.codCirurgia = codCirurgia;
 		this.idAnimal = idAnimal;
 		this.idDono = idDono;
 	}
-
-	public String getCodEquipeMedica() {
+	
+	public EquipeMedica getCodEquipeMedica() {
 		return codEquipeMedica;
 	}
-
-	public void setCodEquipeMedica(String codEquipeMedica) {
+	
+	public void setCodEquipeMedica(EquipeMedica codEquipeMedica) {
 		this.codEquipeMedica = codEquipeMedica;
 	}
-
-	public String getCodCirurgia() {
+	
+	public Cirurgia getCodCirurgia() {
 		return codCirurgia;
 	}
 
-	public void setCodCirurgia(String codCirurgia) {
+	public void setCodCirurgia(Cirurgia codCirurgia) {
 		this.codCirurgia = codCirurgia;
 	}
 
-	public String getIdAnimal() {
+	public Animal getIdAnimal() {
 		return idAnimal;
 	}
 
-	public void setIdAnimal(String idAnimal) {
+	public void setIdAnimal(Animal idAnimal) {
 		this.idAnimal = idAnimal;
 	}
 
-	public String getIdDono() {
+	public Cliente getIdDono() {
 		return idDono;
 	}
-
-	public void setIdDono(String idDono) {
+	public void setIdDono(Cliente idDono) {
 		this.idDono = idDono;
 	}
 

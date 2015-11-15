@@ -3,22 +3,22 @@ package clinica.pet_center.negocio.basicas;
 import java.util.ArrayList;
 
 public class EquipeMedica {
-	private String IdMedicoResponsavel;
+	private String IdVeterinarioResponsavel;
 	private String especialidadeMedicoResponsavel;
 	private ArrayList<String> Medico;
 	private String codigoEquipe;
-	public EquipeMedica(String idMedicoResponsavel,
+	public EquipeMedica(String idVeterinarioResponsavel,
 			String especialidadeMedicoResponsavel, String codigoEquipe) 
 	{
-		IdMedicoResponsavel = idMedicoResponsavel;
+		IdVeterinarioResponsavel = idVeterinarioResponsavel;
 		this.especialidadeMedicoResponsavel = especialidadeMedicoResponsavel;
 		this.codigoEquipe = codigoEquipe;
 	}
-	public String getIdMedicoResponsavel() {
-		return IdMedicoResponsavel;
+	public String getIdVeterinarioResponsavel() {
+		return IdVeterinarioResponsavel;
 	}
-	public void setIdMedicoResponsavel(String idMedicoResponsavel) {
-		IdMedicoResponsavel = idMedicoResponsavel;
+	public void setIdVeterinarioResponsavel(String idVeterinarioResponsavel) {
+		IdVeterinarioResponsavel = idVeterinarioResponsavel;
 	}
 	public String getEspecialidadeMedicoResponsavel() {
 		return especialidadeMedicoResponsavel;
@@ -45,7 +45,7 @@ public class EquipeMedica {
 				+ "Especialidade do medico responsavel: %s\n"
 				+ "Lista de medicos no grupo: %s\n"
 				+ "Codigo da equipo medica: %s\n\n", 
-				getIdMedicoResponsavel(), getEspecialidadeMedicoResponsavel(),
+				getIdVeterinarioResponsavel(), getEspecialidadeMedicoResponsavel(),
 				getMedico(), getCodigoEquipe());
 	}
 	

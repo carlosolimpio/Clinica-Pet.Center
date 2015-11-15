@@ -10,12 +10,12 @@ public class Cirurgia {
 	
 	public Cirurgia(String codigoCirurgia, String nomeCirurgia, String data,
 			Veterinario crmv, Animal idAnimal, Cliente idDono) {
-		this.codigoCirurgia = codigoCirurgia;
-		this.nomeCirurgia = nomeCirurgia;
-		this.data = data;
-		this.crmv = crmv;
-		this.idAnimal = idAnimal;
-		this.idDono = idDono;
+		setCodigoCirurgia(codigoCirurgia);
+		setNomeCirurgia(nomeCirurgia);
+		setData(data);
+		setCrmv(crmv);
+		setIdAnimal(idAnimal);
+		setIdDono(idDono);
 	}
 
 	public String getCodigoCirurgia() {
