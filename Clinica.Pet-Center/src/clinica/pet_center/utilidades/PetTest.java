@@ -14,9 +14,11 @@ import clinica.pet_center.negocio.cadastros.CadastroCliente;
 import clinica.pet_center.negocio.cadastros.CadastroConsulta;
 import clinica.pet_center.negocio.cadastros.CadastroFuncionario;
 
-public class PetTest {
+public class PetTest 
+{
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+	{
 
 		Scanner input = new Scanner(System.in);
 		int op = -1;
@@ -25,7 +27,8 @@ public class PetTest {
 		CadastroFuncionario cadFunc = new CadastroFuncionario();
 
 
-		do {
+		do 
+		{
 			System.out.println("*****CLINICA PET CENTER*****");
 			System.out.println("1 - Login com ADM");
 			System.out.println("2 - Login com Funcionario");
@@ -33,18 +36,21 @@ public class PetTest {
 			System.out.print("OPÇÃO: ");
 			op = input.nextInt();
 
-			switch(op) {
+			switch(op) 
+			{
 			case 1:
 				System.out.print("ID: ");
 				aux1 = input.next();
 				System.out.print("Senha: ");
 				aux2 = input.next();
 
-				if(Util.isADM(aux1, aux2)) {
+				if(Util.isADM(aux1, aux2)) 
+				{
 					telaADM();
 					break;
 				}
-				else {
+				else 
+				{
 					System.out.println("ID OU SENHA INCORRETOS!");
 					break;
 				}
@@ -58,7 +64,8 @@ public class PetTest {
 				ArrayList<Funcionario> arrF = cadFunc.listaFuncionarios();
 
 				if(arrF != null) 
-					for(Funcionario func : arrF) {
+					for(Funcionario func : arrF) 
+					{
 						if(func.getId().equals(aux1) || func.getSenha().equals(aux2))
 							telaFuncionario(func);
 						else
@@ -73,9 +80,11 @@ public class PetTest {
 				break;
 			}
 		} while(op != 0);
+		input.close();
 	}
 
-	private static void telaFuncionario(Funcionario func) {
+	private static void telaFuncionario(Funcionario func) 
+	{
 		int op = -1;
 		int op2 = -1;
 		String aux1, aux2, aux3, aux4, aux5, aux6, aux7;
@@ -90,10 +99,12 @@ public class PetTest {
 		CadastroAnimal cadAN = new CadastroAnimal();
 		CadastroConsulta cadCON = new CadastroConsulta();
 
-		do {
+		do 
+		{
 			System.out.printf("\n*****BEM VINDO %s*****", func.getNome().toUpperCase());
 
-			if(func instanceof Veterinario) {
+			if(func instanceof Veterinario) 
+			{
 				System.out.println("\n1 - REALIZAR CONSULTA");
 				System.out.println("2 - IMPRIMIR RECEITA");
 				System.out.println("3 - LISTA ANIMAIS DE DONO ESPECIFICO");
@@ -101,16 +112,19 @@ public class PetTest {
 				System.out.println("0 - VOLTAR");
 				op = input.nextInt();
 
-				switch(op) {
+				switch(op) 
+				{
 				case 1:
-					do {
+					do 
+					{
 						System.out.println("1 - CADASTRAR ANIMAL");
 						System.out.println("2 - PREENCHER CONSULTA");
 						System.out.println("3 - BUSCA ANIMAL (ID)");
 						System.out.println("0 - SAIR");
 						op2 = input.nextInt();
 
-						switch(op2) {
+						switch(op2) 
+						{
 						case 1:
 							//cadastra animal
 							System.out.print("\nNome: ");
@@ -127,7 +141,8 @@ public class PetTest {
 
 							cliente = cadCL.buscaCliente(aux6);
 
-							if(cliente != null) {
+							if(cliente != null) 
+							{
 								animal = new Animal(aux1, aux2, aux3, aux4, cliente);  //cria um animal
 								cliente.addAnimal(animal);							   //add animal no array de animais de um cliente
 								if(cadAN.cadastraAnimal(animal))
@@ -157,7 +172,8 @@ public class PetTest {
 							animal = cadAN.buscaAnimalId(aux5);
 							cliente = cadCL.buscaCliente(aux6);
 
-							if(animal != null && cliente != null) {
+							if(animal != null && cliente != null) 
+							{
 								consulta = new Consulta((Veterinario) func, cliente, animal, aux4);
 								if(cadCON.cadastraConsulta(consulta))
 									System.out.println("Consulta realizada com sucesso!");
@@ -208,7 +224,8 @@ public class PetTest {
 
 					cliente = cadCL.buscaCliente(id);
 
-					if(cliente != null) {
+					if(cliente != null) 
+					{
 						ArrayList<Animal> arrAN = cadCL.listaAnimaisCliente(cliente.getId());
 						System.out.printf("\nAnimais do cliente %s:\n", cliente.getNome());
 						for(Animal ax : arrAN)
@@ -221,7 +238,8 @@ public class PetTest {
 				case 4:
 					//lista todos animais do sistema
 					ArrayList<Animal> arrAN = cadAN.listaAnimais();
-					if(arrAN != null) {
+					if(arrAN != null) 
+					{
 						for(Animal ax : arrAN)
 							System.out.println(ax.toString());
 					}
@@ -235,7 +253,8 @@ public class PetTest {
 				default:
 				}
 			}
-			else if(func instanceof OperadorSistema) {
+			else if(func instanceof OperadorSistema) 
+			{
 				System.out.println("\n1 - CADASTRAR CLIENTE");
 				System.out.println("2 - LISTA ANIMAIS DE DONO ESPECIFICO");
 				System.out.println("3 - LISTA TODOS ANIMAIS");
@@ -247,7 +266,8 @@ public class PetTest {
 				System.out.println("0 - VOLTAR");
 				op = input.nextInt();
 
-				switch(op) {
+				switch(op) 
+				{
 				case 1:
 					//cadastra Cliente
 					System.out.print("\nNome: ");
@@ -316,7 +336,8 @@ public class PetTest {
 
 					animal = cadAN.buscaAnimalId(id);
 
-					if(animal != null) {
+					if(animal != null) 
+					{
 						if(cadAN.removeAnimal(animal.getId()))
 							System.out.println("Animal removido!");
 					}
@@ -327,7 +348,8 @@ public class PetTest {
 				case 6:
 					//listar todos clientes
 					ArrayList<Cliente> arrCL = cadCL.listaClientes();
-					if(arrCL != null) {
+					if(arrCL != null) 
+					{
 						for(Cliente cx : arrCL)
 							System.out.println(cx.toString());
 					}
@@ -355,7 +377,8 @@ public class PetTest {
 
 					cliente = cadCL.buscaCliente(id);
 
-					if(cliente != null) {
+					if(cliente != null) 
+					{
 						if(cadCL.removeCliente(cliente.getId()))
 							System.out.println("Cliente removido!");
 					}
@@ -373,7 +396,8 @@ public class PetTest {
 		} while(op != 0);
 	}
 
-	private static void telaADM() {
+	private static void telaADM() 
+	{
 		int op = -1;
 		int op2 = -1;
 
@@ -386,7 +410,8 @@ public class PetTest {
 		CadastroFuncionario cadF;
 
 
-		do {
+		do 
+		{
 
 			System.out.println("*****BEM VINDO ADM*****");
 			System.out.println("1 - CADASTRAR FUNCIONARIO");
@@ -402,7 +427,8 @@ public class PetTest {
 
 			cadF = new CadastroFuncionario();
 
-			switch(op) {
+			switch(op) 
+			{
 			case 1:
 				System.out.println("CADASTRAR FUNCIONARIO");
 				System.out.println("\n1 - Operador de Sistema");
@@ -410,7 +436,8 @@ public class PetTest {
 				System.out.print("OPÇÃO: ");
 				op2 = input.nextInt();
 
-				if(op2 == 1) {
+				if(op2 == 1) 
+				{
 
 					System.out.print("\nNome: ");
 					input.next();
@@ -434,7 +461,8 @@ public class PetTest {
 						System.out.println("Erro no cadastro!");
 
 				}
-				else if(op2 == 2) {
+				else if(op2 == 2) 
+				{
 					System.out.print("\nNome: ");
 					input.next();
 					aux1 = input.nextLine();
@@ -493,12 +521,14 @@ public class PetTest {
 				System.out.println("3 - Todos");
 				op2 = input.nextInt();
 
-				switch(op2) {
+				switch(op2) 
+				{
 				case 1:
 					System.out.println("Operadores de Sistema");
 					ArrayList<OperadorSistema> arOP = cadF.listaOperadoresSistema();
 					if(arOP != null)
-						for(Funcionario fx : arOP) {
+						for(Funcionario fx : arOP) 
+						{
 							System.out.println(fx.toString());;
 						}
 					else
@@ -509,7 +539,8 @@ public class PetTest {
 					System.out.println("Veterinarios");
 					ArrayList<Veterinario> arVT = cadF.listaVeterinarios();
 					if(arVT != null)
-						for(Funcionario fx : arVT) {
+						for(Funcionario fx : arVT) 
+						{
 							System.out.println(fx.toString());;
 						}
 					else
@@ -520,7 +551,8 @@ public class PetTest {
 					System.out.println("Funcionarios");
 					ArrayList<Funcionario> arF = cadF.listaFuncionarios();
 					if(arF != null)
-						for(Funcionario fx : arF) {
+						for(Funcionario fx : arF) 
+						{
 							System.out.println(fx.toString());;
 						}
 					else
@@ -546,7 +578,8 @@ public class PetTest {
 				CadastroAnimal cadA = new CadastroAnimal();
 				ArrayList<Animal> arA = cadA.listaAnimais();
 				if(arA != null)
-					for(Animal ax : arA) {
+					for(Animal ax : arA) 
+					{
 						System.out.println(ax.toString());;
 					}
 				else
@@ -558,7 +591,8 @@ public class PetTest {
 				CadastroConsulta cadCO = new CadastroConsulta();
 				ArrayList<Consulta> arCO = cadCO.listaConsultas();
 				if(arCO != null)
-					for(Consulta cox : arCO) {
+					for(Consulta cox : arCO) 
+					{
 						System.out.println(cox.toString());;
 					}
 				else
@@ -572,5 +606,6 @@ public class PetTest {
 
 			}
 		} while(op != 0);
+		input.close();
 	}
 }
