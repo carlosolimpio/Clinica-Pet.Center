@@ -2,6 +2,7 @@ package clinica.pet_center.negocio.cadastros;
 
 import java.util.ArrayList;
 
+import clinica.pet_center.dados.IRepositorioFuncionarios;
 import clinica.pet_center.dados.RepositorioFuncionarios;
 import clinica.pet_center.negocio.basicas.Funcionario;
 import clinica.pet_center.negocio.basicas.OperadorSistema;
@@ -9,11 +10,12 @@ import clinica.pet_center.negocio.basicas.Veterinario;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Constantes;
 import clinica.pet_center.utilidades.Util;
 
 public class CadastroFuncionario {
 
-	private RepositorioFuncionarios repositorioFuncionario;
+	private IRepositorioFuncionarios repositorioFuncionario;
 	
 	public CadastroFuncionario() {
 		repositorioFuncionario = RepositorioFuncionarios.getInstancia();
@@ -33,24 +35,40 @@ public class CadastroFuncionario {
 			throw new IDIException(id);
 	}
 	
-	public ArrayList<Funcionario> listaFuncionarios() {
-		return repositorioFuncionario.lista();
+	public ArrayList<Funcionario> listaFuncionarios() throws ONExistenteException 
+	{
+		ArrayList<Funcionario> listaFunc = repositorioFuncionario.lista();
+		if(listaFunc == null)
+		{
+			throw new ONExistenteException(Constantes.FUNCIONARIO);
+		}
+		return listaFunc;
 	}
 	
-	public ArrayList<Veterinario> listaVeterinarios() {
+	@SuppressWarnings("unused")
+	public ArrayList<Veterinario> listaVeterinarios() throws ONExistenteException
+	{
 		ArrayList<Veterinario> r = new ArrayList<Veterinario>();
 		for(Funcionario f : repositorioFuncionario.lista()) {
 			if(f instanceof Veterinario)
 				r.add(((Veterinario) f));
 		}
+		if (r == null){
+			throw new ONExistenteException(Constantes.VETERINARIO);
+		}
 		return r;
 	}
 	
-	public ArrayList<OperadorSistema> listaOperadoresSistema() {
+	@SuppressWarnings("unused")
+	public ArrayList<OperadorSistema> listaOperadoresSistema() throws ONExistenteException 
+	{
 		ArrayList<OperadorSistema> r = new ArrayList<OperadorSistema>();
 		for(Funcionario f : repositorioFuncionario.lista()) {
 			if(f instanceof OperadorSistema)
 				r.add(((OperadorSistema) f));
+		}
+		if (r == null){
+			throw new ONExistenteException(Constantes.OPSISTEMA);
 		}
 		return r;
 	}

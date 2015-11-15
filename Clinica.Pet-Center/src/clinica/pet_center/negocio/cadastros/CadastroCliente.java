@@ -2,17 +2,20 @@ package clinica.pet_center.negocio.cadastros;
 
 import java.util.ArrayList;
 
+import clinica.pet_center.dados.IRepositorioClientes;
 import clinica.pet_center.dados.RepositorioClientes;
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.basicas.Cliente;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Constantes;
 import clinica.pet_center.utilidades.Util;
 
 public class CadastroCliente {
 
-	private RepositorioClientes repositorioCliente;
+	private IRepositorioClientes repositorioCliente;
+	
 	
 	public CadastroCliente() {
 		repositorioCliente = RepositorioClientes.getInstancia();
@@ -32,8 +35,15 @@ public class CadastroCliente {
 			throw new IDIException(id);
 	}
 	
-	public ArrayList<Cliente> listaClientes() {
-		return repositorioCliente.lista();
+	public ArrayList<Cliente> listaClientes() throws ONExistenteException {
+		ArrayList<Cliente> listaCliente = repositorioCliente.lista();
+		if(listaCliente == null)
+		{
+			throw new ONExistenteException(Constantes.USUARIO);
+		}
+		return listaCliente;
+		
+		
 	}
 	
 	public ArrayList<Animal> listaAnimaisCliente(String id) throws ONExistenteException, IDIException {

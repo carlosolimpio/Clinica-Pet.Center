@@ -43,7 +43,7 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	}
 	
 	@Override
-	public ArrayList<Animal> lista() { //fazer exceção
+	public ArrayList<Animal> lista() throws ONExistenteException {
 		return animais;
 	}
 	

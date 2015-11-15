@@ -19,10 +19,6 @@ public class FachadaCadastro implements IFachadaCadastro {
 	private CadastroConsulta cadConsulta;
 	private CadastroFuncionario cadFuncionario;
 	
-	/**
-	 * NÃO ESTÁ FINALIZADA
-	 */
-	
 	public FachadaCadastro() {
 		cadAnimal = new CadastroAnimal();
 		cadCliente = new CadastroCliente();
@@ -42,7 +38,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Animal> listaAnimais() {
+	public ArrayList<Animal> listaAnimais() throws ONExistenteException {
 		return cadAnimal.listaAnimais();
 	}
 
@@ -68,7 +64,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Cliente> listaClientes() {
+	public ArrayList<Cliente> listaClientes() throws ONExistenteException {
 		return cadCliente.listaClientes();
 	}
 
@@ -99,7 +95,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Consulta> listaConsultas() {
+	public ArrayList<Consulta> listaConsultas() throws ONExistenteException {
 		return cadConsulta.listaConsultas();
 	}
 
@@ -125,17 +121,17 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Funcionario> listaFuncionarios() {
+	public ArrayList<Funcionario> listaFuncionarios() throws ONExistenteException {
 		return cadFuncionario.listaFuncionarios();
 	}
 
 	@Override
-	public ArrayList<Veterinario> listaVeterinarios() {
+	public ArrayList<Veterinario> listaVeterinarios() throws ONExistenteException {
 		return cadFuncionario.listaVeterinarios();
 	}
 
 	@Override
-	public ArrayList<OperadorSistema> listaOperadoresSistema() {
+	public ArrayList<OperadorSistema> listaOperadoresSistema() throws ONExistenteException{
 		return cadFuncionario.listaOperadoresSistema();
 	}
 

@@ -43,7 +43,7 @@ public class RepositorioFuncionarios implements IRepositorioFuncionarios{
 	}
 	
 	@Override
-	public ArrayList<Funcionario> lista() {
+	public ArrayList<Funcionario> lista() throws ONExistenteException {
 		return funcionarios;
 	}
 	

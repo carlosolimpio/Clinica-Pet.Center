@@ -10,7 +10,7 @@ public interface IRepositorioFuncionarios {
 	
 	void insere(Funcionario func) throws OExistenteException;
 	Funcionario busca(String id) throws ONExistenteException;
-	ArrayList<Funcionario> lista();
+	ArrayList<Funcionario> lista() throws ONExistenteException;
 	void remove(String id) throws ONExistenteException;
 	void atualiza(Funcionario funcionario, String id) throws OExistenteException, ONExistenteException;
 }

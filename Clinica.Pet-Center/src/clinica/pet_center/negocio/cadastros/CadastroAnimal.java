@@ -2,16 +2,17 @@ package clinica.pet_center.negocio.cadastros;
 
 import java.util.ArrayList;
 
+import clinica.pet_center.dados.IRepositorioAnimais;
 import clinica.pet_center.dados.RepositorioAnimais;
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
-import clinica.pet_center.utilidades.Util;
+import clinica.pet_center.utilidades.*;
 
 public class CadastroAnimal {
 	
-	private RepositorioAnimais repositorioAnimal;
+	private IRepositorioAnimais repositorioAnimal;
 	
 	public CadastroAnimal() {
 		repositorioAnimal = RepositorioAnimais.getInstancia();
@@ -31,8 +32,14 @@ public class CadastroAnimal {
 			throw new IDIException(id);
 	}
 	
-	public ArrayList<Animal> listaAnimais() {
-		return repositorioAnimal.lista();
+	public ArrayList<Animal> listaAnimais() throws ONExistenteException
+	{
+		ArrayList<Animal> listaAnimal = repositorioAnimal.lista();
+		if(listaAnimal == null)
+		{
+			throw new ONExistenteException(Constantes.ANIMAL);
+		}
+		return listaAnimal;
 	}
 	
 	public void removeAnimal(String id) throws ONExistenteException, IDIException {

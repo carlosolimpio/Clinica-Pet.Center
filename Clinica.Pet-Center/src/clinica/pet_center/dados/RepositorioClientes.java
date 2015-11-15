@@ -43,7 +43,7 @@ public class RepositorioClientes implements IRepositorioClientes{
 	}
 	
 	@Override
-	public ArrayList<Cliente> lista() {
+	public ArrayList<Cliente> lista() throws ONExistenteException {
 		return clientes;
 	}
 	

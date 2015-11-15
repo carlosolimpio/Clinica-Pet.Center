@@ -10,7 +10,7 @@ public interface IRepositorioAnimais {
 	
 	void insere(Animal animal) throws OExistenteException;
 	Animal busca(String id) throws ONExistenteException;
-	ArrayList<Animal> lista();
+	ArrayList<Animal> lista() throws ONExistenteException;
 	void remove(String id) throws ONExistenteException;
 	void atualiza(Animal novo, String idVelho) throws OExistenteException, ONExistenteException;
 }

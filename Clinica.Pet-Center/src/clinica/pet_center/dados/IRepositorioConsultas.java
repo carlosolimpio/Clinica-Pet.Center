@@ -11,7 +11,7 @@ public interface IRepositorioConsultas {
 	
 	void insere(Consulta c) throws OExistenteException;
 	Consulta busca(String idConsulta) throws ONExistenteException, IDIException;
-	ArrayList<Consulta> lista();
+	ArrayList<Consulta> lista() throws ONExistenteException;
 	void remove(String idConsulta) throws ONExistenteException;
 	void atualiza(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException;
 }

@@ -44,7 +44,7 @@ public class RepositorioConsultas implements IRepositorioConsultas{
 	}
 	
 	@Override
-	public ArrayList<Consulta> lista() {
+	public ArrayList<Consulta> lista() throws ONExistenteException {
 		return consultas;
 	}
 	
