@@ -15,11 +15,11 @@ import clinica.pet_center.negocio.exceptions.ONExistenteException;
 public interface IFachadaCadastro {
 	
 	//Animal
-	void cadastraAnimal(Animal animal) throws OExistenteException, IDIException;
-	Animal buscaAnimalId(String id) throws ONExistenteException, IDIException;
-	ArrayList<Animal> listaAnimais() throws ONExistenteException;
-	void removeAnimal(String id) throws ONExistenteException, IDIException;
-	void alteraAnimal(String id, Animal novo) throws OExistenteException, ONExistenteException, IDIException;
+	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException;
+	Animal buscarAnimalId(String id) throws ONExistenteException, IDIException;
+	ArrayList<Animal> listarAnimais() throws IllegalArgumentException;
+	void removerAnimal(String id) throws ONExistenteException, IDIException;
+	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException;
 	
 	//Cliente
 	void cadastraCliente(Cliente cliente) throws OExistenteException, IDIException;

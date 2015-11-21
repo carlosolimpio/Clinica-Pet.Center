@@ -28,28 +28,28 @@ public class FachadaCadastro implements IFachadaCadastro {
 
 	//animal
 	@Override
-	public void cadastraAnimal(Animal animal) throws OExistenteException, IDIException {
-		cadAnimal.cadastraAnimal(animal);
+	public void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException {
+		cadAnimal.cadastrarAnimal(animal);
 	}
 
 	@Override
-	public Animal buscaAnimalId(String id) throws ONExistenteException, IDIException {
-		return cadAnimal.buscaAnimalId(id);
+	public Animal buscarAnimalId(String id) throws ONExistenteException, IDIException {
+		return cadAnimal.buscarAnimalId(id);
 	}
 
 	@Override
-	public ArrayList<Animal> listaAnimais() throws ONExistenteException {
-		return cadAnimal.listaAnimais();
+	public ArrayList<Animal> listarAnimais() throws IllegalArgumentException {
+		return cadAnimal.listarAnimais();
 	}
 
 	@Override
-	public void removeAnimal(String id) throws ONExistenteException, IDIException {
-		cadAnimal.removeAnimal(id);
+	public void removerAnimal(String id) throws ONExistenteException, IDIException {
+		cadAnimal.removerAnimal(id);
 	}
 
 	@Override
-	public void alteraAnimal(String id, Animal novo) throws OExistenteException, ONExistenteException, IDIException {
-		cadAnimal.alteraAnimal(id, novo);
+	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException {
+		cadAnimal.alterarAnimal(id, novo);
 	}
 
 	//cliente
