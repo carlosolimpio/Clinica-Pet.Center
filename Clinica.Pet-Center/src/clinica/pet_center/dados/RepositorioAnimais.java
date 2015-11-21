@@ -3,7 +3,6 @@ package clinica.pet_center.dados;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Animal;
-import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public class RepositorioAnimais implements IRepositorioAnimais {
@@ -22,13 +21,12 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	}
 	
 	@Override
-	public void insere(Animal animal) throws OExistenteException {
-		jaExiste(animal);
+	public void inserir(Animal animal) {
 		animais.add(animal);
 	}
 	
 	@Override
-	public Animal busca(String id) throws ONExistenteException {
+	public Animal buscar(String id) throws ONExistenteException {
 		Animal r = null;
 		for(Animal a: animais){
 			if(a.getId().equals(id)) {
@@ -43,12 +41,15 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	}
 	
 	@Override
-	public ArrayList<Animal> lista() throws ONExistenteException {
-		return animais;
+	public ArrayList<Animal> listar() throws IllegalArgumentException {
+		if(!animais.isEmpty())
+			return animais;
+		else
+			throw new IllegalArgumentException("Repositório vazio.");
 	}
 	
 	@Override
-	public void remove(String id) throws ONExistenteException {
+	public void remover(String id) throws ONExistenteException {
 		boolean r = false;
 		for(int i=0; i<animais.size(); i++){
 			if(animais.get(i).getId().equals(id)){
@@ -62,19 +63,8 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	}
 	
 	@Override
-	public void atualiza(Animal novo, String idVelho) throws OExistenteException, ONExistenteException {
-		jaExiste(novo);
-		remove(idVelho);
-		insere(novo);
+	public void atualizar(Animal novo, String id) throws ONExistenteException {
+		remover(id);
+		inserir(novo);
 	}
-	
-	private void jaExiste(Animal animal) throws OExistenteException {
-		for(Animal a : animais) {
-			if(a.equals(animal)) 
-				throw new OExistenteException(animal);
-		}
-	}
-	
-	//crud
-	//create, read, update, delete
 }
