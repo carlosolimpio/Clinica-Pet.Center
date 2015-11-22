@@ -1,11 +1,18 @@
 package clinica.pet_center.dados;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-public class RepositorioAnimais implements IRepositorioAnimais {
+@SuppressWarnings("serial")
+public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 
 	private static RepositorioAnimais repositorioAnimais;
 	private ArrayList<Animal> animais;
@@ -16,13 +23,14 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	
 	public static RepositorioAnimais getInstancia() {
 		if(repositorioAnimais == null)
-			repositorioAnimais = new RepositorioAnimais();
+			repositorioAnimais = carregaDoArquivo();
 		return repositorioAnimais;
 	}
 	
 	@Override
 	public void inserir(Animal animal) {
 		animais.add(animal);
+		salvarArquivo();
 	}
 	
 	@Override
@@ -55,7 +63,9 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 				break;
 			}
 		}
-		if(!r) 
+		if(r)
+			salvarArquivo();
+		else
 			throw new ONExistenteException(id);
 	}
 	
@@ -63,5 +73,55 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	public void atualizar(Animal novo, String id) throws ONExistenteException {
 		remover(id);
 		inserir(novo);
+	}
+	
+	private void salvarArquivo() {
+		File arquivo = new File("repositorioAnimais.bat");
+		FileOutputStream fos = null;
+		ObjectOutputStream oos = null;
+		
+		try {
+			
+			fos = new FileOutputStream(arquivo);
+			oos = new ObjectOutputStream(fos);
+			oos.writeObject(repositorioAnimais);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				oos.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	private static RepositorioAnimais carregaDoArquivo() {
+		File arquivo = new File("repositorioAnimais.bat");
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		RepositorioAnimais temp = null;
+		
+		try {
+			
+			fis = new FileInputStream(arquivo);
+			ois = new ObjectInputStream(fis);
+			temp = (RepositorioAnimais) ois.readObject();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				ois.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		if(temp != null)
+			return temp;
+		else
+			return new RepositorioAnimais();
 	}
 }
