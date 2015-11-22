@@ -41,11 +41,8 @@ public class RepositorioAnimais implements IRepositorioAnimais {
 	}
 	
 	@Override
-	public ArrayList<Animal> listar() throws IllegalArgumentException {
-		if(!animais.isEmpty())
-			return animais;
-		else
-			throw new IllegalArgumentException("Repositório vazio.");
+	public ArrayList<Animal> listar() {
+		return animais;
 	}
 	
 	@Override

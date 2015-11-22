@@ -9,7 +9,7 @@ public interface IRepositorioAnimais {
 	
 	void inserir(Animal animal);
 	Animal buscar(String id) throws ONExistenteException;
-	ArrayList<Animal> listar() throws IllegalArgumentException;
+	ArrayList<Animal> listar();
 	void remover(String id) throws ONExistenteException;
 	void atualizar(Animal novo, String idVelho) throws ONExistenteException;
 }

@@ -17,7 +17,7 @@ public interface IFachadaCadastro {
 	//Animal
 	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException;
 	Animal buscarAnimalId(String id) throws ONExistenteException, IDIException;
-	ArrayList<Animal> listarAnimais() throws IllegalArgumentException;
+	ArrayList<Animal> listarAnimais();
 	void removerAnimal(String id) throws ONExistenteException, IDIException;
 	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException;
 	

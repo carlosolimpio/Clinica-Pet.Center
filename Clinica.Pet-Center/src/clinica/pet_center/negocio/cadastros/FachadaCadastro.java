@@ -38,7 +38,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Animal> listarAnimais() throws IllegalArgumentException {
+	public ArrayList<Animal> listarAnimais() {
 		return cadAnimal.listarAnimais();
 	}
 
