@@ -13,7 +13,7 @@ import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public class FachadaCadastro implements IFachadaCadastro {
-
+	private static FachadaCadastro instance;
 	private CadastroAnimal cadAnimal;
 	private CadastroCliente cadCliente;
 	private CadastroConsulta cadConsulta;
@@ -25,6 +25,13 @@ public class FachadaCadastro implements IFachadaCadastro {
 		cadConsulta = new CadastroConsulta();
 		cadFuncionario = new CadastroFuncionario();
 	}
+	
+	public static FachadaCadastro getInstance() {
+    	if (instance == null) {
+			instance = new FachadaCadastro();
+		}
+    	return instance;
+    }
 
 	//animal
 	@Override
