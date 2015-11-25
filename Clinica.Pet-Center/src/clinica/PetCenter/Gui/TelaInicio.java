@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.border.EmptyBorder;
 
 import clinica.pet_center.negocio.basicas.Funcionario;
@@ -64,22 +65,22 @@ public class TelaInicio extends JFrame {
 		contentPane.add(tfId);
 		tfId.setColumns(10);
 		
-		tfSenha = new JTextField();
+		tfSenha = new JPasswordField();
 		tfSenha.setBounds(111, 92, 97, 20);
 		contentPane.add(tfSenha);
 		tfSenha.setColumns(10);
 		
-		JButton btnLoginAdm = new JButton("Login ADM");
+		JButton btnLoginAdm = new JButton("Login");
 		btnLoginAdm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				LoginADM();
+				login();
 				
 			}
 		});
 		btnLoginAdm.setBounds(255, 60, 140, 23);
 		contentPane.add(btnLoginAdm);
 		
-		JButton btnLoginFuncionario = new JButton("Login Funcionario");
+	/*	JButton btnLoginFuncionario = new JButton("Login Funcionario");
 		btnLoginFuncionario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				LoginFuncionario();
@@ -87,8 +88,38 @@ public class TelaInicio extends JFrame {
 		});
 		btnLoginFuncionario.setBounds(255, 95, 140, 23);
 		contentPane.add(btnLoginFuncionario);
+	*/
 		
 		this.FachadaCadastro = new CadastroFuncionario();
+	}
+	
+	private void login(){
+		try{
+			String id = tfId.getText();
+			String senha = tfSenha.getText();
+			if(Util.isADM(id, senha)) 
+			{
+				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
+				dispose();
+				TelaAdm tadm = new TelaAdm();
+				tadm.setLocationRelativeTo(null);
+				tadm.setVisible(true);
+			}else if(!Util.isADM(id, senha)){
+				JOptionPane.showMessageDialog(this, "Login ou senha incorretos!");
+			}else{
+				ArrayList<Funcionario> arrlf = this.FachadaCadastro.listaFuncionarios();
+				for(Funcionario func : arrlf) 
+				{
+					if(func.getId().equals(id) && func.getSenha().equals(senha))
+						JOptionPane.showMessageDialog(this, "Logado com sucesso no sistema!");
+				}
+			}
+		}
+		catch (Exception e){
+			JOptionPane.showMessageDialog(this, "Erro ao logar");
+		}
+		
+		
 	}
 	
 	private void LoginADM(){
@@ -98,6 +129,7 @@ public class TelaInicio extends JFrame {
 			if(Util.isADM(id, senha)) 
 			{
 				JOptionPane.showMessageDialog(this, "Logado com sucesso!");
+				dispose();
 				TelaAdm tadm = new TelaAdm();
 				tadm.setLocationRelativeTo(null);
 				tadm.setVisible(true);

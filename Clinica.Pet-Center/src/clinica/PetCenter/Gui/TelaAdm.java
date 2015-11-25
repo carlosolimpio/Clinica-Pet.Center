@@ -110,6 +110,27 @@ public class TelaAdm extends JFrame {
 		
 		JMenuItem mntmConsulta = new JMenuItem("Consulta");
 		mnListar.add(mntmConsulta);
+		mntmListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				listarFuncionario();
+			}
+		});
+		
+		JMenuBar mbVoltar = new JMenuBar();
+		mbVoltar.setBounds(209, 0, 97, 21);
+		contentPane.add(mbVoltar);
+		
+		JMenu mnVoltar = new JMenu("Voltar");
+		mbVoltar.add(mnVoltar);
+		
+		JMenuItem mntmvoltarLogin = new JMenuItem("Tela de Login");
+		mnVoltar.add(mntmvoltarLogin);
+		
+		//JMenu mnVoltar = new JMenu("Voltar");
+		//menuBar.add(mnVoltar);		
+		
+		//JMenuItem mntmVoltar = new JMenuItem("Tela de Login");
+		//mnVoltar.add(mntmVoltar);
 		
 		this.FachadaCadastro = new CadastroFuncionario();
 	}
@@ -141,8 +162,4 @@ public class TelaAdm extends JFrame {
 	private void listarFuncionario(){
 		
 	}
-	
-	
-	
-	
 }
