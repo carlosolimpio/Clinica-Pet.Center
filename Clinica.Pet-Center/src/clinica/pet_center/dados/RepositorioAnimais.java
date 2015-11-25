@@ -23,7 +23,7 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 	
 	public static RepositorioAnimais getInstancia() {
 		if(repositorioAnimais == null)
-			repositorioAnimais = carregaDoArquivo();
+			repositorioAnimais = //carregaDoArquivo();
 		return repositorioAnimais;
 	}
 	
@@ -76,7 +76,7 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 	}
 	
 	private void salvarArquivo() {
-		File arquivo = new File("repositorioAnimais.bat");
+		File arquivo = new File("repositorioAnimais.dat");
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		
@@ -98,30 +98,6 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 	}
 	
 	private static RepositorioAnimais carregaDoArquivo() {
-		File arquivo = new File("repositorioAnimais.bat");
-		FileInputStream fis = null;
-		ObjectInputStream ois = null;
-		RepositorioAnimais temp = null;
 		
-		try {
-			
-			fis = new FileInputStream(arquivo);
-			ois = new ObjectInputStream(fis);
-			temp = (RepositorioAnimais) ois.readObject();
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				ois.close();
-			} catch(Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		if(temp != null)
-			return temp;
-		else
-			return new RepositorioAnimais();
 	}
 }
