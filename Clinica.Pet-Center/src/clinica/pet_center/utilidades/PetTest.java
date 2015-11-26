@@ -117,9 +117,9 @@ public class PetTest
 				case 1:
 					do 
 					{
-						System.out.println("1 - CADASTRAR ANIMAL");
+						System.out.println("1 - CADASTRAR ANIMAL"); //Operador de sistema
 						System.out.println("2 - PREENCHER CONSULTA");
-						System.out.println("3 - BUSCA ANIMAL (ID)");
+						System.out.println("3 - BUSCA ANIMAL (ID)");//operador de sistema
 						System.out.println("0 - SAIR");
 						op2 = input.nextInt();
 
@@ -255,14 +255,15 @@ public class PetTest
 			}
 			else if(func instanceof OperadorSistema) 
 			{
-				System.out.println("\n1 - CADASTRAR CLIENTE");
-				System.out.println("2 - LISTA ANIMAIS DE DONO ESPECIFICO");
-				System.out.println("3 - LISTA TODOS ANIMAIS");
-				System.out.println("4 - BUSCA ANIMAL (ID)");
-				System.out.println("5 - REMOVE ANIMAL");
-				System.out.println("6 - LISTA TODOS CLIENTES");
-				System.out.println("7 - BUSCA CLIENTE (ID)");
-				System.out.println("8 - REMOVE CLIENTE");
+				System.out.println("\n1 - CADASTRAR CLIENTE");				//OK
+				System.out.println("2 - LISTA ANIMAIS DE DONO ESPECIFICO");	//OK
+				System.out.println("3 - LISTA TODOS ANIMAIS");				//OK
+				System.out.println("4 - BUSCA ANIMAL (ID)");				//OK
+				System.out.println("5 - REMOVE ANIMAL");					//OK
+				System.out.println("6 - LISTA TODOS CLIENTES");				//OK
+				System.out.println("7 - BUSCA CLIENTE (ID)");				//OK
+				System.out.println("8 - REMOVE CLIENTE");					//OK
+				System.out.println("9 - CADASTRAR ANIMAL");					//OK
 				System.out.println("0 - VOLTAR");
 				op = input.nextInt();
 
