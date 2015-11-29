@@ -18,7 +18,7 @@ public class Util {
 	public static boolean isID(String id) {
 		boolean r = false;
 		if(id != null && !id.isEmpty())
-			r = id.startsWith("ANM") || id.startsWith("CL") || id.startsWith("OP") || id.startsWith("VT") || id.startsWith("CONSULTA");
+			r = id.startsWith("ANM") || id.startsWith("CL") || id.startsWith("OP") || id.startsWith("VT") || id.startsWith("CONSULTA") || id.startsWith("ADM");
 		return r;
 	}	
 	
