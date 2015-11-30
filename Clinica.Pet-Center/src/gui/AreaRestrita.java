@@ -33,19 +33,19 @@ public class AreaRestrita extends JFrame {
 	public void carregarTela(Pessoa p){
 		if(p instanceof Cliente){
 			Cliente c = (Cliente)p;
-			painel.add(painelCliente);
+			painel.add(PainelCliente.painelCliente(c));
 		}
 		else if(p instanceof OperadorSistema){
 			OperadorSistema op = (OperadorSistema)p;
-			painel.add(painelOperadorSistema);
+			painel.add(PainelOperadorSistema.painelOperadorSistema(op));
 		}
 		else if(p instanceof Veterinario){
 			Veterinario vet = (Veterinario)p;
-			painel.add(painelVeterinario);
+			painel.add(PainelVeterinario.painelVeterinario(vet));
 		}
 		else if(p instanceof Administrador){
 			Administrador adm = (Administrador)p;
-			painel.add(painelAdministrador);
+			painel.add(PainelAdministrador.painelAdministrador(adm));
 		}
 		
 	}

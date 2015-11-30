@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import clinica.pet_center.negocio.basicas.Administrador;
 import clinica.pet_center.negocio.basicas.Pessoa;
+import clinica.pet_center.negocio.basicas.Veterinario;
 import clinica.pet_center.negocio.cadastros.FachadaCadastro;
 import clinica.pet_center.utilidades.Util;
 
@@ -17,6 +18,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.HeadlessException;
+
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
@@ -81,10 +84,13 @@ public class TelaInicio extends JFrame {
 				}
 				else{
 					Pessoa p;
+					login = tfLogin.getText();
+					senha = tfSenha.getText();
 					try {
 						if(Util.isADM(login, senha)){
 							JOptionPane.showMessageDialog(null, "Logado com sucesso!");
-							p = 
+							Administrador p1 = new Administrador("Mara", "11043254207", "07/12/2000", "m@gma.ww");
+							p = p1;
 							AdministracaoTelas.getAreaRestrita().carregarTela(p);
 							AdministracaoTelas.administracaoDeTelas(TelaInicio.this, AdministracaoTelas.getAreaRestrita());
 						}
@@ -92,7 +98,7 @@ public class TelaInicio extends JFrame {
 						
 					} 
 					catch (Exception e) {
-						// TODO: handle exception
+						JOptionPane.showMessageDialog(null, "Erro de tela");
 					}
 				}
 			}
