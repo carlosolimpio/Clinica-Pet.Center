@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaAtualizarAnimal extends JFrame {
 
@@ -98,6 +100,13 @@ public class TelaAtualizarAnimal extends JFrame {
 		contentPane.add(btnSalvar);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaOperadorSistema telaOperadorSistema = new TelaOperadorSistema();
+				telaOperadorSistema.setVisible(true);
+				dispose();
+			}
+		});
 		btnVoltar.setBounds(385, 327, 90, 23);
 		contentPane.add(btnVoltar);
 		

@@ -32,6 +32,15 @@ public class FachadaCadastro implements IFachadaCadastro {
 		}
     	return instance;
     }
+	
+	public Funcionario verificaLogin(String login, String senha) throws ONExistenteException, IDIException, 
+		IllegalArgumentException {
+		Funcionario r = cadFuncionario.buscaFuncionario(login);
+		if(senha.equals(r.getSenha()))
+			return r;
+		else
+			throw new IllegalArgumentException("Senha incorreta!");
+	}
 
 	//animal
 	@Override

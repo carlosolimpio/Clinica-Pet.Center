@@ -1,42 +1,41 @@
 package clinica.pet_center.dados;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Animal;
+import clinica.pet_center.negocio.basicas.AnimalAux;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 @SuppressWarnings("serial")
 public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 
 	private static RepositorioAnimais repositorioAnimais;
-	private ArrayList<Animal> animais;
+	private ArrayList<AnimalAux> animais;
 	
 	private RepositorioAnimais() {
-		animais = new ArrayList<Animal>();
+		animais = new ArrayList<AnimalAux>();
 	}
 	
 	public static RepositorioAnimais getInstancia() {
-		if(repositorioAnimais == null)
-			repositorioAnimais = //carregaDoArquivo();
+//		if(repositorioAnimais == null)
+//			repositorioAnimais = //carregaDoArquivo();
 		return repositorioAnimais;
 	}
 	
 	@Override
-	public void inserir(Animal animal) {
+	public void inserir(AnimalAux animal) {
 		animais.add(animal);
 		salvarArquivo();
 	}
 	
 	@Override
-	public Animal buscar(String id) throws ONExistenteException {
-		Animal r = null;
-		for(Animal a: animais){
+	public AnimalAux buscar(String id) throws ONExistenteException {
+		AnimalAux r = null;
+		for(AnimalAux a: animais){
 			if(a.getId().equals(id)) {
 				r = a;
 				break;
@@ -49,7 +48,7 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 	}
 	
 	@Override
-	public ArrayList<Animal> listar() {
+	public ArrayList<AnimalAux> listar() {
 		return animais;
 	}
 	
@@ -70,7 +69,7 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 	}
 	
 	@Override
-	public void atualizar(Animal novo, String id) throws ONExistenteException {
+	public void atualizar(AnimalAux novo, String id) throws ONExistenteException {
 		remover(id);
 		inserir(novo);
 	}
@@ -97,7 +96,7 @@ public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
 		}
 	}
 	
-	private static RepositorioAnimais carregaDoArquivo() {
+//	private static RepositorioAnimais carregaDoArquivo() {
 		
-	}
+//	}
 }

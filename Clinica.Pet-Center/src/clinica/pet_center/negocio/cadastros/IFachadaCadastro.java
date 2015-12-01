@@ -14,6 +14,9 @@ import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
 public interface IFachadaCadastro {
 	
+	Funcionario verificaLogin(String login, String senha) throws ONExistenteException, IDIException, 
+	IllegalArgumentException;
+	
 	//Animal
 	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException;
 	Animal buscarAnimalId(String id) throws ONExistenteException, IDIException;

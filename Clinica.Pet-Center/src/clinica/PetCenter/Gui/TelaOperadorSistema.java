@@ -9,6 +9,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaOperadorSistema extends JFrame {
 
@@ -50,10 +52,34 @@ public class TelaOperadorSistema extends JFrame {
 		mbAnimal.add(mnAnimal);
 		
 		JMenuItem mntmCadastrarAnimal = new JMenuItem("Cadastrar");
+		mntmCadastrarAnimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroAnimal telaCadastroAnimal = new TelaCadastroAnimal();
+				telaCadastroAnimal.setVisible(true);
+				dispose();
+			}
+		});
 		mnAnimal.add(mntmCadastrarAnimal);
 		
-		JMenuItem mntmListarRemoverAnimal = new JMenuItem("Listar/Remover");
-		mnAnimal.add(mntmListarRemoverAnimal);
+		JMenuItem mntmListarAnimal = new JMenuItem("Listar");
+		mntmListarAnimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListarAnimais telaListarAnimais = new TelaListarAnimais();
+				telaListarAnimais.setVisible(true);
+				dispose();
+			}
+		});
+		mnAnimal.add(mntmListarAnimal);
+		
+		JMenuItem mntmAtualizarRemoverAnimal = new JMenuItem("Atualizar/Remover");
+		mntmAtualizarRemoverAnimal.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarAnimal telaAtualizarAnimal = new TelaAtualizarAnimal();
+				telaAtualizarAnimal.setVisible(true);
+				dispose();
+			}
+		});
+		mnAnimal.add(mntmAtualizarRemoverAnimal);
 		
 		JMenuBar mbCliente = new JMenuBar();
 		mbCliente.setBounds(50, 0, 48, 21);
@@ -65,8 +91,11 @@ public class TelaOperadorSistema extends JFrame {
 		JMenuItem mtnmCadastrarCliente = new JMenuItem("Cadastrar");
 		mnCliente.add(mtnmCadastrarCliente);
 		
-		JMenuItem mntmListarRemoverCliente = new JMenuItem("Listar/Remover");
-		mnCliente.add(mntmListarRemoverCliente);
+		JMenuItem mntmListarCliente = new JMenuItem("Listar");
+		mnCliente.add(mntmListarCliente);
+		
+		JMenuItem mntmAtualizarRemoverCliente = new JMenuItem("Atualizar/Remover");
+		mnCliente.add(mntmAtualizarRemoverCliente);
 		
 		JMenuBar mbVoltar = new JMenuBar();
 		mbVoltar.setBounds(98, 0, 40, 21);
@@ -78,5 +107,7 @@ public class TelaOperadorSistema extends JFrame {
 		JMenuItem mntmVoltar = new JMenuItem("Voltar");
 		mnVoltar.add(mntmVoltar);
 	}
+	
+	
 
 }

@@ -116,6 +116,9 @@ public class TelaListarAnimais extends JFrame {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				TelaOperadorSistema telaOperadorSistema = new TelaOperadorSistema();
+				telaOperadorSistema.setVisible(true);
+				dispose();
 			}
 		});
 		btnVoltar.setBounds(321, 327, 90, 23);

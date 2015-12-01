@@ -1,17 +1,25 @@
 package clinica.PetCenter.Gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import clinica.pet_center.negocio.basicas.AnimalAux;
+import clinica.pet_center.negocio.cadastros.CadastroAnimalAux;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
 
 public class TelaCadastroAnimal extends JFrame {
 
+	private CadastroAnimalAux fachadaAnimal;
 	private JPanel contentPane;
 	private JTextField tfNome;
 	private JTextField tfEspecie;
@@ -93,15 +101,50 @@ public class TelaCadastroAnimal extends JFrame {
 		contentPane.add(tfIdDono);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cadastrarAnimalTela();				
+			}
+		});
 		btnCadastrar.setBounds(485, 327, 90, 23);
 		contentPane.add(btnCadastrar);
 		
 		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaOperadorSistema telaOperadorSistema = new TelaOperadorSistema();
+				telaOperadorSistema.setVisible(true);
+				dispose();
+			}
+		});
 		btnVoltar.setBounds(385, 327, 90, 23);
 		contentPane.add(btnVoltar);
 		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.setBounds(285, 327, 90, 23);
 		contentPane.add(btnLimpar);
+	}
+	
+	public void cadastrarAnimalTela(){
+		try{
+			String nome = tfNome.getText();
+			String especie = tfEspecie.getText();
+			String raca = tfRaca.getText();
+			String dataNascimento = tfDataNascimento.getText();
+			String idDono = tfIdDono.getText();
+			AnimalAux animal;
+			animal = new AnimalAux(nome,especie,raca,dataNascimento,idDono);
+			fachadaAnimal.cadastrarAnimal(animal);
+			JOptionPane.showMessageDialog(this, "Animal cadastrado com sucesso!");
+		
+		} catch (IDIException idi) {
+			JOptionPane.showMessageDialog(this, idi.getMessage());
+		}
+		catch(OExistenteException oe){
+			JOptionPane.showMessageDialog(this, oe.getMessage());
+		}
+		catch(Exception e){
+			JOptionPane.showMessageDialog(this,"Droga!");
+		}
 	}
 }
