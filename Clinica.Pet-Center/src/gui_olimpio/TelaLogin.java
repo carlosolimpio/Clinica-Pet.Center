@@ -51,11 +51,12 @@ public class TelaLogin {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 610, 433);
+		frame.setResizable(false);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		fachada = new FachadaCadastro();
+		//fachada = new FachadaCadastro();
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(58, 58, 46, 14);
@@ -93,7 +94,7 @@ public class TelaLogin {
 				
 				if(Util.isADM(login, senha)) {
 					frame.getContentPane().setVisible(false);
-					frame.setContentPane(new PanelADM());
+					frame.setContentPane(new PanelADM(frame));
 					frame.getContentPane().setVisible(true);
 				} else {
 					Funcionario r = fachada.verificaLogin(login, senha);

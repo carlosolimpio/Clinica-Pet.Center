@@ -1,17 +1,24 @@
 package gui_olimpio;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 
 public class PanelADM extends JPanel {
 
-	public PanelADM () {
+	private JFrame frame;
+	
+	public PanelADM (JFrame frame) {
 		setLayout(null);
+		setPreferredSize(new Dimension(600,400));
+		
+		setFrame(frame);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 260, 21);
@@ -21,18 +28,20 @@ public class PanelADM extends JPanel {
 		mnOperadorDeSistema.setBounds(50,0,140,21);
 		menuBar.add(mnOperadorDeSistema);
 		
-		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");
-		mntmCadastrarOperador.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
+		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");   //=============================OK
 		mnOperadorDeSistema.add(mntmCadastrarOperador);
+		EvntMntmCadastrarOperador evntCadastrarOperador = new EvntMntmCadastrarOperador();
+		mntmCadastrarOperador.addActionListener(evntCadastrarOperador);
 		
-		JMenuItem mntmListarOperador = new JMenuItem("Listar");
+		JMenuItem mntmListarOperador = new JMenuItem("Listar");         //=============================OK
 		mnOperadorDeSistema.add(mntmListarOperador);
+		EvntMntmListarOperador evntListarOperador = new EvntMntmListarOperador();
+		mntmListarOperador.addActionListener(evntListarOperador);
 		
-		JMenuItem mntmRemoverOperador = new JMenuItem("Remover");
-		mnOperadorDeSistema.add(mntmRemoverOperador);
+		JMenuItem mntmRemoverAtualizarOperador = new JMenuItem("Remover/Atualizar");       //=============================OK
+		mnOperadorDeSistema.add(mntmRemoverAtualizarOperador);
+		EvntMntmRemoverOperador evntRemoverOperador = new EvntMntmRemoverOperador();
+		mntmRemoverAtualizarOperador.addActionListener(evntRemoverOperador);
 		
 		JMenu mnVeterinario = new JMenu("Veterin\u00E1rio");
 		mnVeterinario.setBounds(170,0,70,21);
@@ -44,9 +53,42 @@ public class PanelADM extends JPanel {
 		JMenuItem mntmListarVeterinario = new JMenuItem("Listar");
 		mnVeterinario.add(mntmListarVeterinario);
 		
-		JMenuItem mntmRemoverVeterinario = new JMenuItem("Remover");
-		mnVeterinario.add(mntmRemoverVeterinario);		
+		JMenuItem mntmRemoverAtualizarVeterinario = new JMenuItem("Remover/Atualizar");
+		mnVeterinario.add(mntmRemoverAtualizarVeterinario);
 		
 	}	
-		
+	
+	private void setFrame(JFrame frame){
+		this.frame = frame;
+	}
+	
+	private class EvntMntmCadastrarOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmListarOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelListarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmRemoverOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAtualizarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
 }
