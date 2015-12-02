@@ -1,102 +1,132 @@
 package clinica.pet_center.dados;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import clinica.pet_center.negocio.basicas.Animal;
-import clinica.pet_center.negocio.basicas.AnimalAux;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
 
-@SuppressWarnings("serial")
-public class RepositorioAnimais implements IRepositorioAnimais, Serializable {
-
+public class RepositorioAnimais implements IRepositorio<Animal>, Serializable {
+	
 	private static RepositorioAnimais repositorioAnimais;
-	private ArrayList<AnimalAux> animais;
-	
+	private ArrayList<Animal> animais;
+	private static final String NOME_ARQUIVO = "repositorioAnimais.dat";
+
 	private RepositorioAnimais() {
-		animais = new ArrayList<AnimalAux>();
+		animais = new ArrayList<Animal>();
 	}
-	
+
 	public static RepositorioAnimais getInstancia() {
-//		if(repositorioAnimais == null)
-//			repositorioAnimais = //carregaDoArquivo();
+		if (repositorioAnimais == null)
+			repositorioAnimais = carregaDoArquivo();
 		return repositorioAnimais;
 	}
-	
+
 	@Override
-	public void inserir(AnimalAux animal) {
+	public void inserir(Animal animal) {
 		animais.add(animal);
 		salvarArquivo();
 	}
-	
+
 	@Override
-	public AnimalAux buscar(String id) throws ONExistenteException {
-		AnimalAux r = null;
-		for(AnimalAux a: animais){
-			if(a.getId().equals(id)) {
+	public Animal buscar(String id) throws ONExistenteException {
+		Animal r = null;
+		for (Animal a : animais) {
+			if (a.getId().equals(id)) {
 				r = a;
 				break;
 			}
 		}
-		if(r != null)
+		if (r != null)
 			return r;
-		else 
+		else
 			throw new ONExistenteException(id);
 	}
-	
+
 	@Override
-	public ArrayList<AnimalAux> listar() {
+	public ArrayList<Animal> listar() {
 		return animais;
 	}
-	
+
 	@Override
 	public void remover(String id) throws ONExistenteException {
 		boolean r = false;
-		for(int i=0; i<animais.size(); i++){
-			if(animais.get(i).getId().equals(id)){
+		for (int i = 0; i < animais.size(); i++) {
+			if (animais.get(i).getId().equals(id)) {
 				animais.remove(i);
 				r = true;
 				break;
 			}
 		}
-		if(r)
+		if (r)
 			salvarArquivo();
 		else
 			throw new ONExistenteException(id);
 	}
-	
+
 	@Override
-	public void atualizar(AnimalAux novo, String id) throws ONExistenteException {
+	public void atualizar(Animal novo, String id) throws ONExistenteException {
 		remover(id);
 		inserir(novo);
 	}
-	
-	private void salvarArquivo() {
-		File arquivo = new File("repositorioAnimais.dat");
+
+	public void salvarArquivo() {
+		File arquivo = new File(NOME_ARQUIVO);
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
-		
+
 		try {
-			
+			if (!arquivo.exists()) {
+				arquivo.createNewFile();
+			}
 			fos = new FileOutputStream(arquivo);
 			oos = new ObjectOutputStream(fos);
 			oos.writeObject(repositorioAnimais);
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				oos.close();
-			} catch(Exception e) {
-				e.printStackTrace();
+			if(oos != null) {
+				try {
+					oos.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
-	
-//	private static RepositorioAnimais carregaDoArquivo() {
-		
-//	}
+
+	private static RepositorioAnimais carregaDoArquivo() {
+		File arquivo = new File(NOME_ARQUIVO);
+		FileInputStream fis = null;
+		ObjectInputStream ois = null;
+		RepositorioAnimais temp = null;
+
+		try {
+			if (arquivo.exists()) {
+				fis = new FileInputStream(arquivo);
+				ois = new ObjectInputStream(fis);
+				temp = (RepositorioAnimais) ois.readObject();
+			} else { 
+				temp = new RepositorioAnimais();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (ois != null) {
+				try {
+					ois.close();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return temp;
+	}
 }
