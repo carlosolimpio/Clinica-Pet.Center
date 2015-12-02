@@ -11,6 +11,7 @@ import clinica.pet_center.negocio.basicas.Veterinario;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
 
 public class FachadaCadastro implements IFachadaCadastro {
 	private static FachadaCadastro instance;
@@ -34,12 +35,12 @@ public class FachadaCadastro implements IFachadaCadastro {
     }
 	
 	public Funcionario verificaLogin(String login, String senha) throws ONExistenteException, IDIException, 
-		IllegalArgumentException {
+		SenhaInvalidaException {
 		Funcionario r = cadFuncionario.buscarFuncionario(login);
 		if(senha.equals(r.getSenha()))
 			return r;
 		else
-			throw new IllegalArgumentException("Senha incorreta!");
+			throw new SenhaInvalidaException("Senha inválida login:" + login);
 	}
 
 	//animal

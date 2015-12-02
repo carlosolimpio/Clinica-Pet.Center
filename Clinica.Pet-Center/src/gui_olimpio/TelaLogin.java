@@ -7,12 +7,18 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import clinica.pet_center.negocio.basicas.Funcionario;
+import clinica.pet_center.negocio.basicas.OperadorSistema;
+import clinica.pet_center.negocio.basicas.Veterinario;
 import clinica.pet_center.negocio.cadastros.FachadaCadastro;
 import clinica.pet_center.negocio.cadastros.IFachadaCadastro;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
 import clinica.pet_center.utilidades.Util;
 
 public class TelaLogin {
@@ -53,10 +59,11 @@ public class TelaLogin {
 		frame = new JFrame();
 		frame.setBounds(100, 100, 610, 433);
 		frame.setResizable(false);
+		frame.setTitle("Clínica PetCenter");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		//fachada = new FachadaCadastro();
+		fachada = FachadaCadastro.getInstance();
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(58, 58, 46, 14);
@@ -83,6 +90,11 @@ public class TelaLogin {
 		
 	}
 	
+	public void limpar() {
+		tfId.setText("");
+		pfSenha.setText("");
+	}
+	
 	private class EvntBtnEntrar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
@@ -99,10 +111,30 @@ public class TelaLogin {
 				} else {
 					Funcionario r = fachada.verificaLogin(login, senha);
 					
+					
+					if(r instanceof OperadorSistema) {
+						
+						
+						
+					} else if(r instanceof Veterinario) {
+						
+					}
+					
+					
 				}
 				
-			}catch(Exception ex) {
-				
+			} catch(ONExistenteException onee) {
+				JOptionPane.showMessageDialog(null, "Funcionario não cadastrado.", "Alerta", JOptionPane.ERROR_MESSAGE);
+				limpar();
+			} catch(IDIException iie) {
+				JOptionPane.showMessageDialog(null, "ID inválido!", "Alerta", JOptionPane.ERROR_MESSAGE);
+				limpar();
+			} catch(SenhaInvalidaException sie) {
+				JOptionPane.showMessageDialog(null, "Senha inválida!", "Alerta", JOptionPane.ERROR_MESSAGE);
+				limpar();
+			} catch(IllegalArgumentException iae) {
+				JOptionPane.showMessageDialog(null, iae.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+				limpar();
 			}
 		}
 	}

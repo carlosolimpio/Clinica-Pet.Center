@@ -11,11 +11,12 @@ import clinica.pet_center.negocio.basicas.Veterinario;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
 
 public interface IFachadaCadastro {
 	
 	Funcionario verificaLogin(String login, String senha) throws ONExistenteException, IDIException, 
-	IllegalArgumentException;
+	SenhaInvalidaException;
 	
 	//Animal
 	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, 
