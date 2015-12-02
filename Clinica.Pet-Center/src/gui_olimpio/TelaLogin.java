@@ -106,7 +106,7 @@ public class TelaLogin {
 				
 				if(Util.isADM(login, senha)) {
 					frame.getContentPane().setVisible(false);
-					frame.setContentPane(new PanelADM(frame));
+					frame.setContentPane(new PanelOperadorSistema(frame));
 					frame.getContentPane().setVisible(true);
 				} else {
 					Funcionario r = fachada.verificaLogin(login, senha);
