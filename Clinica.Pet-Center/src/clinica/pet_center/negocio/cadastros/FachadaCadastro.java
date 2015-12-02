@@ -1,6 +1,6 @@
 package clinica.pet_center.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.basicas.Cliente;
@@ -19,7 +19,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	private CadastroConsulta cadConsulta;
 	private CadastroFuncionario cadFuncionario;
 	
-	public FachadaCadastro() {
+	private FachadaCadastro() {
 		cadAnimal = new CadastroAnimal();
 		cadCliente = new CadastroCliente();
 		cadConsulta = new CadastroConsulta();
@@ -35,7 +35,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	
 	public Funcionario verificaLogin(String login, String senha) throws ONExistenteException, IDIException, 
 		IllegalArgumentException {
-		Funcionario r = cadFuncionario.buscaFuncionario(login);
+		Funcionario r = cadFuncionario.buscarFuncionario(login);
 		if(senha.equals(r.getSenha()))
 			return r;
 		else
@@ -44,7 +44,8 @@ public class FachadaCadastro implements IFachadaCadastro {
 
 	//animal
 	@Override
-	public void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException {
+	public void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, 
+		IllegalArgumentException {
 		cadAnimal.cadastrarAnimal(animal);
 	}
 
@@ -54,7 +55,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public ArrayList<Animal> listarAnimais() {
+	public List<Animal> listarAnimais() {
 		return cadAnimal.listarAnimais();
 	}
 
@@ -64,100 +65,105 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException {
+	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException, 
+		OExistenteException {
 		cadAnimal.alterarAnimal(id, novo);
 	}
 
 	//cliente
 	@Override
-	public void cadastraCliente(Cliente cliente) throws OExistenteException, IDIException {
-		cadCliente.cadastraCliente(cliente);
+	public void cadastrarCliente(Cliente cliente) throws OExistenteException, IDIException, 
+		IllegalArgumentException {
+		cadCliente.cadastrarCliente(cliente);
 	}
 
 	@Override
-	public Cliente buscaCliente(String id) throws ONExistenteException, IDIException {
-		return cadCliente.buscaCliente(id);
+	public Cliente buscarCliente(String id) throws ONExistenteException, IDIException {
+		return cadCliente.buscarCliente(id);
 	}
 
 	@Override
-	public ArrayList<Cliente> listaClientes() throws ONExistenteException {
-		return cadCliente.listaClientes();
+	public List<Cliente> listarClientes() {
+		return cadCliente.listarClientes();
 	}
 
 	@Override
-	public ArrayList<Animal> listaAnimaisCliente(String id) throws ONExistenteException, IDIException {
-		return cadCliente.listaAnimaisCliente(id);
+	public List<Animal> listarAnimaisDoCliente(String id) throws ONExistenteException, IDIException {
+		return cadCliente.listarAnimaisDoCliente(id);
 	}
 
 	@Override
-	public void removeCliente(String id) throws ONExistenteException, IDIException {
-		cadCliente.removeCliente(id);
+	public void removerCliente(String id) throws ONExistenteException, IDIException {
+		cadCliente.removerCliente(id);
 	}
 	
 	@Override
-	public void alteraCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, IDIException {
-		cadCliente.alteraCliente(novo, id);
+	public void alterarCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, 
+		IDIException {
+		cadCliente.alterarCliente(novo, id);
 	}
 
 	//consulta
 	@Override
-	public void cadastraConsulta(Consulta c) throws OExistenteException, IDIException {
-		cadConsulta.cadastraConsulta(c);
+	public void cadastrarConsulta(Consulta c) throws OExistenteException, IDIException {
+		cadConsulta.cadastrarConsulta(c);
 	}
 
 	@Override
-	public Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		return cadConsulta.buscaConsulta(idConsulta);
+	public Consulta buscarConsulta(String idConsulta) throws ONExistenteException, IDIException {
+		return cadConsulta.buscarConsulta(idConsulta);
 	}
 
 	@Override
-	public ArrayList<Consulta> listaConsultas() throws ONExistenteException {
-		return cadConsulta.listaConsultas();
+	public List<Consulta> listarConsultas() {
+		return cadConsulta.listarConsultas();
 	}
 
 	@Override
-	public void removeConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		cadConsulta.removeConsulta(idConsulta);
+	public void removerConsulta(String idConsulta) throws ONExistenteException, IDIException {
+		cadConsulta.removerConsulta(idConsulta);
 	}
 	
 	@Override
-	public void alteraConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException, IDIException {
-		cadConsulta.alteraConsulta(novaConsulta, idConsulta);
+	public void alterarConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, 
+		ONExistenteException, IDIException {
+		cadConsulta.alterarConsulta(novaConsulta, idConsulta);
 	}
 
 	//funcionario
 	@Override
-	public void cadastraFuncionario(Funcionario func) throws OExistenteException, IDIException {
-		cadFuncionario.cadastraFuncionario(func);
+	public void cadastrarFuncionario(Funcionario func) throws OExistenteException, IDIException {
+		cadFuncionario.cadastrarFuncionario(func);
 	}
 
 	@Override
-	public Funcionario buscaFuncionario(String id) throws ONExistenteException, IDIException {
-		return cadFuncionario.buscaFuncionario(id);
+	public Funcionario buscarFuncionario(String id) throws ONExistenteException, IDIException {
+		return cadFuncionario.buscarFuncionario(id);
 	}
 
 	@Override
-	public ArrayList<Funcionario> listaFuncionarios() throws ONExistenteException {
-		return cadFuncionario.listaFuncionarios();
+	public List<Funcionario> listarFuncionarios() {
+		return cadFuncionario.listarFuncionarios();
 	}
 
 	@Override
-	public ArrayList<Veterinario> listaVeterinarios() throws ONExistenteException {
-		return cadFuncionario.listaVeterinarios();
+	public List<Veterinario> listarVeterinarios() {
+		return cadFuncionario.listarVeterinarios();
 	}
 
 	@Override
-	public ArrayList<OperadorSistema> listaOperadoresSistema() throws ONExistenteException{
-		return cadFuncionario.listaOperadoresSistema();
+	public List<OperadorSistema> listarOperadoresSistema() {
+		return cadFuncionario.listarOperadoresSistema();
 	}
 
 	@Override
-	public void removeFuncionario(String id) throws ONExistenteException, IDIException {
-		cadFuncionario.removeFuncionario(id);
+	public void removerFuncionario(String id) throws ONExistenteException, IDIException {
+		cadFuncionario.removerFuncionario(id);
 	}
 	
 	@Override
-	public void alteraFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException {
-		cadFuncionario.alteraFuncionario(novo, id);
+	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, 
+		IDIException {
+		cadFuncionario.alterarFuncionario(novo, id);
 	}
 }

@@ -1,6 +1,6 @@
 package clinica.pet_center.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.basicas.Cliente;
@@ -18,33 +18,39 @@ public interface IFachadaCadastro {
 	IllegalArgumentException;
 	
 	//Animal
-	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException;
+	void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, 
+		IllegalArgumentException;
 	Animal buscarAnimalId(String id) throws ONExistenteException, IDIException;
-	ArrayList<Animal> listarAnimais();
+	List<Animal> listarAnimais();
 	void removerAnimal(String id) throws ONExistenteException, IDIException;
-	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException;
+	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException, 
+		OExistenteException;
 	
 	//Cliente
-	void cadastraCliente(Cliente cliente) throws OExistenteException, IDIException;
-	Cliente buscaCliente(String id) throws ONExistenteException, IDIException;
-	ArrayList<Cliente> listaClientes() throws ONExistenteException;
-	ArrayList<Animal> listaAnimaisCliente(String id) throws ONExistenteException, IDIException;
-	void removeCliente(String id) throws ONExistenteException, IDIException;
-	void alteraCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, IDIException;
+	void cadastrarCliente(Cliente cliente) throws OExistenteException, IDIException, 
+		IllegalArgumentException;
+	Cliente buscarCliente(String id) throws ONExistenteException, IDIException;
+	List<Cliente> listarClientes();
+	List<Animal> listarAnimaisDoCliente(String id) throws ONExistenteException, IDIException;
+	void removerCliente(String id) throws ONExistenteException, IDIException;
+	void alterarCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, 
+		IDIException;
 	
 	//Consulta
-	void cadastraConsulta(Consulta c) throws OExistenteException, IDIException;
-	Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException;
-	ArrayList<Consulta> listaConsultas() throws ONExistenteException;
-	void removeConsulta(String idConsulta) throws ONExistenteException, IDIException;
-	void alteraConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException, IDIException; 
+	void cadastrarConsulta(Consulta c) throws OExistenteException, IDIException;
+	Consulta buscarConsulta(String idConsulta) throws ONExistenteException, IDIException;
+	List<Consulta> listarConsultas();
+	void removerConsulta(String idConsulta) throws ONExistenteException, IDIException;
+	void alterarConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, 
+		ONExistenteException, IDIException; 
 	
 	//Funcionario
-	void cadastraFuncionario(Funcionario func) throws OExistenteException, IDIException;
-	Funcionario buscaFuncionario(String id) throws ONExistenteException, IDIException;
-	ArrayList<Funcionario> listaFuncionarios() throws ONExistenteException;
-	ArrayList<Veterinario> listaVeterinarios() throws ONExistenteException;
-	ArrayList<OperadorSistema> listaOperadoresSistema() throws ONExistenteException;
-	void removeFuncionario(String id) throws ONExistenteException, IDIException;
-	void alteraFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException;
+	void cadastrarFuncionario(Funcionario func) throws OExistenteException, IDIException;
+	Funcionario buscarFuncionario(String id) throws ONExistenteException, IDIException;
+	List<Funcionario> listarFuncionarios();
+	List<Veterinario> listarVeterinarios();
+	List<OperadorSistema> listarOperadoresSistema();
+	void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, 
+		IDIException;
+	void removerFuncionario(String id) throws ONExistenteException, IDIException;
 }

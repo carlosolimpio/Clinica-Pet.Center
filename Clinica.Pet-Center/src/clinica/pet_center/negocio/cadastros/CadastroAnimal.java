@@ -1,8 +1,8 @@
 package clinica.pet_center.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import clinica.pet_center.dados.IRepositorioAnimais;
+import clinica.pet_center.dados.IRepositorio;
 import clinica.pet_center.dados.RepositorioAnimais;
 import clinica.pet_center.negocio.basicas.Animal;
 import clinica.pet_center.negocio.exceptions.IDIException;
@@ -12,13 +12,14 @@ import clinica.pet_center.utilidades.Util;
 
 public class CadastroAnimal {
 	
-	private IRepositorioAnimais repositorioAnimal;
+	private IRepositorio<Animal> repositorioAnimal;
 	
 	public CadastroAnimal() {
 		repositorioAnimal = RepositorioAnimais.getInstancia();
 	}
 	
-	public void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, IllegalArgumentException {
+	public void cadastrarAnimal(Animal animal) throws OExistenteException, IDIException, 
+		IllegalArgumentException {
 		if(Util.isID(animal.getId())) {
 			existeObjeto(animal);
 			repositorioAnimal.inserir(animal);
@@ -34,7 +35,7 @@ public class CadastroAnimal {
 			throw new IDIException(id);
 	}
 	
-	public ArrayList<Animal> listarAnimais() throws IllegalArgumentException {
+	public List<Animal> listarAnimais() {
 		return repositorioAnimal.listar();
 	}
 	
@@ -45,9 +46,12 @@ public class CadastroAnimal {
 			throw new IDIException(id);
 	}
 	
-	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException {
-		if(Util.isID(id))
+	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException, 
+		OExistenteException {
+		if(Util.isID(id)) {
+			existeObjeto(novo);
 			repositorioAnimal.atualizar(novo, id);
+		}
 		else
 			throw new IDIException(id);
 	}

@@ -1,74 +1,68 @@
 package clinica.pet_center.negocio.cadastros;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import clinica.pet_center.dados.IRepositorioConsultas;
+import clinica.pet_center.dados.IRepositorio;
 import clinica.pet_center.dados.RepositorioConsultas;
 import clinica.pet_center.negocio.basicas.Consulta;
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.negocio.exceptions.OExistenteException;
 import clinica.pet_center.negocio.exceptions.ONExistenteException;
-import clinica.pet_center.utilidades.Constantes;
 import clinica.pet_center.utilidades.Util;
 
 public class CadastroConsulta {
 
-	private IRepositorioConsultas repositorioConsulta;
+	private IRepositorio<Consulta> repositorioConsulta;
 	
 	public CadastroConsulta() {
 		repositorioConsulta = RepositorioConsultas.getInstancia();
 	}
 	
-	public void cadastraConsulta(Consulta c) throws OExistenteException, IDIException {
-		if(Util.isID(c.getIdConsulta()))
-			repositorioConsulta.insere(c);
+	public void cadastrarConsulta(Consulta c) throws OExistenteException, IDIException {
+		if(Util.isID(c.getIdConsulta())) {
+			existeObjeto(c);
+			repositorioConsulta.inserir(c);
+		}
 		else
 			throw new IDIException(c.getIdConsulta());
 	}
 	
-	public Consulta buscaConsulta(String idConsulta) throws ONExistenteException, IDIException {
+	public Consulta buscarConsulta(String idConsulta) throws ONExistenteException, IDIException {
 		if(Util.isID(idConsulta))
-			return repositorioConsulta.busca(idConsulta);
+			return repositorioConsulta.buscar(idConsulta);
 		else 
 			throw new IDIException(idConsulta);
 	}
 	
-	public ArrayList<Consulta> listaConsultas() throws ONExistenteException
-	{
-		ArrayList<Consulta> listaConsulta = repositorioConsulta.lista();
-		if(listaConsulta == null)
-		{
-			throw new ONExistenteException(Constantes.CONSULTA);
+	public List<Consulta> listarConsultas() {
+		return repositorioConsulta.listar();
+	}
+	
+	public void removerConsulta(String idConsulta) throws ONExistenteException, IDIException {
+		if(Util.isID(idConsulta))
+			repositorioConsulta.remover(idConsulta);
+		else 
+			throw new IDIException(idConsulta);
+	}
+	
+	public void alterarConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, 
+		ONExistenteException, IDIException {
+		if(Util.isID(idConsulta)) {
+			existeObjeto(novaConsulta);
+			repositorioConsulta.atualizar(novaConsulta, idConsulta);
 		}
-		return listaConsulta;
-	}
-	
-	public void removeConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		if(Util.isID(idConsulta))
-			repositorioConsulta.remove(idConsulta);
-		else 
-			throw new IDIException(idConsulta);
-	}
-	
-	public void alteraConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, ONExistenteException, IDIException {
-		if(novaConsulta != null && Util.isID(idConsulta))
-			repositorioConsulta.atualiza(novaConsulta, idConsulta);
 		else
 			throw new IDIException(idConsulta);
 	}
 	
-//	//será uma consulta se todos parametros de consulta forem != null
-//	private boolean isConsulta(Consulta c) {
-//		boolean r = false;
-//		if(c != null)
-//			r = c.getCliente() != null && c.getAnimal() != null && c.getVeterinario() != null 
-//				&& c.getDiagnostico() != null && c.getMotivoVisita() != null && c.getReceita() != null
-//				&& c.getData() != null && c.getIdConsulta() != null;
-//		return r;
-//	}
-	
-//	@Override
-//	public String toString(){
-//		return String.format("EXISTEM %d CONSULTAS NO SISTEMA",  repositorioConsulta.lista().size());
-//	}
+	private void existeObjeto(Object obj) throws OExistenteException, IllegalArgumentException {
+		if(obj != null) {
+			for(Consulta c : listarConsultas()) {
+				if(c.equals(obj))
+					throw new OExistenteException(obj);
+			}
+		}
+		else
+			throw new IllegalArgumentException("Objeto nulo");
+	}
 }
