@@ -1,11 +1,18 @@
 package gui_olimpio;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class PanelCadastrarVeterinario extends JPanel {
+	
+	private JFrame frame;
+	
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
@@ -17,7 +24,10 @@ public class PanelCadastrarVeterinario extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PanelCadastrarVeterinario() {
+	public PanelCadastrarVeterinario(JFrame frame) {
+		
+		setFrame(frame);
+		
 		setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome");
@@ -87,10 +97,26 @@ public class PanelCadastrarVeterinario extends JPanel {
 		btnCadastrar.setBounds(501, 366, 89, 23);
 		add(btnCadastrar);
 		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(402, 366, 89, 23);
-		add(btnVoltar);
+		JButton btnVoltarPanelAdm = new JButton("Voltar");
+		btnVoltarPanelAdm.setBounds(402, 366, 89, 23);
+		add(btnVoltarPanelAdm);
+		EvntBtnVoltarPanelAdm evntVoltarPanelAdm = new EvntBtnVoltarPanelAdm();
+		btnVoltarPanelAdm.addActionListener(evntVoltarPanelAdm);
 
+	}
+	
+	private void setFrame(JFrame frame){
+		this.frame = frame;
+	}
+	
+	private class EvntBtnVoltarPanelAdm implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelADM(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
 	}
 
 }

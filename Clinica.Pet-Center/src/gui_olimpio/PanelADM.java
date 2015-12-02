@@ -21,7 +21,7 @@ public class PanelADM extends JPanel {
 		setFrame(frame);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 260, 21);
+		menuBar.setBounds(0, 0, 210, 21);
 		add(menuBar);
 		
 		JMenu mnOperadorDeSistema = new JMenu("Operador de sistema");
@@ -49,12 +49,18 @@ public class PanelADM extends JPanel {
 		
 		JMenuItem mntmCadastrarVeterinario = new JMenuItem("Cadastrar");
 		mnVeterinario.add(mntmCadastrarVeterinario);
+		EvntMntmCadastrarVeterinario evntCadastrarVeterinario = new EvntMntmCadastrarVeterinario();
+		mntmCadastrarVeterinario.addActionListener(evntCadastrarVeterinario);
 		
 		JMenuItem mntmListarVeterinario = new JMenuItem("Listar");
 		mnVeterinario.add(mntmListarVeterinario);
+		EvntMntmListarVeterinario evntListarVeterinario = new EvntMntmListarVeterinario();
+		mntmListarVeterinario.addActionListener(evntListarVeterinario);
 		
 		JMenuItem mntmRemoverAtualizarVeterinario = new JMenuItem("Remover/Atualizar");
 		mnVeterinario.add(mntmRemoverAtualizarVeterinario);
+		EvntMntmRemoverAtualizarVeterinario evntRemoverAtualizarVeterinario = new EvntMntmRemoverAtualizarVeterinario();
+		mntmRemoverAtualizarVeterinario.addActionListener(evntRemoverAtualizarVeterinario);
 		
 	}	
 	
@@ -87,6 +93,36 @@ public class PanelADM extends JPanel {
 				
 			frame.getContentPane().setVisible(false);
 			frame.setContentPane(new PanelRemoverAtualizarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmCadastrarVeterinario implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarVeterinario(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmListarVeterinario implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelListarVeterinario(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmRemoverAtualizarVeterinario implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAtualizarVeterinario(frame));
 			frame.getContentPane().setVisible(true);	
 			
 		}
