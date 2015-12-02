@@ -1,28 +1,13 @@
 package clinica.pet_center.negocio.basicas;
 
-
-
 public abstract class Funcionario extends Pessoa {
 	
 	private String dataAdmissao;
 	protected String senha;
-	protected double salario;
 	
-	/**
-	 * @author Carlos olimpio
-	 * 
-	 * @param dataAdmissao - data de contrato
-	 * @param salarioBase - salario minimo base para calculo posterior
-	 */
-	
-	public Funcionario(String nome, String CPF, String dataNascimento, String email, String dataAdmissao, double salarioBase) {
+	public Funcionario(String nome, String CPF, String dataNascimento, String email, String dataAdmissao) {
 		super(nome, CPF, dataNascimento, email);
 		setDataAdmissao(dataAdmissao);
-		this.salario = salarioBase;
-	}
-	
-	public double getSalarioBase() {
-		return salario;
 	}
 
 	public String getDataAdmissao() {
@@ -32,8 +17,6 @@ public abstract class Funcionario extends Pessoa {
 	public void setDataAdmissao(String dataAdmissao) {
 		this.dataAdmissao = dataAdmissao;
 	}
-
-	public abstract double calculaSalario(int horasTrabalhadas);
 	
 	protected abstract void setSenha(String senha);
 	

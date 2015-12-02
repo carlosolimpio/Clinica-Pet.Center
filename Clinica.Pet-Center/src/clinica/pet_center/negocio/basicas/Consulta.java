@@ -1,10 +1,12 @@
 package clinica.pet_center.negocio.basicas;
 
+import java.io.Serializable;
+
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
 import clinica.pet_center.utilidades.Util;
 
-public class Consulta {
+public class Consulta implements Serializable{
 	
 	private Veterinario veterinario;
 	private Cliente cliente;

@@ -1,26 +1,17 @@
 package clinica.pet_center.negocio.basicas;
 
+import java.io.Serializable;
+
 import clinica.pet_center.negocio.exceptions.IDIException;
 import clinica.pet_center.utilidades.Contadores;
 
-public abstract class Pessoa {
+public abstract class Pessoa implements Serializable{
 	
 	private String nome;
 	private String CPF; // 12312312390
 	private String dataNascimento;
 	private String email;
 	protected String id;
-	
-	/**
-	 * @author Carlos Olimpio
-	 * 
-	 * @param nome - nome
-	 * @param CPF - cpf(11122233300) sem pontos e traço(?)
-	 * @param dataNascimento - data nascimento
-	 * @param email - email
-	 * @param id - identificador para cada pessoa
-	 * @param contador - usado no id
-	 */
 	
 	public Pessoa(String nome, String CPF, String dataNascimento, String email) {
 		

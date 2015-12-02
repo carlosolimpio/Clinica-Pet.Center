@@ -9,18 +9,18 @@ public class Veterinario extends Funcionario {
 	private String crmv;
 	
 	public Veterinario(String nome, String CPF, String dataNascimento, String email, 
-			String dataAdmissao, double salarioBase, String crmv, String senha) {
+			String dataAdmissao, String crmv, String senha) {
 		
-		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
+		super(nome, CPF, dataNascimento, email, dataAdmissao);
 		setSenha(senha);
 		setCrmv(crmv);
 		geraId();
 	}
 	
 	public Veterinario(String id, String nome, String CPF, String dataNascimento, String email, 
-			String dataAdmissao, double salarioBase, String crmv, String senha) throws IDIException {
+			String dataAdmissao, String crmv, String senha) throws IDIException {
 		
-		super(nome, CPF, dataNascimento, email, dataAdmissao, salarioBase);
+		super(nome, CPF, dataNascimento, email, dataAdmissao);
 		setSenha(senha);
 		setCrmv(crmv);
 		setId(id);
@@ -32,15 +32,6 @@ public class Veterinario extends Funcionario {
 	
 	public String getCrmv() {
 		return crmv;
-	}
-	
-	public double calculaSalario(int horasTrabalhadas) {
-		if(horasTrabalhadas <= Util.HORAS)
-			this.salario = Util.SALARIO_BASE_VETERINARIO;
-		else
-			this.salario = Util.SALARIO_BASE_VETERINARIO + (horasTrabalhadas - Util.HORAS)/(Util.HORAS * Util.SALARIO_BASE_VETERINARIO);
-		
-		return this.salario;
 	}
 	
 	protected void setSenha(String senha) {
