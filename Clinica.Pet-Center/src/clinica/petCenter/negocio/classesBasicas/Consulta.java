@@ -1,10 +1,10 @@
-package clinica.petCenter.negocio.classesBasicas;
+package clinica.pet_center.negocio.basicas;
 
 import java.io.Serializable;
 
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.utilidades.Contadores;
-import clinica.petCenter.utilidades.Util;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.utilidades.Contadores;
+import clinica.pet_center.utilidades.Util;
 
 public class Consulta implements Serializable{
 	

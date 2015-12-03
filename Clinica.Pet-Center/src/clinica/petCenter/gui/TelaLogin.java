@@ -1,4 +1,4 @@
-package clinica.petCenter.gui;
+package gui_olimpio;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -10,16 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 
-import clinica.petCenter.negocio.cadastros.FachadaCadastro;
-import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
-import clinica.petCenter.negocio.classesBasicas.Funcionario;
-import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
-import clinica.petCenter.negocio.classesBasicas.Veterinario;
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.ONExistenteException;
-import clinica.petCenter.negocio.exceptions.SenhaInvalidaException;
-import clinica.petCenter.utilidades.Util;
+import clinica.pet_center.negocio.basicas.Funcionario;
+import clinica.pet_center.negocio.basicas.OperadorSistema;
+import clinica.pet_center.negocio.basicas.Veterinario;
+import clinica.pet_center.negocio.cadastros.FachadaCadastro;
+import clinica.pet_center.negocio.cadastros.IFachadaCadastro;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
+import clinica.pet_center.utilidades.Util;
 
 public class TelaLogin {
 
@@ -56,6 +57,13 @@ public class TelaLogin {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+		
+		try { //aparencia do SO
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch(Exception e) {
+			e.getStackTrace();
+		}
+		
 		frame = new JFrame();
 		frame.setBounds(100, 100, 610, 433);
 		frame.setResizable(false);
@@ -100,21 +108,24 @@ public class TelaLogin {
 			
 			try {
 				
-				String login, senha;
-				login = tfId.getText();
+				String senha;
+				String login = tfId.getText();
 				senha = new String(pfSenha.getPassword());
 				
 				if(Util.isADM(login, senha)) {
 					frame.getContentPane().setVisible(false);
-					frame.setContentPane(new PanelOperadorSistema(frame));
+					frame.setContentPane(new PanelADM(frame));
 					frame.getContentPane().setVisible(true);
 				} else {
+					
 					Funcionario r = fachada.verificaLogin(login, senha);
 					
 					
 					if(r instanceof OperadorSistema) {
 						
-						
+						frame.getContentPane().setVisible(false);
+						frame.setContentPane(new PanelOperadorSistema(frame));
+						frame.getContentPane().setVisible(true);
 						
 					} else if(r instanceof Veterinario) {
 						
@@ -127,7 +138,8 @@ public class TelaLogin {
 				JOptionPane.showMessageDialog(null, "Funcionario não cadastrado.", "Alerta", JOptionPane.ERROR_MESSAGE);
 				limpar();
 			} catch(IDIException iie) {
-				JOptionPane.showMessageDialog(null, "ID inválido!", "Alerta", JOptionPane.ERROR_MESSAGE);
+				//JOptionPane.showMessageDialog(null, iie.getMessage(), "Alerta", JOptionPane.ERROR_MESSAGE);
+				iie.printStackTrace();
 				limpar();
 			} catch(SenhaInvalidaException sie) {
 				JOptionPane.showMessageDialog(null, "Senha inválida!", "Alerta", JOptionPane.ERROR_MESSAGE);

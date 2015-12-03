@@ -1,4 +1,4 @@
-package clinica.petCenter.gui;
+package gui_olimpio;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -33,7 +33,7 @@ public class PanelCadastrarCliente extends JPanel {
 		
 		tfNome = new JTextField();
 		tfNome.setColumns(10);
-		tfNome.setBounds(160, 47, 265, 20);
+		tfNome.setBounds(160, 47, 320, 20);
 		add(tfNome);
 		
 		JLabel lblCpf = new JLabel("CPF");
@@ -42,7 +42,7 @@ public class PanelCadastrarCliente extends JPanel {
 		
 		tfCpf = new JTextField();
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(160, 87, 265, 20);
+		tfCpf.setBounds(160, 87, 320, 20);
 		add(tfCpf);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
@@ -50,7 +50,7 @@ public class PanelCadastrarCliente extends JPanel {
 		add(lblDataDeNascimento);
 		
 		tfDataNascimento = new JTextField();
-		tfDataNascimento.setBounds(160, 127, 265, 20);
+		tfDataNascimento.setBounds(160, 127, 320, 20);
 		add(tfDataNascimento);
 		tfDataNascimento.setColumns(10);
 		
@@ -60,7 +60,7 @@ public class PanelCadastrarCliente extends JPanel {
 		
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(160, 167, 265, 20);
+		tfEmail.setBounds(160, 167, 320, 20);
 		add(tfEmail);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");

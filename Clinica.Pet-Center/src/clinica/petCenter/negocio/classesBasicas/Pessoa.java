@@ -1,9 +1,8 @@
-package clinica.petCenter.negocio.classesBasicas;
+package clinica.pet_center.negocio.basicas;
 
 import java.io.Serializable;
 
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.utilidades.Contadores;
+import clinica.pet_center.negocio.exceptions.IDIException;
 
 public abstract class Pessoa implements Serializable{
 	
@@ -19,7 +18,6 @@ public abstract class Pessoa implements Serializable{
 		setDataNascimento(dataNascimento);
 		setEmail(email);
 		this.CPF = CPF;
-		Contadores.contPessoas();
 	}
 
 	public String getNome() {

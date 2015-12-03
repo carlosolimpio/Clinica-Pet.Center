@@ -1,14 +1,14 @@
-package clinica.petCenter.negocio.cadastros;
+package clinica.pet_center.negocio.cadastros;
 
 import java.util.List;
 
-import clinica.petCenter.dados.IRepositorio;
-import clinica.petCenter.dados.RepositorioConsultas;
-import clinica.petCenter.negocio.classesBasicas.Consulta;
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.OExistenteException;
-import clinica.petCenter.negocio.exceptions.ONExistenteException;
-import clinica.petCenter.utilidades.Util;
+import clinica.pet_center.dados.IRepositorio;
+import clinica.pet_center.dados.RepositorioConsultas;
+import clinica.pet_center.negocio.basicas.Consulta;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Util;
 
 public class CadastroConsulta {
 

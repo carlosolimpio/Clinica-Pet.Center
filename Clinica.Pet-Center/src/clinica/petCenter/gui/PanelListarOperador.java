@@ -1,4 +1,4 @@
-package clinica.petCenter.gui;
+package gui_olimpio;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;

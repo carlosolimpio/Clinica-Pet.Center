@@ -1,24 +1,14 @@
-package clinica.petCenter.utilidades;
-
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.SenhaInvalidaException;
+package clinica.pet_center.utilidades;
 
 public class Util {
-	
-	public static final double SALARIO_BASE_OP = 1250.00;
-	public static final double SALARIO_BASE_VETERINARIO = 2500.00;
-	public static final int HORAS = 40;
 	
 	private static final String LOGIN = "ADMIN";
 	private static final String SENHA = "1234";
 	
-	public static boolean isADM(String login, String senha) throws IDIException, SenhaInvalidaException {
+	public static boolean isADM(String login, String senha) {
 		boolean r = false;
-		if(!login.equals(LOGIN))
-			throw new IDIException(login);
-		else if(!senha.equals(SENHA))
-			throw new SenhaInvalidaException(login);
-		else
+		
+		if(login.equals(LOGIN) && senha.equals(SENHA))
 			r = true;
 		
 		return r;
@@ -26,8 +16,10 @@ public class Util {
 	
 	public static boolean isID(String id) {
 		boolean r = false;
+		
 		if(id != null && !id.isEmpty())
-			r = id.startsWith("ANM") || id.startsWith("CL") || id.startsWith("OP") || id.startsWith("VT") || id.startsWith("CONSULTA");
+			r = id.startsWith("OP") || id.startsWith("VT") || id.startsWith("ANM") || id.startsWith("CL") || id.startsWith("CONSULTA");
+		
 		return r;
 	}	
 	

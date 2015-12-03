@@ -1,4 +1,4 @@
-package clinica.petCenter.gui;
+package gui_olimpio;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -73,7 +73,7 @@ public class PanelADM extends JPanel {
 				
 			frame.getContentPane().setVisible(false);
 			frame.setContentPane(new PanelCadastrarOperador(frame));
-			frame.getContentPane().setVisible(true);	
+			frame.getContentPane().setVisible(true);
 			
 		}
 	}

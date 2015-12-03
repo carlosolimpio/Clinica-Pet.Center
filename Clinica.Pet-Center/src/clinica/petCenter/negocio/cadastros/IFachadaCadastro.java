@@ -1,17 +1,17 @@
-package clinica.petCenter.negocio.cadastros;
+package clinica.pet_center.negocio.cadastros;
 
 import java.util.List;
 
-import clinica.petCenter.negocio.classesBasicas.Animal;
-import clinica.petCenter.negocio.classesBasicas.Cliente;
-import clinica.petCenter.negocio.classesBasicas.Consulta;
-import clinica.petCenter.negocio.classesBasicas.Funcionario;
-import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
-import clinica.petCenter.negocio.classesBasicas.Veterinario;
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.OExistenteException;
-import clinica.petCenter.negocio.exceptions.ONExistenteException;
-import clinica.petCenter.negocio.exceptions.SenhaInvalidaException;
+import clinica.pet_center.negocio.basicas.Animal;
+import clinica.pet_center.negocio.basicas.Cliente;
+import clinica.pet_center.negocio.basicas.Consulta;
+import clinica.pet_center.negocio.basicas.Funcionario;
+import clinica.pet_center.negocio.basicas.OperadorSistema;
+import clinica.pet_center.negocio.basicas.Veterinario;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
 
 public interface IFachadaCadastro {
 	
@@ -46,7 +46,7 @@ public interface IFachadaCadastro {
 		ONExistenteException, IDIException; 
 	
 	//Funcionario
-	void cadastrarFuncionario(Funcionario func) throws OExistenteException, IDIException;
+	void cadastrarFuncionario(Funcionario func) throws OExistenteException;
 	Funcionario buscarFuncionario(String id) throws ONExistenteException, IDIException;
 	List<Funcionario> listarFuncionarios();
 	List<Veterinario> listarVeterinarios();

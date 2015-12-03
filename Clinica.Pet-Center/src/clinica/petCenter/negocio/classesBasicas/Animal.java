@@ -1,9 +1,9 @@
-package clinica.petCenter.negocio.classesBasicas;
+package clinica.pet_center.negocio.basicas;
 
 import java.io.Serializable;
 
-import clinica.petCenter.utilidades.Contadores;
-import clinica.petCenter.utilidades.Util;
+import clinica.pet_center.utilidades.Contadores;
+import clinica.pet_center.utilidades.Util;
 
 public class Animal implements Serializable {
 	
@@ -22,7 +22,6 @@ public class Animal implements Serializable {
 		setDataNascimento(dataNascimento);
 		setIdDono(idDono);
 		setTipoSanguineo(tipoSanguineo);
-		Contadores.contAnimais();
 		geraId();
 	}
 	

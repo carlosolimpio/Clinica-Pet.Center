@@ -1,17 +1,17 @@
-package clinica.petCenter.negocio.cadastros;
+package clinica.pet_center.negocio.cadastros;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import clinica.petCenter.dados.IRepositorio;
-import clinica.petCenter.dados.RepositorioFuncionarios;
-import clinica.petCenter.negocio.classesBasicas.Funcionario;
-import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
-import clinica.petCenter.negocio.classesBasicas.Veterinario;
-import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.OExistenteException;
-import clinica.petCenter.negocio.exceptions.ONExistenteException;
-import clinica.petCenter.utilidades.Util;
+import clinica.pet_center.dados.IRepositorio;
+import clinica.pet_center.dados.RepositorioFuncionarios;
+import clinica.pet_center.negocio.basicas.Funcionario;
+import clinica.pet_center.negocio.basicas.OperadorSistema;
+import clinica.pet_center.negocio.basicas.Veterinario;
+import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.pet_center.negocio.exceptions.OExistenteException;
+import clinica.pet_center.negocio.exceptions.ONExistenteException;
+import clinica.pet_center.utilidades.Util;
 
 public class CadastroFuncionario {
 
@@ -21,13 +21,9 @@ public class CadastroFuncionario {
 		repositorioFuncionario = RepositorioFuncionarios.getInstancia();
 	}
 	
-	public void cadastrarFuncionario(Funcionario func) throws OExistenteException, IDIException {
-		if(Util.isID(func.getId())) {
-			existeObjeto(func);
-			repositorioFuncionario.inserir(func);
-		}
-		else 
-			throw new IDIException(func.getId());
+	public void cadastrarFuncionario(Funcionario func) throws OExistenteException {
+		existeObjeto(func);
+		repositorioFuncionario.inserir(func);
 	}
 	
 	public Funcionario buscarFuncionario(String id) throws ONExistenteException, IDIException {
