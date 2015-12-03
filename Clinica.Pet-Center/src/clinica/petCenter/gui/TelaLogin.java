@@ -1,4 +1,4 @@
-package gui_olimpio;
+package clinica.petCenter.gui;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -12,15 +12,15 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-import clinica.pet_center.negocio.basicas.Funcionario;
-import clinica.pet_center.negocio.basicas.OperadorSistema;
-import clinica.pet_center.negocio.basicas.Veterinario;
-import clinica.pet_center.negocio.cadastros.FachadaCadastro;
-import clinica.pet_center.negocio.cadastros.IFachadaCadastro;
-import clinica.pet_center.negocio.exceptions.IDIException;
-import clinica.pet_center.negocio.exceptions.ONExistenteException;
-import clinica.pet_center.negocio.exceptions.SenhaInvalidaException;
-import clinica.pet_center.utilidades.Util;
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
+import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
+import clinica.petCenter.negocio.classesBasicas.Funcionario;
+import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
+import clinica.petCenter.negocio.classesBasicas.Veterinario;
+import clinica.petCenter.negocio.exceptions.IDIException;
+import clinica.petCenter.negocio.exceptions.ONExistenteException;
+import clinica.petCenter.negocio.exceptions.SenhaInvalidaException;
+import clinica.petCenter.utilidades.Util;
 
 public class TelaLogin {
 

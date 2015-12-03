@@ -1,8 +1,8 @@
-package clinica.pet_center.negocio.basicas;
+package clinica.petCenter.negocio.classesBasicas;
 
 import java.io.Serializable;
 
-import clinica.pet_center.negocio.exceptions.IDIException;
+import clinica.petCenter.negocio.exceptions.IDIException;
 
 public abstract class Pessoa implements Serializable{
 	

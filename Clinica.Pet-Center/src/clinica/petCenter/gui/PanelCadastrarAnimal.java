@@ -1,4 +1,4 @@
-package gui_olimpio;
+package clinica.petCenter.gui;
 
 import javax.swing.JPanel;
 

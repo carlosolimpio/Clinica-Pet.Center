@@ -1,4 +1,4 @@
-package clinica.pet_center.negocio.basicas;
+package clinica.petCenter.negocio.classesBasicas;
 
 public abstract class Funcionario extends Pessoa {
 	

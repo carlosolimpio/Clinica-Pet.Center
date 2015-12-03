@@ -1,4 +1,4 @@
-package gui_olimpio;
+package clinica.petCenter.gui;
 
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,11 +13,11 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
-import clinica.pet_center.negocio.basicas.OperadorSistema;
-import clinica.pet_center.negocio.cadastros.FachadaCadastro;
-import clinica.pet_center.negocio.cadastros.IFachadaCadastro;
-import clinica.pet_center.negocio.exceptions.OExistenteException;
-import clinica.pet_center.utilidades.Contadores;
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
+import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
+import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
+import clinica.petCenter.negocio.exceptions.OExistenteException;
+import clinica.petCenter.utilidades.Contadores;
 
 public class PanelCadastrarOperador extends JPanel {
 	

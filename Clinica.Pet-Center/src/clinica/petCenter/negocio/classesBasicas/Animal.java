@@ -1,9 +1,9 @@
-package clinica.pet_center.negocio.basicas;
+package clinica.petCenter.negocio.classesBasicas;
 
 import java.io.Serializable;
 
-import clinica.pet_center.utilidades.Contadores;
-import clinica.pet_center.utilidades.Util;
+import clinica.petCenter.utilidades.Contadores;
+import clinica.petCenter.utilidades.Util;
 
 public class Animal implements Serializable {
 	

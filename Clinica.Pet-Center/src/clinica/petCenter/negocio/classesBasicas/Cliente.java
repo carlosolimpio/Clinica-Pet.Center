@@ -1,10 +1,10 @@
-package clinica.pet_center.negocio.basicas;
+package clinica.petCenter.negocio.classesBasicas;
 
 import java.util.ArrayList;
 
-import clinica.pet_center.negocio.exceptions.IDIException;
-import clinica.pet_center.utilidades.Contadores;
-import clinica.pet_center.utilidades.Util;
+import clinica.petCenter.negocio.exceptions.IDIException;
+import clinica.petCenter.utilidades.Contadores;
+import clinica.petCenter.utilidades.Util;
 
 public class Cliente extends Pessoa {
 	

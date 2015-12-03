@@ -1,4 +1,4 @@
-package gui_olimpio;
+package clinica.petCenter.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

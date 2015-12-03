@@ -1,4 +1,4 @@
-package clinica.pet_center.utilidades;
+package clinica.petCenter.utilidades;
 
 public class Util {
 	
