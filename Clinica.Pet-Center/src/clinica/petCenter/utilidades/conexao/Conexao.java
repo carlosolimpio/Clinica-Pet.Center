@@ -9,7 +9,7 @@ import javax.swing.JOptionPane;
 public class Conexao {
 	
 	private Connection con;
-	private String servidor = "jdbc:mysql://localhost:3306/clinicapetshop";
+	private String servidor = "jdbc:mysql://localhost:3306/clinicapetcenter";
 	private String usuario = "root";
 	private String senha = "";
 	private String driver = "com.mysql.jdbc.Driver";
