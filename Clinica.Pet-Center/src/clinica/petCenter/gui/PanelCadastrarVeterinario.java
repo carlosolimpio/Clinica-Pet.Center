@@ -168,9 +168,9 @@ public class PanelCadastrarVeterinario extends JPanel {
 			try {
 				fachada.cadastrarFuncionario(vet);
 				JOptionPane.showMessageDialog(null, vet.getId(), "Cadastro", JOptionPane.PLAIN_MESSAGE);
-			} catch(OExistenteException oee) {
-				JOptionPane.showMessageDialog(null, "Funcionario já cadastrado no sistema.", "Erro", JOptionPane.CANCEL_OPTION);
-				Contadores.decrementaPessoas();
+			} 
+			catch(OExistenteException oee){
+				JOptionPane.showMessageDialog(null, "Funcionario ja cadastrado no sistema!");
 			}
 		}
 	}
