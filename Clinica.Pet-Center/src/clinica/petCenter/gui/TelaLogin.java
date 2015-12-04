@@ -128,7 +128,9 @@ public class TelaLogin {
 						frame.getContentPane().setVisible(true);
 						
 					} else if(r instanceof Veterinario) {
-						
+//						frame.getContentPane().setVisible(false);
+//						frame.setContentPane(new PanelVeterinario(frame));
+//						frame.getContentPane().setVisible(true);
 					}
 					
 					

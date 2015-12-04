@@ -55,8 +55,7 @@ public class CadastroFuncionario {
 		return r;
 	}
 	
-	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, 
-		IDIException {
+	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException {
 		if(Util.isID(id)) {
 			existeObjeto(novo);
 			repositorioFuncionario.atualizar(novo, id);

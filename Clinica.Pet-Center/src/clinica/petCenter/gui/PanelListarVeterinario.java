@@ -87,6 +87,13 @@ private JFrame frame;
 		add(btnLimpar);		
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().setVisible(false);
+				frame.setContentPane(new PanelCadastrarVeterinario(frame));
+				frame.getContentPane().setVisible(true);
+			}
+		});
 		btnCadastrar.setBounds(481, 365, 93, 23);
 		add(btnCadastrar);
 		
@@ -96,13 +103,16 @@ private JFrame frame;
 		EvntBtnVoltarPanelAdm evntVoltarPanelAdm = new EvntBtnVoltarPanelAdm();
 		btnVoltarPanelAdm.addActionListener(evntVoltarPanelAdm);
 		
-		JButton btnRemover = new JButton("Remover");
-		btnRemover.setBounds(166, 365, 93, 23);
-		add(btnRemover);
-		
-		JButton btnAtualizar = new JButton("Atualizar");
-		btnAtualizar.setBounds(20, 365, 93, 23);
-		add(btnAtualizar);
+		JButton btnAtualizarRemover = new JButton("Atualizar/Remover");
+		btnAtualizarRemover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.getContentPane().setVisible(false);
+				frame.setContentPane(new PanelRemoverAtualizarVeterinario(frame));
+				frame.getContentPane().setVisible(true);
+			}
+		});
+		btnAtualizarRemover.setBounds(31, 365, 138, 23);
+		add(btnAtualizarRemover);
 		
 		tfListarVet = new JTextField();
 		tfListarVet.setBounds(21, 119, 553, 235);

@@ -35,8 +35,7 @@ public class Veterinario extends Funcionario {
 	}
 	
 	protected void setSenha(String senha) {
-		if(!senha.isEmpty() && (senha.length() > 8))
-			super.senha = senha;
+		this.senha = senha;
 	}
 	
 	protected void setId(String id) throws IDIException {

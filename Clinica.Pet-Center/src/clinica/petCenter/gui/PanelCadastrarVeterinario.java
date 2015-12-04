@@ -109,7 +109,7 @@ public class PanelCadastrarVeterinario extends JPanel {
 		btnCadastrar.addActionListener(new EvntBtnCadastrar());
 		
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
-		btnVoltarPanelAdm.setBounds(402, 366, 89, 23);
+		btnVoltarPanelAdm.setBounds(274, 366, 89, 23);
 		add(btnVoltarPanelAdm);
 		
 		pfSenha = new JPasswordField();
@@ -128,6 +128,22 @@ public class PanelCadastrarVeterinario extends JPanel {
 		tfDataAdmissao.setColumns(10);
 		tfDataAdmissao.setBounds(160, 327, 318, 20);
 		add(tfDataAdmissao);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tfCpf.setText("");
+				tfCrmv.setText("");
+				tfDataAdmissao.setText("");
+				tfDataNascimento.setText("");
+				tfEmail.setText("");
+				tfNome.setText("");
+				pfSenha.setText("");
+				pfCSenha.setText("");
+			}
+		});
+		btnLimpar.setBounds(389, 366, 89, 23);
+		add(btnLimpar);
 		EvntBtnVoltarPanelAdm evntVoltarPanelAdm = new EvntBtnVoltarPanelAdm();
 		btnVoltarPanelAdm.addActionListener(evntVoltarPanelAdm);
 
