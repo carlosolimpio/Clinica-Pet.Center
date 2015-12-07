@@ -105,7 +105,7 @@ public class Consulta implements Serializable{
 	}
 	
 	private void geraIdConsulta() {
-		this.idConsulta = String.format("CONSULTA|" + Contadores.getQtdConsultas());
+		this.idConsulta = String.format("CONSULTA" + Contadores.getQtdConsultas());
 	}
 	
 	public String getIdConsulta() {

@@ -23,5 +23,19 @@ public class Util {
 		return r;
 	}	
 	
-	
+	public static String whatId(String id) {
+		String r = "Erro";
+		if(id.startsWith("OP")){
+			r = "OP";
+		}else if(id.startsWith("VT")){
+			r = "VT";
+		}else if(id.startsWith("ANM")){
+			r = "ANM";
+		}else if(id.startsWith("CL")){
+			r = "CL";
+		}else if(id.startsWith("CONSULTA")){
+			r = "CONSULTA";
+		}
+		return r;
+	}
 }

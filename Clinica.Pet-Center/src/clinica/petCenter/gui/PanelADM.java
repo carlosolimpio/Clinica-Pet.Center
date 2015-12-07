@@ -6,7 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -14,30 +16,25 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import clinica.petCenter.negocio.cadastros.FachadaCadastro;
 import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
-import clinica.petCenter.negocio.classesBasicas.Animal;
-import clinica.petCenter.negocio.classesBasicas.Cliente;
-import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.classesBasicas.Veterinario;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
+import clinica.petCenter.utilidades.Util;
 
 public class PanelADM extends JPanel {
 
 	private JFrame frame;
 	private JTextField tfBuscar;
-	
+	private JComboBox comboBox;
 	private IFachadaCadastro fachada;
 	
 	private JTextArea txtrBusca;
-	private JRadioButton rdBtnVeterinario;
-	private JRadioButton rdBtnOperador;
 	
 	public PanelADM (JFrame frame) {
 		
@@ -60,7 +57,7 @@ public class PanelADM extends JPanel {
 		mnOperadorDeSistema.setBounds(50,0,140,21);
 		menuBar.add(mnOperadorDeSistema);
 		
-		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");   //=============================OK
+		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");   
 		mnOperadorDeSistema.add(mntmCadastrarOperador);
 		
 		JMenuItem mntmAtualizarOperador = new JMenuItem("Atualizar");
@@ -94,27 +91,17 @@ public class PanelADM extends JPanel {
 		tfBuscar.setBounds(101, 106, 134, 20);
 		add(tfBuscar);
 		
-		rdBtnOperador = new JRadioButton("Operador de Sistema");
-		rdBtnOperador.setBounds(42, 133, 127, 23);
-		add(rdBtnOperador);
-		
-		rdBtnVeterinario = new JRadioButton("Veterin\u00E1rio");
-		rdBtnVeterinario.setBounds(171, 133, 89, 23);
-		add(rdBtnVeterinario);
-		
 		ButtonGroup agrupaBtns = new ButtonGroup();
-		agrupaBtns.add(rdBtnOperador);
-		agrupaBtns.add(rdBtnVeterinario);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(245, 105, 89, 23);
 		add(btnBuscar);
 		btnBuscar.addActionListener(new EvntBtnBuscar());
 		
-		JButton btnListarTodos = new JButton("Listar todos");
-		btnListarTodos.setBounds(391, 105, 146, 23);
-		add(btnListarTodos);
-		btnListarTodos.addActionListener(new EvntBtnListarTodos());
+		JButton btnListar = new JButton("Listar");
+		btnListar.setBounds(391, 105, 146, 23);
+		add(btnListar);
+		btnListar.addActionListener(new EvntBtnListarTodos());
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(501, 366, 89, 23);
@@ -122,8 +109,13 @@ public class PanelADM extends JPanel {
 		btnSair.addActionListener(new EvntBtnSair());
 		
 		txtrBusca = new JTextArea();
-		txtrBusca.setBounds(42, 193, 427, 153);
+		txtrBusca.setBounds(42, 149, 457, 197);
 		add(txtrBusca);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Todos", "Operador de Sistema", "Veterinario"}));
+		comboBox.setBounds(391, 74, 146, 20);
+		add(comboBox);
 		
 	}	
 	
@@ -137,10 +129,11 @@ public class PanelADM extends JPanel {
 			String id = tfBuscar.getText();
 			String temp;
 			txtrBusca.setText("");
+			String idBusca = Util.whatId(id);
 			
 			try {
 				
-				if(rdBtnOperador.isSelected()) {
+				if(idBusca.equals("OP")) {
 					
 					OperadorSistema op = (OperadorSistema) fachada.buscarFuncionario(id);
 					temp = "ID: " + op.getId() + "\n" + "NOME: " + op.getNome() + "\n" + 
@@ -148,7 +141,7 @@ public class PanelADM extends JPanel {
 					txtrBusca.append(temp.toUpperCase());
 					tfBuscar.setText("");
 					
-				} else if(rdBtnVeterinario.isSelected()) {
+				} else if(idBusca.equals("VT")) {
 					
 					Veterinario v = (Veterinario) fachada.buscarFuncionario(id);
 					temp = "ID: " + v.getId() + "\n" + "NOME: " + v.getNome() + "\n" + "CRMV: " + v.getCrmv() + "\n"
@@ -156,8 +149,7 @@ public class PanelADM extends JPanel {
 					txtrBusca.append(temp.toUpperCase());
 					tfBuscar.setText("");
 					
-				} else 
-					JOptionPane.showMessageDialog(null, "Selecione o tipo de busca!", "Erro", JOptionPane.ERROR_MESSAGE);
+				}
 				
 			} catch(IDIException idie) {
 				JOptionPane.showMessageDialog(null, "ID incorreto ou fora do padrão.", "Erro", JOptionPane.ERROR_MESSAGE);
@@ -172,20 +164,26 @@ public class PanelADM extends JPanel {
 	private class EvntBtnListarTodos implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			if(rdBtnOperador.isSelected()) {
+			String s = (String)comboBox.getSelectedItem();
+			
+			
+			if(s.equals("Operador de Sistema")) {
 
 				frame.getContentPane().setVisible(false);
 				frame.setContentPane(new PanelADMListarTodos(frame, "Operadores de Sistema"));
 				frame.getContentPane().setVisible(true);
 
-			} else if(rdBtnVeterinario.isSelected()) {
+			} else if(s.equals("Veterinario")) {
 
 				frame.getContentPane().setVisible(false);
 				frame.setContentPane(new PanelADMListarTodos(frame, "Veterinários"));
 				frame.getContentPane().setVisible(true);
 
-			} else
-				JOptionPane.showMessageDialog(null, "Selecione o tipo de listagem!", "Erro", JOptionPane.ERROR_MESSAGE);
+			} else if(s.equals("Todos")) {
+				frame.getContentPane().setVisible(false);
+				frame.setContentPane(new PanelADMListarTodos(frame, "Todos"));
+				frame.getContentPane().setVisible(true);
+			}
 		}
 	}
 	

@@ -94,13 +94,75 @@ public class PanelADMListarTodos extends JPanel {
 					textArea.append(temp.toUpperCase());
 				}
 				
-			} else 
+			} else if(tipo.equals("Todos")){
+				for(Veterinario v : fachada.listarVeterinarios()) {
+					temp = "ID: " + v.getId() + "\n" + "NOME: " + v.getNome() + "\n" + "CRMV: " + v.getCrmv() + "\n"
+							+ "CPF: " + v.getCPF() + "\n" + "EMAIL: " + v.getEmail() + "\n" + "DATA ADMISSÃO: "
+							+ v.getDataAdmissao() + "\n\n";
+					textArea.append(temp.toUpperCase());
+				}
+				for(OperadorSistema op : fachada.listarOperadoresSistema()) {					
+					temp = "ID: " + op.getId() + "\n" + "NOME: " + op.getNome() + "\n" + 
+							"CPF: " + op.getCPF() + "\n" + "EMAIL: " + op.getEmail() + "\n" + "DATA ADMISSÃO: " + op.getDataAdmissao()
+							 + "\n\n";
+					textArea.append(temp.toUpperCase());;
+				}
+			}else 
 				throw new IllegalArgumentException("Erro na Lista");
 			
 		} catch(IllegalArgumentException iae) {
 			JOptionPane.showMessageDialog(null, iae.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+//private void mostraListaDeObjetos(String tipo) {
+//		
+//		String temp;
+//		
+//		try {
+//			if(tipo.equals("Operadores de Sistema")) {
+//				System.out.println("Entrou no Operadores");
+//				for(OperadorSistema op : fachada.listarOperadoresSistema()) {
+//					
+//					temp = "ID: " + op.getId() + "\n" + "NOME: " + op.getNome() + "\n" + 
+//							"CPF: " + op.getCPF() + "\n" + "EMAIL: " + op.getEmail() + "\n" + "DATA ADMISSÃO: " + op.getDataAdmissao()
+//							 + "\n\n";
+//					textArea.append(temp.toUpperCase());;
+//					
+//				}
+//			
+//			} else if(tipo.equals("Veterinários")) {
+//				System.out.println("Entrou no Veterinários");
+//				for(Veterinario v : fachada.listarVeterinarios()) {
+//					temp = "ID: " + v.getId() + "\n" + "NOME: " + v.getNome() + "\n" + "CRMV: " + v.getCrmv() + "\n"
+//							+ "CPF: " + v.getCPF() + "\n" + "EMAIL: " + v.getEmail() + "\n" + "DATA ADMISSÃO: "
+//							+ v.getDataAdmissao() + "\n\n";
+//					textArea.append(temp.toUpperCase());
+//				}
+//				
+//			}else if(tipo.equals("Todos")){
+//				System.out.println("Entrou no Todos - fudeu");
+//				for(Veterinario v : fachada.listarVeterinarios()) {
+//					temp = "ID: " + v.getId() + "\n" + "NOME: " + v.getNome() + "\n" + "CRMV: " + v.getCrmv() + "\n"
+//							+ "CPF: " + v.getCPF() + "\n" + "EMAIL: " + v.getEmail() + "\n" + "DATA ADMISSÃO: "
+//							+ v.getDataAdmissao() + "\n\n";
+//					textArea.append(temp.toUpperCase());
+//				}
+//				for(OperadorSistema op : fachada.listarOperadoresSistema()) {
+//					
+//					temp = "ID: " + op.getId() + "\n" + "NOME: " + op.getNome() + "\n" + 
+//							"CPF: " + op.getCPF() + "\n" + "EMAIL: " + op.getEmail() + "\n" + "DATA ADMISSÃO: " + op.getDataAdmissao()
+//							 + "\n\n";
+//					textArea.append(temp.toUpperCase());;
+//				}
+//			}
+//			else 
+//				throw new IllegalArgumentException("Erro na Lista");
+//			
+//		} catch(IllegalArgumentException iae) {
+//			JOptionPane.showMessageDialog(null, iae.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+//		}
+//	}
 	
 	private class EvntBtnVoltar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {

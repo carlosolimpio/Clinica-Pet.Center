@@ -20,6 +20,7 @@ import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
+import clinica.petCenter.utilidades.Contadores;
 
 public class PanelCadastrarAnimal extends JPanel {
 
@@ -162,6 +163,7 @@ public class PanelCadastrarAnimal extends JPanel {
 				tfDataNascimento.setText("");
 				tfIdCliente.setText(""); 
 				tfTipoSanguineo.setText("");
+				Contadores.decrementaAnimais();
 			} catch(Exception ex) {
 				ex.printStackTrace();
 			}

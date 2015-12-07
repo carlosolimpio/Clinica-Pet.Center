@@ -24,6 +24,7 @@ import clinica.petCenter.negocio.classesBasicas.Veterinario;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
+import clinica.petCenter.utilidades.Contadores;
 
 public class PanelAgendarConsulta extends JPanel {
 
@@ -149,6 +150,7 @@ public class PanelAgendarConsulta extends JPanel {
 			} catch(OExistenteException oee) {
 				JOptionPane.showMessageDialog(null, oee.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
 				limpar();
+				Contadores.decrementaConsultas();
 			}
 		}
 	}
