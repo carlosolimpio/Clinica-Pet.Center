@@ -78,7 +78,7 @@ public class PanelAgendarConsulta extends JPanel {
 		tfData.setColumns(10);
 		
 		JLabel lblMotivoVisita = new JLabel("Motivo da Visita");
-		lblMotivoVisita.setBounds(66, 198, 80, 14);
+		lblMotivoVisita.setBounds(58, 198, 80, 14);
 		add(lblMotivoVisita);
 		
 		txtAreaMotivoVisita = new JTextArea();
@@ -123,16 +123,19 @@ public class PanelAgendarConsulta extends JPanel {
 		public void actionPerformed(ActionEvent e) {
 			
 			try {
-				
-				Veterinario v = (Veterinario) fachada.buscarFuncionario(tfIdVeterinario.getText());
-				Animal a = fachada.buscarAnimalId(tfIdAnimal.getText());
+				String veterinario = tfIdVeterinario.getText();
+				String animal = tfIdAnimal.getText();
+				String data = tfData.getText();
+				Veterinario v = (Veterinario) fachada.buscarFuncionario(veterinario);
+				Animal a = fachada.buscarAnimalId(animal);
 				Cliente c = fachada.buscarCliente(a.getIdDono());
 				
 				if(!tfData.getText().isEmpty() && !txtAreaMotivoVisita.getText().isEmpty()) {
 					
-					Consulta co = new Consulta(v, c, a, tfData.getText());
+					Consulta co = new Consulta(v, c, a, data);
 					co.setMotivoVisita(txtAreaMotivoVisita.getText());
 					fachada.cadastrarConsulta(co);
+					JOptionPane.showMessageDialog(null, "Consulta agendada com sucesso!");
 					limpar();
 				} else
 					JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Atenção", JOptionPane.WARNING_MESSAGE);

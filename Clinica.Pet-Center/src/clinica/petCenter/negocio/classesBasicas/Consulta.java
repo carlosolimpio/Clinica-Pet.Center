@@ -57,7 +57,8 @@ public class Consulta implements Serializable{
 	}
 	
 	public void setAnimal(Animal animal) {
-		this.animal = animal != null && isDono(animal, this.getCliente()) ? animal : null;
+//		this.animal = (animal != null) && isDono(animal, this.getCliente()) ? animal : null;
+		this.animal = animal;
 	}
 	
 	public Cliente getCliente() {
