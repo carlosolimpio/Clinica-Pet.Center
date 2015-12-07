@@ -66,8 +66,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 
 	@Override
-	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException, 
-		OExistenteException {
+	public void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException {
 		cadAnimal.alterarAnimal(id, novo);
 	}
 
@@ -99,7 +98,7 @@ public class FachadaCadastro implements IFachadaCadastro {
 	}
 	
 	@Override
-	public void alterarCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, 
+	public void alterarCliente(Cliente novo, String id) throws ONExistenteException, 
 		IDIException {
 		cadCliente.alterarCliente(novo, id);
 	}
@@ -118,6 +117,11 @@ public class FachadaCadastro implements IFachadaCadastro {
 	@Override
 	public List<Consulta> listarConsultas() {
 		return cadConsulta.listarConsultas();
+	}
+	
+	@Override
+	public List<Consulta> listarConsultasDoVeterinario(String idVet) throws IDIException {
+		return cadConsulta.listarConsultasDoVeterinario(idVet);
 	}
 
 	@Override

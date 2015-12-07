@@ -3,8 +3,6 @@ package clinica.petCenter.negocio.cadastros;
 import java.util.ArrayList;
 import java.util.List;
 
-import clinica.petCenter.dados.IRepositorio;
-import clinica.petCenter.dados.RepositorioFuncionarios;
 import clinica.petCenter.negocio.classesBasicas.Funcionario;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.classesBasicas.Veterinario;
@@ -12,6 +10,8 @@ import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
 import clinica.petCenter.utilidades.Util;
+import clinica.petCenter.dados.IRepositorio;
+import clinica.petCenter.dados.RepositorioFuncionarios;
 
 public class CadastroFuncionario {
 
@@ -55,7 +55,8 @@ public class CadastroFuncionario {
 		return r;
 	}
 	
-	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, IDIException {
+	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, 
+		IDIException {
 		if(Util.isID(id)) {
 			existeObjeto(novo);
 			repositorioFuncionario.atualizar(novo, id);

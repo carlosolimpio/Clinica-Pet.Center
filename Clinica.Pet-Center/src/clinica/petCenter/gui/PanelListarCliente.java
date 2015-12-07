@@ -10,6 +10,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
+import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
+import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
+
 public class PanelListarCliente extends JPanel {
 
 private JFrame frame;
@@ -20,14 +24,16 @@ private JFrame frame;
 	private JTextField tfIdOperador;
 	private JTextField tfListarOperador;
 
-	/**
-	 * Create the panel.
-	 */
-	public PanelListarCliente(JFrame frame) {
+	private IFachadaCadastro fachada;
+	private OperadorSistema op;
+
+	public PanelListarCliente(JFrame frame, OperadorSistema op) {
 		setPreferredSize(new Dimension(600,400));
 		setLayout(null);
-		
 		setFrame(frame);
+		setOperadorSistema(op);
+		
+		fachada = FachadaCadastro.getInstance();
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(20, 23, 46, 14);
@@ -88,15 +94,23 @@ private JFrame frame;
 		tfListarOperador.setColumns(10);
 	}
 	
-	private void setFrame(JFrame frame){
+	private void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	
+	private void setOperadorSistema(OperadorSistema op) {
+		this.op = op;
+	}
+	
+	public OperadorSistema getOperadorSistema() {
+		return op;
 	}
 	
 	private class EvntBtnVoltarPanelOperadorSistema implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
 				
 			frame.getContentPane().setVisible(false);
-			frame.setContentPane(new PanelOperadorSistema(frame));
+			frame.setContentPane(new PanelOperadorSistema(frame, getOperadorSistema()));
 			frame.getContentPane().setVisible(true);	
 			
 		}

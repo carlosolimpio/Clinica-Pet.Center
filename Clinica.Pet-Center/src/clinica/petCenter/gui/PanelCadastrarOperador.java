@@ -31,6 +31,7 @@ public class PanelCadastrarOperador extends JPanel {
 	private JPasswordField pfSenha;
 	
 	private IFachadaCadastro fachada;
+	private JTextField tfDataAdmissao;
 	
 
 	/**
@@ -50,55 +51,59 @@ public class PanelCadastrarOperador extends JPanel {
 		add(lblSubTitulo);
 		
 		JLabel lblNome = new JLabel("Nome");
-		lblNome.setBounds(85, 92, 46, 14);
+		lblNome.setBounds(115, 118, 46, 14);
 		add(lblNome);
 		
 		tfNome = new JTextField();
 		tfNome.setColumns(10);
-		tfNome.setBounds(195, 89, 320, 20);
+		tfNome.setBounds(215, 115, 320, 20);
 		add(tfNome);
 		
 		JLabel lblCpf = new JLabel("CPF");
-		lblCpf.setBounds(85, 132, 46, 14);
+		lblCpf.setBounds(115, 149, 46, 14);
 		add(lblCpf);
 		
 		tfCpf = new JTextField();
 		tfCpf.setColumns(10);
-		tfCpf.setBounds(195, 129, 320, 20);
+		tfCpf.setBounds(215, 146, 320, 20);
 		add(tfCpf);
 		
 		JLabel lblDataDeNascimento = new JLabel("Data de Nascimento");
-		lblDataDeNascimento.setBounds(85, 172, 100, 14);
+		lblDataDeNascimento.setBounds(115, 180, 100, 14);
 		add(lblDataDeNascimento);
 		
 		tfDataNascimento = new JTextField();
-		tfDataNascimento.setBounds(195, 169, 320, 20);
+		tfDataNascimento.setBounds(215, 177, 139, 20);
 		add(tfDataNascimento);
 		tfDataNascimento.setColumns(10);
 		
+		JLabel lblDataDeAdmissao = new JLabel("Data de Admiss\u00E3o");
+		lblDataDeAdmissao.setBounds(115, 208, 100, 14);
+		add(lblDataDeAdmissao);
+		
 		JLabel lblEmail = new JLabel("Email");
-		lblEmail.setBounds(85, 212, 46, 14);
+		lblEmail.setBounds(115, 236, 46, 14);
 		add(lblEmail);
 		
 		tfEmail = new JTextField();
 		tfEmail.setColumns(10);
-		tfEmail.setBounds(195, 209, 320, 20);
+		tfEmail.setBounds(215, 233, 220, 20);
 		add(tfEmail);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setBounds(85, 252, 46, 14);
+		lblSenha.setBounds(115, 267, 46, 14);
 		add(lblSenha);
 		
 		pfSenha = new JPasswordField();
-		pfSenha.setBounds(195, 249, 320, 20);
+		pfSenha.setBounds(215, 264, 139, 20);
 		add(pfSenha);
 		
 		JLabel lblConfirmeASenha = new JLabel("Confirme a Senha");
-		lblConfirmeASenha.setBounds(85, 292, 100, 14);
+		lblConfirmeASenha.setBounds(115, 298, 100, 14);
 		add(lblConfirmeASenha);
 		
 		pfConfirmaSenha = new JPasswordField();
-		pfConfirmaSenha.setBounds(195, 289, 320, 20);
+		pfConfirmaSenha.setBounds(215, 295, 139, 20);
 		add(pfConfirmaSenha);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
@@ -109,6 +114,11 @@ public class PanelCadastrarOperador extends JPanel {
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
 		btnVoltarPanelAdm.setBounds(390, 366, 95, 23);
 		add(btnVoltarPanelAdm);
+		
+		tfDataAdmissao = new JTextField();
+		tfDataAdmissao.setBounds(215, 205, 139, 20);
+		add(tfDataAdmissao);
+		tfDataAdmissao.setColumns(10);
 		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
 
 	}
@@ -123,20 +133,32 @@ public class PanelCadastrarOperador extends JPanel {
 			String senha = new String(pfSenha.getPassword());
 			String cSenha = new String(pfConfirmaSenha.getPassword());
 			
-			OperadorSistema op = new OperadorSistema(tfNome.getText(), tfCpf.getText(), tfDataNascimento.getText(), 
-					tfEmail.getText(), "02/12/2015", senha);
-			
-			try {
+			if(!tfCpf.getText().isEmpty() && !tfDataAdmissao.getText().isEmpty() && !tfDataNascimento.getText().isEmpty() &&
+					!tfEmail.getText().isEmpty() && !tfNome.getText().isEmpty() && !senha.isEmpty() && !cSenha.isEmpty()) {
 				
-				fachada.cadastrarFuncionario(op);
-				JOptionPane.showMessageDialog(null, op.getId(), "Cadastro", JOptionPane.PLAIN_MESSAGE);
-				
-				
-			} catch(OExistenteException oee) {
-				JOptionPane.showMessageDialog(null, "Funcionario já cadastrado no sistema.", "Erro", JOptionPane.CANCEL_OPTION);
-				Contadores.decrementaPessoas();
-			}
-			
+				if(senha.equals(cSenha)) {
+					OperadorSistema op = new OperadorSistema(tfNome.getText(), tfCpf.getText(), tfDataNascimento.getText(), 
+							tfEmail.getText(), tfDataAdmissao.getText(), senha);
+					
+					try {
+						
+						fachada.cadastrarFuncionario(op);
+						JOptionPane.showMessageDialog(null, "Operador " + op.getId() + " cadastrado com sucesso!", 
+								"Sucesso", JOptionPane.PLAIN_MESSAGE);
+						
+						
+					} catch(OExistenteException oee) {
+						JOptionPane.showMessageDialog(null, "Operador já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
+						Contadores.decrementaPessoas();
+					}
+					
+				} else {
+					JOptionPane.showMessageDialog(null, "Senhas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+					pfSenha.setText("");
+					pfConfirmaSenha.setText("");
+				}
+			} else
+				JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	

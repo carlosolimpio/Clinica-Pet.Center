@@ -2,14 +2,14 @@ package clinica.petCenter.negocio.cadastros;
 
 import java.util.List;
 
-import clinica.petCenter.dados.IRepositorio;
-import clinica.petCenter.dados.RepositorioClientes;
 import clinica.petCenter.negocio.classesBasicas.Animal;
 import clinica.petCenter.negocio.classesBasicas.Cliente;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
 import clinica.petCenter.utilidades.Util;
+import clinica.petCenter.dados.IRepositorio;
+import clinica.petCenter.dados.RepositorioClientes;
 
 public class CadastroCliente {
 
@@ -54,12 +54,10 @@ public class CadastroCliente {
 			throw new IDIException(id);
 	}
 	
-	public void alterarCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, 
+	public void alterarCliente(Cliente novo, String id) throws ONExistenteException, 
 		IDIException {
-		if(Util.isID(id)) {
-			existeObjeto(novo);
+		if(Util.isID(id))
 			repositorioCliente.atualizar(novo, id);
-		}
 		else
 			throw new IDIException(id);
 	}

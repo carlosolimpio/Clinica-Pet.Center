@@ -10,10 +10,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
+import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
+import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
+
 public class PanelListarOperador extends JPanel {
 	
 	private JFrame frame;
-	
+	private IFachadaCadastro fachada;
+	private OperadorSistema op;
 	
 	private JTextField tfCpfOperador;
 	private JTextField tfNomeOperador;
@@ -24,10 +29,12 @@ public class PanelListarOperador extends JPanel {
 	 * Create the panel.
 	 */
 	public PanelListarOperador(JFrame frame) {
+		setFrame(frame);
 		setPreferredSize(new Dimension(600,400));
 		setLayout(null);
+		setOperadorSistema(op);
 		
-		setFrame(frame);
+		fachada = FachadaCadastro.getInstance();
 		
 		JLabel lblNome = new JLabel("Nome");
 		lblNome.setBounds(20, 23, 46, 14);
@@ -88,8 +95,16 @@ public class PanelListarOperador extends JPanel {
 		tfListarOperador.setColumns(10);
 	}
 	
-	private void setFrame(JFrame frame){
+	private void setFrame(JFrame frame) {
 		this.frame = frame;
+	}
+	
+	private void setOperadorSistema(OperadorSistema op) {
+		this.op = op;
+	}
+	
+	public OperadorSistema getOperadorSistema() {
+		return op;
 	}
 	
 	private class EvntBtnVoltarPanelAdm implements ActionListener {

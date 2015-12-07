@@ -1,8 +1,6 @@
 package clinica.petCenter.gui;
 
-import java.awt.Color;
 import java.awt.EventQueue;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,7 +10,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 
 import clinica.petCenter.negocio.cadastros.FachadaCadastro;
@@ -24,6 +21,8 @@ import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
 import clinica.petCenter.negocio.exceptions.SenhaInvalidaException;
 import clinica.petCenter.utilidades.Util;
+import java.awt.Font;
+import java.awt.Color;
 
 public class TelaLogin {
 
@@ -76,51 +75,49 @@ public class TelaLogin {
 		
 		fachada = FachadaCadastro.getInstance();
 		
+		JLabel lblTitulo = new JLabel("Cl\u00EDnica PetCenter");
+		lblTitulo.setForeground(new Color(0, 128, 0));
+		lblTitulo.setFont(new Font("Lucida Sans", Font.BOLD, 20));
+		lblTitulo.setBounds(215, 44, 222, 56);
+		frame.getContentPane().add(lblTitulo);
+		
 		JLabel lblId = new JLabel("ID");
-		lblId.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblId.setBounds(58, 144, 46, 14);
+		lblId.setBounds(188, 144, 46, 14);
 		frame.getContentPane().add(lblId);
 		
 		tfId = new JTextField();
-		tfId.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		tfId.setBounds(155, 141, 159, 20);
+		tfId.setBounds(244, 141, 137, 20);
 		frame.getContentPane().add(tfId);
 		tfId.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha");
-		lblSenha.setFont(new Font("Tahoma", Font.BOLD, 18));
-		lblSenha.setBounds(58, 189, 76, 14);
+		lblSenha.setBounds(188, 180, 46, 14);
 		frame.getContentPane().add(lblSenha);
 		
 		pfSenha = new JPasswordField();
-		pfSenha.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		pfSenha.setBounds(155, 186, 159, 20);
+		pfSenha.setBounds(244, 177, 137, 20);
 		frame.getContentPane().add(pfSenha);
 		
 		JButton btnEntrar = new JButton("Entrar");
-		btnEntrar.setBounds(467, 325, 89, 23);
+		btnEntrar.setBounds(265, 218, 89, 23);
 		frame.getContentPane().add(btnEntrar);
+		
+		JLabel lblSistemaDesenvolvidoPara = new JLabel("Sistema desenvolvido para a disciplina de POO, UFRPE");
+		lblSistemaDesenvolvidoPara.setFont(new Font("Lucida Sans", Font.ITALIC, 13));
+		lblSistemaDesenvolvidoPara.setBounds(136, 363, 384, 14);
+		frame.getContentPane().add(lblSistemaDesenvolvidoPara);
 		EvntBtnEntrar evntEntrar = new EvntBtnEntrar();
 		btnEntrar.addActionListener(evntEntrar);
-		
-		JLabel lblcpc = new JLabel("ClinicaPetCenter");
-		lblcpc.setForeground(new Color(165, 42, 42));
-		lblcpc.setHorizontalAlignment(SwingConstants.CENTER);
-		lblcpc.setFont(new Font("Stencil Std", Font.PLAIN, 30));
-		lblcpc.setBounds(275, 69, 329, 60);
-		frame.getContentPane().add(lblcpc);
-		
-		JLabel lblSlogan = new JLabel("Clinica é aqui!");
-		lblSlogan.setHorizontalAlignment(SwingConstants.CENTER);
-		lblSlogan.setFont(new Font("Tahoma", Font.PLAIN, 16));
-		lblSlogan.setBounds(343, 127, 211, 20);
-		frame.getContentPane().add(lblSlogan);
 		
 	}
 	
 	public void limpar() {
 		tfId.setText("");
 		pfSenha.setText("");
+	}
+	
+	public JFrame getFrame() {
+		return frame;
 	}
 	
 	private class EvntBtnEntrar implements ActionListener {
@@ -144,12 +141,12 @@ public class TelaLogin {
 					if(r instanceof OperadorSistema) {
 						
 						frame.getContentPane().setVisible(false);
-						frame.setContentPane(new PanelOperadorSistema(frame));
+						frame.setContentPane(new PanelOperadorSistema(frame, (OperadorSistema) r));
 						frame.getContentPane().setVisible(true);
 						
 					} else if(r instanceof Veterinario) {
 						frame.getContentPane().setVisible(false);
-						frame.setContentPane(new PanelVeterinario(frame));
+						frame.setContentPane(new PanelVeterinario(frame, (Veterinario) r));
 						frame.getContentPane().setVisible(true);
 					}
 					

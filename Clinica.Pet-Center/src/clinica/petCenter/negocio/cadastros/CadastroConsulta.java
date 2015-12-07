@@ -1,14 +1,15 @@
 package clinica.petCenter.negocio.cadastros;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import clinica.petCenter.dados.IRepositorio;
-import clinica.petCenter.dados.RepositorioConsultas;
 import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
 import clinica.petCenter.utilidades.Util;
+import clinica.petCenter.dados.IRepositorio;
+import clinica.petCenter.dados.RepositorioConsultas;
 
 public class CadastroConsulta {
 
@@ -36,6 +37,18 @@ public class CadastroConsulta {
 	
 	public List<Consulta> listarConsultas() {
 		return repositorioConsulta.listar();
+	}
+	
+	public List<Consulta> listarConsultasDoVeterinario(String idVet) throws IDIException {
+		if(Util.isID(idVet)) {
+			List<Consulta> r = new ArrayList<Consulta>();
+			for(Consulta c : FachadaCadastro.getInstance().listarConsultas()) {
+				if(idVet.equals(c.getVeterinario().getId()))
+					r.add(c);
+			}
+			return r;
+		} else
+			throw new IDIException(idVet);
 	}
 	
 	public void removerConsulta(String idConsulta) throws ONExistenteException, IDIException {

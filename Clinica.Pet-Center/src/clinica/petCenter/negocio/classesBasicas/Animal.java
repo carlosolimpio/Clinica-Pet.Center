@@ -104,8 +104,7 @@ public class Animal implements Serializable {
 		 */
 		boolean r = false;
 		if(obj instanceof Animal)
-			r = ((Animal) obj).getId().equals(this.getId()) && 
-				((Animal) obj).getIdDono().equals(this.idDono);
+			r = ((Animal) obj).getId().equals(this.getId());
 		return r;
 	}
 	

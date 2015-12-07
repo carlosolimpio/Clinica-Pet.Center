@@ -24,8 +24,7 @@ public interface IFachadaCadastro {
 	Animal buscarAnimalId(String id) throws ONExistenteException, IDIException;
 	List<Animal> listarAnimais();
 	void removerAnimal(String id) throws ONExistenteException, IDIException;
-	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException, 
-		OExistenteException;
+	void alterarAnimal(String id, Animal novo) throws ONExistenteException, IDIException;
 	
 	//Cliente
 	void cadastrarCliente(Cliente cliente) throws OExistenteException, IDIException, 
@@ -34,13 +33,14 @@ public interface IFachadaCadastro {
 	List<Cliente> listarClientes();
 	List<Animal> listarAnimaisDoCliente(String id) throws ONExistenteException, IDIException;
 	void removerCliente(String id) throws ONExistenteException, IDIException;
-	void alterarCliente(Cliente novo, String id) throws OExistenteException, ONExistenteException, 
+	void alterarCliente(Cliente novo, String id) throws ONExistenteException, 
 		IDIException;
 	
 	//Consulta
 	void cadastrarConsulta(Consulta c) throws OExistenteException, IDIException;
 	Consulta buscarConsulta(String idConsulta) throws ONExistenteException, IDIException;
 	List<Consulta> listarConsultas();
+	List<Consulta> listarConsultasDoVeterinario(String idVet) throws IDIException;
 	void removerConsulta(String idConsulta) throws ONExistenteException, IDIException;
 	void alterarConsulta(Consulta novaConsulta, String idConsulta) throws OExistenteException, 
 		ONExistenteException, IDIException; 

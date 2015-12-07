@@ -1,5 +1,7 @@
 package clinica.petCenter.negocio.classesBasicas;
 
+import java.util.List;
+
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.utilidades.Contadores;
 import clinica.petCenter.utilidades.Util;
@@ -7,6 +9,7 @@ import clinica.petCenter.utilidades.Util;
 public class Veterinario extends Funcionario {
 	
 	private String crmv;
+	private List<Consulta> consultas;
 	
 	public Veterinario(String nome, String CPF, String dataNascimento, String email, 
 			String dataAdmissao, String crmv, String senha) {
@@ -34,8 +37,19 @@ public class Veterinario extends Funcionario {
 		return crmv;
 	}
 	
+	public void setConsulta(List<Consulta> consultas) {
+		for(Consulta r : consultas) {
+			this.consultas.add(r);
+		}
+	}
+	
+	public List<Consulta> getConsulta() {
+		return consultas;
+	}
+	
 	protected void setSenha(String senha) {
-		this.senha = senha;
+		if(!senha.isEmpty() && (senha.length() > 8))
+			super.senha = senha;
 	}
 	
 	protected void setId(String id) throws IDIException {
