@@ -60,8 +60,9 @@ public class CadastroFuncionario {
 		if(Util.isID(id)) {
 			if(novo != null) {
 				for(Funcionario f : listarFuncionarios()) {
-					if(f.equals(novo))	repositorioFuncionario.atualizar(novo, id);
+					if(f.equals(novo)) break;
 				}
+				repositorioFuncionario.atualizar(novo, id);
 			}
 			else{
 				throw new IllegalArgumentException("Objeto nulo");	

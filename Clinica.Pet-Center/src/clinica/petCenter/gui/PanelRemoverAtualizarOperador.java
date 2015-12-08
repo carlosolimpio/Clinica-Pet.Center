@@ -150,8 +150,7 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		public void actionPerformed(ActionEvent e) {			
 				
 			String id = tfIdOperador.getText();	
-			tfIdOperador.setEnabled(false);
-			tfIdOperador.setEnabled(true);
+			
 			try {
 				funcionario = fachada.buscarFuncionario(id);
 				if(funcionario instanceof OperadorSistema){
@@ -160,9 +159,10 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 					tfDataNascimento.setText(funcionario.getDataNascimento());
 					tfEmail.setText(funcionario.getEmail());
 					pfSenha.setText(funcionario.getSenha());
+					tfIdOperador.setEnabled(false);
 				}else {
 					JOptionPane.showMessageDialog(null, "Id incorreto!"
-							, "Removido", JOptionPane.PLAIN_MESSAGE);	
+							, "ERRO", JOptionPane.PLAIN_MESSAGE);	
 				}
 			} catch (ONExistenteException e1) {
 				e1.printStackTrace();				
@@ -205,29 +205,33 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 			
 			Date dataHoje = new Date();
 			SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
-			String data = formataData.format(dataHoje);
+			String data = formataData.format(dataHoje);			
 			
-			
-				try {
-					operador = new OperadorSistema(operador.getId(), tfNome.getText(), tfCpf.getText(), 
-							tfDataNascimento.getText(),tfEmail.getText(), data, senha);
-				} catch (IDIException e1) {
-					System.out.println("Erro IDIException");
-				}
-				
-				try {
-					fachada.alterarFuncionario(operador, operador.getId());
-				} catch (OExistenteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (ONExistenteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IDIException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}				
-				
+			if(senha.equals(cSenha)){
+					try {
+						operador = null;
+						operador = new OperadorSistema(tfIdOperador.getText(), tfNome.getText(), tfCpf.getText(), 
+								tfDataNascimento.getText(),tfEmail.getText(), data, senha);
+					} catch (IDIException e1) {
+						System.out.println("Erro IDIException");
+					}
+					
+					try {
+						fachada.alterarFuncionario(operador, operador.getId());
+					} catch (OExistenteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (ONExistenteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (IDIException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}				
+			}else{
+				JOptionPane.showMessageDialog(null, "Senhas diferentes!"
+						, "Senha", JOptionPane.PLAIN_MESSAGE);		
+			}
 			
 		}
 	}
