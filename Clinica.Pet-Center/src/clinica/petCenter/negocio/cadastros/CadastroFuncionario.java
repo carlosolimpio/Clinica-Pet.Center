@@ -58,8 +58,14 @@ public class CadastroFuncionario {
 	public void alterarFuncionario(Funcionario novo, String id) throws OExistenteException, ONExistenteException, 
 		IDIException {
 		if(Util.isID(id)) {
-			existeObjeto(novo);
-			repositorioFuncionario.atualizar(novo, id);
+			if(novo != null) {
+				for(Funcionario f : listarFuncionarios()) {
+					if(f.equals(novo))	repositorioFuncionario.atualizar(novo, id);
+				}
+			}
+			else{
+				throw new IllegalArgumentException("Objeto nulo");	
+			}			
 		}
 		else
 			throw new IDIException(id);

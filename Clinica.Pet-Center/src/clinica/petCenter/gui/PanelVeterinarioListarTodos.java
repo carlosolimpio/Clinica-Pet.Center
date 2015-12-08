@@ -15,13 +15,10 @@ import javax.swing.JTextArea;
 
 import clinica.petCenter.negocio.cadastros.FachadaCadastro;
 import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
-import clinica.petCenter.negocio.classesBasicas.Animal;
-import clinica.petCenter.negocio.classesBasicas.Cliente;
-import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.classesBasicas.Veterinario;
 
-public class PanelADMListarTodos extends JPanel {
+public class PanelVeterinarioListarTodos extends JPanel {
 
 	private JFrame frame;
 	private JTextArea textArea;
@@ -30,7 +27,7 @@ public class PanelADMListarTodos extends JPanel {
 	private String tipo;
 	private OperadorSistema op;
 	
-	public PanelADMListarTodos(JFrame frame, String tipo) {
+	public PanelVeterinarioListarTodos(JFrame frame, String tipo) {
 		
 		setFrame(frame);
 		setPreferredSize(new Dimension(600,400));
@@ -123,5 +120,5 @@ public class PanelADMListarTodos extends JPanel {
 			frame.setVisible(true);
 		}
 	}
-
+	
 }

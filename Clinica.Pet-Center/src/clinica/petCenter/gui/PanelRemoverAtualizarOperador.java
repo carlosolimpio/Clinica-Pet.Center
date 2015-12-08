@@ -1,13 +1,26 @@
 package clinica.petCenter.gui;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
+import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
+import clinica.petCenter.negocio.classesBasicas.Funcionario;
+import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
+import clinica.petCenter.negocio.exceptions.IDIException;
+import clinica.petCenter.negocio.exceptions.OExistenteException;
+import clinica.petCenter.negocio.exceptions.ONExistenteException;
 
 public class PanelRemoverAtualizarOperador extends JPanel {
 	
@@ -18,8 +31,12 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 	private JTextField tfNome;
 	private JTextField tfCpf;
 	private JTextField tfEmail;
-	private JTextField tfSenha;
-	private JTextField tfConfirmeSenha;
+	private JPasswordField pfSenha;
+	private JPasswordField pfConfirmeSenha;
+	private Funcionario funcionario;
+	
+	private IFachadaCadastro fachada;
+	private OperadorSistema operador;
 
 	/**
 	 * Create the panel.
@@ -27,8 +44,10 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 	public PanelRemoverAtualizarOperador(JFrame frame) {
 		
 		setFrame(frame);
-		
+		setPreferredSize(new Dimension(600,400));
 		setLayout(null);
+		
+		fachada = FachadaCadastro.getInstance();
 		
 		JLabel lblIdOperador = new JLabel("ID Operador");
 		lblIdOperador.setBounds(50, 50, 75, 14);
@@ -79,37 +98,37 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		lblSenha.setBounds(50, 250, 46, 14);
 		add(lblSenha);
 		
-		tfSenha = new JTextField();
-		tfSenha.setColumns(10);
-		tfSenha.setBounds(163, 247, 320, 20);
-		add(tfSenha);
+		pfSenha = new JPasswordField();
+		pfSenha.setBounds(163, 247, 320, 20);
+		add(pfSenha);
 		
 		JLabel lblConfirmeASenha = new JLabel("Confirme a senha");
 		lblConfirmeASenha.setBounds(50, 290, 100, 14);
 		add(lblConfirmeASenha);
 		
+		pfConfirmeSenha = new JPasswordField();
+		pfConfirmeSenha.setBounds(163, 287, 320, 20);
+		add(pfConfirmeSenha);
+		
 		JButton btnRemover = new JButton("Remover");
 		btnRemover.setBounds(501, 366, 89, 23);
 		add(btnRemover);
+		btnRemover.addActionListener(new EvntBtnRemover());
 		
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.setBounds(402, 366, 89, 23);
 		add(btnAtualizar);
-		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setBounds(303, 366, 89, 23);
-		add(btnLimpar);
+		btnAtualizar.addActionListener(new EvntBtnAtualizar());
 		
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
-		btnVoltarPanelAdm.setBounds(204, 366, 89, 23);
+		btnVoltarPanelAdm.setBounds(303, 366, 89, 23);
 		add(btnVoltarPanelAdm);
-		EvntBtnVoltarPanelAdm evntVoltarPanelAdm = new EvntBtnVoltarPanelAdm();
-		btnVoltarPanelAdm.addActionListener(evntVoltarPanelAdm);
+		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
 		
-		tfConfirmeSenha = new JTextField();
-		tfConfirmeSenha.setColumns(10);
-		tfConfirmeSenha.setBounds(163, 287, 320, 20);
-		add(tfConfirmeSenha);		
+		JButton btnPreencher = new JButton("Preencher");
+		btnPreencher.setBounds(493, 46, 89, 23);
+		add(btnPreencher);
+		btnPreencher.addActionListener(new EvntBtnPreencher());
 		
 	}
 	
@@ -123,6 +142,92 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 			frame.getContentPane().setVisible(false);
 			frame.setContentPane(new PanelADM(frame));
 			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntBtnPreencher implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			String id = tfIdOperador.getText();	
+			tfIdOperador.setEnabled(false);
+			tfIdOperador.setEnabled(true);
+			try {
+				funcionario = fachada.buscarFuncionario(id);
+				if(funcionario instanceof OperadorSistema){
+					tfNome.setText(funcionario.getNome());
+					tfCpf.setText(funcionario.getCPF());
+					tfDataNascimento.setText(funcionario.getDataNascimento());
+					tfEmail.setText(funcionario.getEmail());
+					pfSenha.setText(funcionario.getSenha());
+				}else {
+					JOptionPane.showMessageDialog(null, "Id incorreto!"
+							, "Removido", JOptionPane.PLAIN_MESSAGE);	
+				}
+			} catch (ONExistenteException e1) {
+				e1.printStackTrace();				
+			} catch (IDIException e1) {
+				e1.printStackTrace();
+			}						
+		}
+	}
+	
+	private class EvntBtnRemover implements ActionListener {
+		public void actionPerformed(ActionEvent e){
+			String id = tfIdOperador.getText();	
+			
+			try {
+				int reply = JOptionPane.showConfirmDialog(null, "Realmente deseja remover este Operador?"
+						, "Atenção", JOptionPane.YES_NO_OPTION);
+				  if (reply == JOptionPane.YES_OPTION)
+				  {
+					  fachada.removerFuncionario(id);
+						JOptionPane.showMessageDialog(null, "Operador removido com sucesso!"
+							, "Removido", JOptionPane.PLAIN_MESSAGE);					
+				  }
+					
+				
+			} catch (ONExistenteException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IDIException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+	private class EvntBtnAtualizar implements ActionListener{
+		public void actionPerformed(ActionEvent e){
+			
+			String senha = new String(pfSenha.getPassword());
+			String cSenha = new String(pfConfirmeSenha.getPassword());
+			
+			Date dataHoje = new Date();
+			SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
+			String data = formataData.format(dataHoje);
+			
+			
+				try {
+					operador = new OperadorSistema(operador.getId(), tfNome.getText(), tfCpf.getText(), 
+							tfDataNascimento.getText(),tfEmail.getText(), data, senha);
+				} catch (IDIException e1) {
+					System.out.println("Erro IDIException");
+				}
+				
+				try {
+					fachada.alterarFuncionario(operador, operador.getId());
+				} catch (OExistenteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (ONExistenteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IDIException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}				
+				
 			
 		}
 	}

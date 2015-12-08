@@ -59,13 +59,12 @@ public class PanelADM extends JPanel {
 		
 		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");   
 		mnOperadorDeSistema.add(mntmCadastrarOperador);
-		
-		JMenuItem mntmAtualizarOperador = new JMenuItem("Atualizar");
-		mnOperadorDeSistema.add(mntmAtualizarOperador);
-		
-		JMenuItem mntmRemoverOperador = new JMenuItem("Remover");
-		mnOperadorDeSistema.add(mntmRemoverOperador);
 		mntmCadastrarOperador.addActionListener(new EvntMntmCadastrarOperador());
+		
+		JMenuItem mntmRemoverAtualizarOperador = new JMenuItem("Remover / Atualizar");
+		mnOperadorDeSistema.add(mntmRemoverAtualizarOperador);
+		mntmRemoverAtualizarOperador.addActionListener(new EvntMntmRemoverAtualizarOperador());
+		
 		
 		JMenu mnVeterinario = new JMenu("Veterin\u00E1rio");
 		mnVeterinario.setBounds(170,0,70,21);
@@ -73,14 +72,12 @@ public class PanelADM extends JPanel {
 		
 		JMenuItem mntmCadastrarVeterinario = new JMenuItem("Cadastrar");
 		mnVeterinario.add(mntmCadastrarVeterinario);
+		mntmCadastrarVeterinario.addActionListener(new EvntMntmCadastrarVeterinario());
 		
-		JMenuItem mntmAtualizarVeterinario = new JMenuItem("Atualizar");
-		mnVeterinario.add(mntmAtualizarVeterinario);
+		JMenuItem mntmRemoverAtualizarVeterinario = new JMenuItem("Remover / Atualizar");
+		mnVeterinario.add(mntmRemoverAtualizarVeterinario);
+		mntmRemoverAtualizarVeterinario.addActionListener(new EvntMntmRemoverAtualizarVeterinario());
 		
-		JMenuItem mntmRemoverVeterinario = new JMenuItem("Remover");
-		mnVeterinario.add(mntmRemoverVeterinario);
-		EvntMntmCadastrarVeterinario evntCadastrarVeterinario = new EvntMntmCadastrarVeterinario();
-		mntmCadastrarVeterinario.addActionListener(evntCadastrarVeterinario);
 		
 		JLabel label = new JLabel("Buscar ID");
 		label.setBounds(42, 109, 71, 14);
@@ -197,6 +194,14 @@ public class PanelADM extends JPanel {
 		}
 	}
 	
+	private class EvntMntmRemoverAtualizarOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAtualizarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+		}
+	}
+	
 	private class EvntMntmCadastrarVeterinario implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
 				
@@ -223,4 +228,5 @@ public class PanelADM extends JPanel {
 			new TelaLogin().getFrame().setVisible(true);
 		}
 	}
+	
 }
