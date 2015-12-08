@@ -121,7 +121,7 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		btnAtualizar.addActionListener(new EvntBtnAtualizar());
 		
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
-		btnVoltarPanelAdm.setBounds(303, 366, 89, 23);
+		btnVoltarPanelAdm.setBounds(204, 366, 89, 23);
 		add(btnVoltarPanelAdm);
 		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
 		
@@ -130,11 +130,30 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		add(btnPreencher);
 		btnPreencher.addActionListener(new EvntBtnPreencher());
 		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+			}
+		});
+		btnLimpar.setBounds(303, 366, 89, 23);
+		add(btnLimpar);
+		
 	}
 	
 	private void setFrame(JFrame frame){
 		this.frame = frame;
 	}
+	
+	public void limpar() {
+		tfCpf.setText("");
+		tfDataNascimento.setText("");
+		tfEmail.setText("");
+		tfNome.setText("");
+		pfSenha.setText("");
+		tfIdOperador.setText("");
+		pfConfirmeSenha.setText("");
+		}
 	
 	private class EvntBtnVoltarPanelAdm implements ActionListener {
 		public void actionPerformed(ActionEvent e) {			
@@ -163,6 +182,8 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 				}else {
 					JOptionPane.showMessageDialog(null, "Id incorreto!"
 							, "ERRO", JOptionPane.PLAIN_MESSAGE);	
+					limpar();
+					
 				}
 			} catch (ONExistenteException e1) {
 				e1.printStackTrace();				
@@ -183,7 +204,9 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 				  {
 					  fachada.removerFuncionario(id);
 						JOptionPane.showMessageDialog(null, "Operador removido com sucesso!"
-							, "Removido", JOptionPane.PLAIN_MESSAGE);					
+							, "Removido", JOptionPane.PLAIN_MESSAGE);	
+						limpar();
+						tfIdOperador.setEnabled(true);
 				  }
 					
 				
@@ -218,6 +241,9 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 					
 					try {
 						fachada.alterarFuncionario(operador, operador.getId());
+						JOptionPane.showMessageDialog(null, "Operador atualizado com sucesso!");
+						limpar();
+						tfIdOperador.setEnabled(true);
 					} catch (OExistenteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();

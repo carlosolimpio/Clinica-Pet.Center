@@ -120,12 +120,31 @@ public class PanelCadastrarOperador extends JPanel {
 		add(tfDataAdmissao);
 		tfDataAdmissao.setColumns(10);
 		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limpar();
+			}
+		});
+		btnLimpar.setBounds(291, 366, 89, 23);
+		add(btnLimpar);
 
 	}
 	
 	private void setFrame(JFrame frame){
 		this.frame = frame;
 	}
+	
+	public void limpar() {
+		tfCpf.setText("");
+		tfDataAdmissao.setText("");
+		tfDataNascimento.setText("");
+		tfEmail.setText("");
+		tfNome.setText("");
+		pfSenha.setText("");
+		pfConfirmaSenha.setText("");
+		}
 	
 	private class EvntBtnCadastrar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
@@ -145,11 +164,13 @@ public class PanelCadastrarOperador extends JPanel {
 						fachada.cadastrarFuncionario(op);
 						JOptionPane.showMessageDialog(null, "Operador " + op.getId() + " cadastrado com sucesso!", 
 								"Sucesso", JOptionPane.PLAIN_MESSAGE);
+						limpar();
 						
 						
 					} catch(OExistenteException oee) {
 						JOptionPane.showMessageDialog(null, "Operador já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
 						Contadores.decrementaPessoas();
+						limpar();
 					}
 					
 				} else {
