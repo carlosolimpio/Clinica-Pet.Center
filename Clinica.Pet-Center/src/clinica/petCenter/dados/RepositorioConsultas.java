@@ -37,7 +37,7 @@ public class RepositorioConsultas implements IRepositorio<Consulta>, Serializabl
 	public Consulta buscar(String idConsulta) throws ONExistenteException {
 		Consulta r = null;
 		for(Consulta c : consultas) {
-			if(c.getIdConsulta().equals(idConsulta)) {
+			if(idConsulta.equals(c.getIdConsulta())) {
 				r = c;
 				break;
 			}

@@ -31,6 +31,7 @@ public class PanelVeterinario extends JPanel {
 	private Veterinario vet;
 	private JTextField tfBuscar;
 	private Consulta consulta;
+	
 
 	public PanelVeterinario(JFrame frame, Veterinario vet) {
 		
@@ -96,16 +97,15 @@ public class PanelVeterinario extends JPanel {
 	private class EvntBtnBuscar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 
-			String id = tfBuscar.getText();
 			String temp;
 			txtrBusca.setText("");
-			String idBusca = Util.whatId(id);
+			String idBusca = Util.whatId(tfBuscar.getText());
 			
 			try {
 				
-				if(idBusca.equals("CONSULTA")) {
+				if(idBusca.equals(tfBuscar.getText())) {
 					
-					Consulta c =  fachada.buscarConsulta(id);
+					Consulta c =  fachada.buscarConsulta(tfBuscar.getText());
 					temp = "ID: "+c.getIdConsulta()+"\nID Animal: "+c.getAnimal().getId()+"\nMotivo Visita:\n"
 							+c.getMotivoVisita();
 					txtrBusca.append(temp.toUpperCase());
@@ -119,6 +119,8 @@ public class PanelVeterinario extends JPanel {
 			} catch(ONExistenteException onee) {
 				JOptionPane.showMessageDialog(null, "Funcionario não encontrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
 				tfBuscar.setText("");
+			} catch (Exception e1){
+				e1.printStackTrace();
 			}
 		}
 	}

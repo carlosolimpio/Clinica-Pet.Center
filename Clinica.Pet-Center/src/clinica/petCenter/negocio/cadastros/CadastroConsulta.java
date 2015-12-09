@@ -29,7 +29,7 @@ public class CadastroConsulta {
 	}
 	
 	public Consulta buscarConsulta(String idConsulta) throws ONExistenteException, IDIException {
-		if(Util.isID(idConsulta))
+		if(Util.isID(idConsulta))			
 			return repositorioConsulta.buscar(idConsulta);
 		else 
 			throw new IDIException(idConsulta);
