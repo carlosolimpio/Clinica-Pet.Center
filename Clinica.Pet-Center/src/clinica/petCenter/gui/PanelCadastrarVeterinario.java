@@ -171,29 +171,34 @@ public class PanelCadastrarVeterinario extends JPanel {
 			
 			if(!nome.isEmpty() && !dataAdmissao.isEmpty() && !cpf.isEmpty() && !dataNascimento.isEmpty() 
 					&& !email.isEmpty() && !senha.isEmpty() && !cSenha.isEmpty() && !crmv.isEmpty()) {
-				
-				if(senha.equals(cSenha)) {
-					Veterinario v = new Veterinario(nome, cpf, dataNascimento, email, dataAdmissao, crmv, senha);
-					
-					try {
+			
+				if(senha.length() > 8){
+					if(senha.equals(cSenha)) {
+						Veterinario v = new Veterinario(nome, cpf, dataNascimento, email, dataAdmissao, crmv, senha);
 						
-						fachada.cadastrarFuncionario(v);
-						JOptionPane.showMessageDialog(null, "Veterinario " + v.getId() + " cadastrado com sucesso!", 
-								"Sucesso", JOptionPane.PLAIN_MESSAGE);
-						limpar();
+						try {
+							
+							fachada.cadastrarFuncionario(v);
+							JOptionPane.showMessageDialog(null, "Veterinario " + v.getId() + " cadastrado com sucesso!", 
+									"Sucesso", JOptionPane.PLAIN_MESSAGE);
+							limpar();
+							
+							
+						} catch(OExistenteException oee) {
+							JOptionPane.showMessageDialog(null, "Veterinario já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
+							Contadores.decrementaPessoas();
+							limpar();
+						}
 						
-						
-					} catch(OExistenteException oee) {
-						JOptionPane.showMessageDialog(null, "Veterinario já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
-						Contadores.decrementaPessoas();
-						limpar();
+					} else {
+						JOptionPane.showMessageDialog(null, "Senhas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+						pfSenha.setText("");
+						pfConfirmaSenha.setText("");
 					}
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "Senhas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
-					pfSenha.setText("");
-					pfConfirmaSenha.setText("");
 				}
+				else
+					JOptionPane.showMessageDialog(null, "A senha tem que ter tamanho maior que oito caracteres!");
+
 			} else
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);	
 		}

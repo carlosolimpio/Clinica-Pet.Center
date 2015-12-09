@@ -154,30 +154,34 @@ public class PanelCadastrarOperador extends JPanel {
 			
 			if(!tfCpf.getText().isEmpty() && !tfDataAdmissao.getText().isEmpty() && !tfDataNascimento.getText().isEmpty() &&
 					!tfEmail.getText().isEmpty() && !tfNome.getText().isEmpty() && !senha.isEmpty() && !cSenha.isEmpty()) {
-				
-				if(senha.equals(cSenha)) {
-					OperadorSistema op = new OperadorSistema(tfNome.getText(), tfCpf.getText(), tfDataNascimento.getText(), 
-							tfEmail.getText(), tfDataAdmissao.getText(), senha);
-					
-					try {
+				if(senha.length() > 8){
+					if(senha.equals(cSenha)) {
+						OperadorSistema op = new OperadorSistema(tfNome.getText(), tfCpf.getText(), tfDataNascimento.getText(), 
+								tfEmail.getText(), tfDataAdmissao.getText(), senha);
 						
-						fachada.cadastrarFuncionario(op);
-						JOptionPane.showMessageDialog(null, "Operador " + op.getId() + " cadastrado com sucesso!", 
-								"Sucesso", JOptionPane.PLAIN_MESSAGE);
-						limpar();
+						try {
+							
+							fachada.cadastrarFuncionario(op);
+							JOptionPane.showMessageDialog(null, "Operador " + op.getId() + " cadastrado com sucesso!", 
+									"Sucesso", JOptionPane.PLAIN_MESSAGE);
+							limpar();
+							
+							
+						} catch(OExistenteException oee) {
+							JOptionPane.showMessageDialog(null, "Operador já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
+							Contadores.decrementaPessoas();
+							limpar();
+						}
 						
-						
-					} catch(OExistenteException oee) {
-						JOptionPane.showMessageDialog(null, "Operador já cadastrado no sistema.", "Erro", JOptionPane.ERROR_MESSAGE);
-						Contadores.decrementaPessoas();
-						limpar();
+					} else {
+						JOptionPane.showMessageDialog(null, "Senhas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
+						pfSenha.setText("");
+						pfConfirmaSenha.setText("");
 					}
-					
-				} else {
-					JOptionPane.showMessageDialog(null, "Senhas diferentes.", "Erro", JOptionPane.ERROR_MESSAGE);
-					pfSenha.setText("");
-					pfConfirmaSenha.setText("");
 				}
+				else
+					JOptionPane.showMessageDialog(null, "A senha tem que ter tamanho maior que oito caracteres!");
+					
 			} else
 				JOptionPane.showMessageDialog(null, "Preencha todos os campos!", "Erro", JOptionPane.ERROR_MESSAGE);
 		}
