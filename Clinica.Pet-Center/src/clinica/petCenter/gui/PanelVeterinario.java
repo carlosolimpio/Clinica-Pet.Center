@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import clinica.petCenter.negocio.cadastros.FachadaCadastro;
 import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
 import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.classesBasicas.Veterinario;
@@ -38,6 +39,9 @@ public class PanelVeterinario extends JPanel {
 		setFrame(frame);
 		setPreferredSize(new Dimension(600,400));
 		setLayout(null);
+		setVeterinario(vet);
+		
+		fachada = FachadaCadastro.getInstance();
 		
 		lblNomeVet = new JLabel("Bem Vindo, veterinario " + vet.getNome());
 		lblNomeVet.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -63,9 +67,10 @@ public class PanelVeterinario extends JPanel {
 		add(btnBuscar);
 		btnBuscar.addActionListener(new EvntBtnBuscar());
 		
-		JButton btnListarTodos = new JButton("Listar todas");
+		JButton btnListarTodos = new JButton("Listar todos");
 		btnListarTodos.setBounds(381, 105, 146, 23);
 		add(btnListarTodos);
+		btnListarTodos.addActionListener(new EvntBtnListarTodos());
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(491, 366, 89, 23);
@@ -81,6 +86,15 @@ public class PanelVeterinario extends JPanel {
 		add(btnPreencher);
 		
 
+	}
+
+	private void setVeterinario(Veterinario vet) {
+		this.vet = vet;
+		
+	}
+	
+	public Veterinario getVeterinario(){
+		return vet;
 	}
 
 	private void setFrame(JFrame frame) {
@@ -122,6 +136,16 @@ public class PanelVeterinario extends JPanel {
 			} catch (Exception e1){
 				e1.printStackTrace();
 			}
+		}
+	}
+	
+	private class EvntBtnListarTodos implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+
+				frame.getContentPane().setVisible(false);
+				frame.setContentPane(new PanelListarVeterinario(frame));
+				frame.getContentPane().setVisible(true);
+				
 		}
 	}
 }
