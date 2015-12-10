@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -15,9 +18,6 @@ import javax.swing.JTextArea;
 
 import clinica.petCenter.negocio.cadastros.FachadaCadastro;
 import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
-import clinica.petCenter.negocio.classesBasicas.Animal;
-import clinica.petCenter.negocio.classesBasicas.Cliente;
-import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.classesBasicas.Veterinario;
 
@@ -42,7 +42,7 @@ public class PanelADMListarTodos extends JPanel {
 		
 		JLabel lblTitulo = new JLabel(getTipo());
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 14));
-		lblTitulo.setBounds(23, 11, 295, 28);
+		lblTitulo.setBounds(10, 362, 295, 28);
 		add(lblTitulo);
 		
 		textArea = new JTextArea();
@@ -56,6 +56,33 @@ public class PanelADMListarTodos extends JPanel {
 		btnVoltar.setBounds(501, 367, 89, 23);
 		add(btnVoltar);
 		btnVoltar.addActionListener(new EvntBtnVoltar());
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 600, 21);
+		add(menuBar);
+		
+		JMenu mnOperadorDeSistema = new JMenu("Operador de sistema");
+		menuBar.add(mnOperadorDeSistema);
+		
+		JMenuItem mntmCadastrarOperador = new JMenuItem("Cadastrar");
+		mnOperadorDeSistema.add(mntmCadastrarOperador);
+		mntmCadastrarOperador.addActionListener(new EvntMntmCadastrarOperador());
+		
+		JMenuItem mntmRemoverAtualizarOperador = new JMenuItem("Remover / Atualizar");
+		mnOperadorDeSistema.add(mntmRemoverAtualizarOperador);
+		mntmRemoverAtualizarOperador.addActionListener(new EvntMntmRemoverAtualizarOperador());
+		
+		JMenu mnVeterinario = new JMenu("Veterin\u00E1rio");
+		menuBar.add(mnVeterinario);
+		
+		JMenuItem mntmCadastrarVeterinario = new JMenuItem("Cadastrar");
+		mnVeterinario.add(mntmCadastrarVeterinario);
+		mntmCadastrarVeterinario.addActionListener(new EvntMntmCadastrarVeterinario());
+		
+		JMenuItem mntmRemoverAtualizarVeterinario = new JMenuItem("Remover / Atualizar");
+		mnVeterinario.add(mntmRemoverAtualizarVeterinario);
+		mntmRemoverAtualizarVeterinario.addActionListener(new EvntMntmRemoverAtualizarVeterinario());
+		
 		
 		mostraListaDeObjetos(getTipo());
 	}
@@ -123,5 +150,42 @@ public class PanelADMListarTodos extends JPanel {
 			frame.setVisible(true);
 		}
 	}
-
+	
+	private class EvntMntmCadastrarOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarOperador(frame));
+			frame.getContentPane().setVisible(true);
+			
+		}
+	}
+	
+	private class EvntMntmRemoverAtualizarOperador implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAtualizarOperador(frame));
+			frame.getContentPane().setVisible(true);	
+		}
+	}
+	
+	private class EvntMntmCadastrarVeterinario implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarVeterinario(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmRemoverAtualizarVeterinario implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAtualizarVeterinario(frame));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
 }

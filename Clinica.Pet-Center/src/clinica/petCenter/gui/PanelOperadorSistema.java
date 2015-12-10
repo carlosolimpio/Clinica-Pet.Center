@@ -26,16 +26,16 @@ import clinica.petCenter.negocio.classesBasicas.Consulta;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.exceptions.IDIException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
+import clinica.petCenter.utilidades.Util;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class PanelOperadorSistema extends JPanel {
 
 	private JFrame frame;
 	private JTextField tfBuscar;
 	private JTextArea txtrBusca;
-	
-	private JRadioButton rdbtnAnimal;
-	private JRadioButton rdbtnCliente;
-	private JRadioButton rdbtnConsulta;
+	private JComboBox comboBox;
 	
 	private IFachadaCadastro fachada;
 	private OperadorSistema op;
@@ -111,32 +111,17 @@ public class PanelOperadorSistema extends JPanel {
 		add(tfBuscar);
 		tfBuscar.setColumns(10);
 		
-		rdbtnAnimal = new JRadioButton("Animal");
-		rdbtnAnimal.setBounds(42, 133, 71, 23);
-		add(rdbtnAnimal);
-		
-		rdbtnCliente = new JRadioButton("Cliente");
-		rdbtnCliente.setBounds(111, 137, 71, 14);
-		add(rdbtnCliente);
-		
-		rdbtnConsulta = new JRadioButton("Consulta");
-		rdbtnConsulta.setBounds(184, 133, 71, 23);
-		add(rdbtnConsulta);
-		
 		ButtonGroup agrupaBtns = new ButtonGroup();
-		agrupaBtns.add(rdbtnAnimal);
-		agrupaBtns.add(rdbtnCliente);
-		agrupaBtns.add(rdbtnConsulta);
 		
 		JButton btnBuscar = new JButton("Buscar");
 		btnBuscar.setBounds(245, 105, 89, 23);
 		add(btnBuscar);
 		btnBuscar.addActionListener(new EvntBtnBuscar());
 		
-		JButton btnListarTodos = new JButton("Listar todos");
-		btnListarTodos.setBounds(391, 105, 146, 23);
-		add(btnListarTodos);
-		btnListarTodos.addActionListener(new EvntBtnListarTodos());
+		JButton btnListar = new JButton("Listar");
+		btnListar.setBounds(391, 105, 146, 23);
+		add(btnListar);
+		btnListar.addActionListener(new EvntBtnListar());
 		
 		JButton btnSair = new JButton("Sair");
 		btnSair.setBounds(501, 366, 89, 23);
@@ -144,8 +129,13 @@ public class PanelOperadorSistema extends JPanel {
 		btnSair.addActionListener(new EvntBtnSair());
 		
 		txtrBusca = new JTextArea();
-		txtrBusca.setBounds(42, 193, 427, 153);
+		txtrBusca.setBounds(42, 139, 427, 207);
 		add(txtrBusca);
+		
+		comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Animais", "Clientes", "Consultas", "Todos"}));
+		comboBox.setBounds(391, 71, 146, 20);
+		add(comboBox);
 	}
 	
 	private void setFrame(JFrame frame) {
@@ -167,10 +157,11 @@ public class PanelOperadorSistema extends JPanel {
 			String id = tfBuscar.getText();
 			String temp;
 			txtrBusca.setText("");
+			String idBusca = Util.whatId(id);
 			
 			try {
 				
-				if(rdbtnAnimal.isSelected()) {
+				if(idBusca.equals("ANM")) {
 					
 					Animal a = fachada.buscarAnimalId(id);
 					temp = "ID: " + a.getId() + "\n" + "ESPÉCIE: " + a.getEspecie() + "\n" + 
@@ -178,7 +169,7 @@ public class PanelOperadorSistema extends JPanel {
 					txtrBusca.append(temp.toUpperCase());
 					tfBuscar.setText("");
 					
-				} else if(rdbtnCliente.isSelected()) {
+				} else if(idBusca.equals("CL")) {
 					
 					Cliente c = fachada.buscarCliente(id);
 					temp = "ID: " + c.getId() + "\n" + "NOME: " + c.getNome() + "\n" + 
@@ -186,7 +177,7 @@ public class PanelOperadorSistema extends JPanel {
 					txtrBusca.append(temp.toUpperCase());
 					tfBuscar.setText("");
 					
-				} else if(rdbtnConsulta.isSelected()) {
+				} else if(idBusca.equals("CONSULTA")) {
 					
 					Consulta co = fachada.buscarConsulta(id);
 					temp = "ID: " + co.getIdConsulta() + "\n" + "DATA: " + co.getData() + "\n" + 
@@ -208,29 +199,36 @@ public class PanelOperadorSistema extends JPanel {
 		}
 	}
 	
-	private class EvntBtnListarTodos implements ActionListener {
+	private class EvntBtnListar implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			
-			if(rdbtnAnimal.isSelected()) {
+			String s = (String)comboBox.getSelectedItem();
+			
+			if(s.equals("Animais")) {
 				
 				frame.getContentPane().setVisible(false);
 				frame.setContentPane(new PanelListarTodos(frame, "Animais", getOperadorSistema()));
 				frame.getContentPane().setVisible(true);
 				
-			} else if(rdbtnCliente.isSelected()) {
+			} else if(s.equals("Clientes")) {
 				
 				frame.getContentPane().setVisible(false);
 				frame.setContentPane(new PanelListarTodos(frame, "Clientes", getOperadorSistema()));
 				frame.getContentPane().setVisible(true);
 				
-			} else if(rdbtnConsulta.isSelected()) {
+			} else if(s.equals("Consultas")) {
 				
 				frame.getContentPane().setVisible(false);
 				frame.setContentPane(new PanelListarTodos(frame, "Consultas", getOperadorSistema()));
 				frame.getContentPane().setVisible(true);
 				
-			} else
-				JOptionPane.showMessageDialog(null, "Selecione o tipo de listagem!", "Erro", JOptionPane.ERROR_MESSAGE);
+			} else if(s.equals("Todos")){
+
+				frame.getContentPane().setVisible(false);
+				frame.setContentPane(new PanelListarTodos(frame, "Todos", getOperadorSistema()));
+				frame.getContentPane().setVisible(true);
+			}
+				
 		}
 	}
 	

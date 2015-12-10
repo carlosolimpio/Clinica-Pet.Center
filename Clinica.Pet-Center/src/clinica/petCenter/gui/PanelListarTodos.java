@@ -106,7 +106,26 @@ public class PanelListarTodos extends JPanel {
 							"ID ANIMAL: " + co.getAnimal().getId() + "\n" + "ID VETERINÁRIO: " + co.getVeterinario().getId() + "\n\n";
 					textArea.append(temp.toUpperCase());
 				}
-			} else 
+			}else if(tipo.equals("Todos")){
+				for(Animal a : fachada.listarAnimais()) {
+					
+					temp = "ID: " + a.getId() + "\n" + "ESPÉCIE: " + a.getEspecie() + "\n" + 
+							"RAÇA: " + a.getRaca() + "\n" + "ID DONO: " + a.getIdDono() + "\n\n";
+					textArea.append(temp.toUpperCase());
+				}
+				for(Cliente c : fachada.listarClientes()) {
+					temp = "ID: " + c.getId() + "\n" + "NOME: " + c.getNome() + "\n" + 
+							"CPF: " + c.getCPF() + "\n" + "EMAIL: " + c.getEmail() + "\n\n";
+					textArea.append(temp.toUpperCase());
+				}
+				for(Consulta co : fachada.listarConsultas()) {
+					temp = "ID: " + co.getIdConsulta() + "\n" + "DATA: " + co.getData() + "\n" + 
+							"ID ANIMAL: " + co.getAnimal().getId() + "\n" + "ID VETERINÁRIO: " + co.getVeterinario().getId() + "\n\n";
+					textArea.append(temp.toUpperCase());
+				}
+			}
+			
+			else 
 				throw new IllegalArgumentException("Erro na Lista");
 			
 		} catch(IllegalArgumentException iae) {
