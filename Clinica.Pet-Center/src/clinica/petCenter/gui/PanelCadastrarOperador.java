@@ -124,15 +124,6 @@ public class PanelCadastrarOperador extends JPanel {
 		tfDataAdmissao.setColumns(10);
 		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpar();
-			}
-		});
-		btnLimpar.setBounds(291, 366, 89, 23);
-		add(btnLimpar);
-		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 600, 21);
 		add(menuBar);

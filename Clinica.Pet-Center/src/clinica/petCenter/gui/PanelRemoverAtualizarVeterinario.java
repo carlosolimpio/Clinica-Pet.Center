@@ -160,17 +160,8 @@ private JFrame frame;
 		add(btnPreencher);
 		btnPreencher.addActionListener(new EvntBtnPreencher());
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpar();
-			}
-		});
-		btnLimpar.setBounds(303, 366, 89, 23);
-		add(btnLimpar);
-		
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
-		btnVoltarPanelAdm.setBounds(204, 366, 89, 23);
+		btnVoltarPanelAdm.setBounds(303, 366, 89, 23);
 		add(btnVoltarPanelAdm);
 		
 		pfSenha = new JPasswordField();

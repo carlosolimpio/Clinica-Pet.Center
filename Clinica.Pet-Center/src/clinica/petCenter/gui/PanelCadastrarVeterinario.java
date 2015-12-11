@@ -133,15 +133,6 @@ public class PanelCadastrarVeterinario extends JPanel {
 		tfDataAdmissao.setColumns(10);
 		btnVoltar.addActionListener(new EvntBtnVoltar());
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpar();
-			}
-		});
-		btnLimpar.setBounds(303, 366, 89, 23);
-		add(btnLimpar);
-		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 600, 21);
 		add(menuBar);

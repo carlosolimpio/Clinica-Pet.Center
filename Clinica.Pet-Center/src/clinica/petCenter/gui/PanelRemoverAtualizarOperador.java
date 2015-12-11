@@ -125,7 +125,7 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		btnAtualizar.addActionListener(new EvntBtnAtualizar());
 		
 		JButton btnVoltarPanelAdm = new JButton("Voltar");
-		btnVoltarPanelAdm.setBounds(204, 366, 89, 23);
+		btnVoltarPanelAdm.setBounds(303, 366, 89, 23);
 		add(btnVoltarPanelAdm);
 		btnVoltarPanelAdm.addActionListener(new EvntBtnVoltarPanelAdm());
 		
@@ -134,18 +134,9 @@ public class PanelRemoverAtualizarOperador extends JPanel {
 		add(btnPreencher);
 		btnPreencher.addActionListener(new EvntBtnPreencher());
 		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limpar();
-			}
-		});
-		btnLimpar.setBounds(303, 366, 89, 23);
-		add(btnLimpar);
-		
 		JLabel lblRemoveratualizarOp = new JLabel("REMOVER/ATUALIZAR OP");
 		lblRemoveratualizarOp.setFont(new Font("Tahoma", Font.BOLD, 15));
-		lblRemoveratualizarOp.setBounds(10, 325, 202, 37);
+		lblRemoveratualizarOp.setBounds(10, 357, 202, 37);
 		add(lblRemoveratualizarOp);
 		
 		JMenuBar menuBar = new JMenuBar();
