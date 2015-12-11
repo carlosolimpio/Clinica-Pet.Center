@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -17,7 +20,6 @@ import clinica.petCenter.negocio.cadastros.IFachadaCadastro;
 import clinica.petCenter.negocio.classesBasicas.Cliente;
 import clinica.petCenter.negocio.classesBasicas.OperadorSistema;
 import clinica.petCenter.negocio.exceptions.IDIException;
-import clinica.petCenter.negocio.exceptions.OExistenteException;
 import clinica.petCenter.negocio.exceptions.ONExistenteException;
 
 public class PanelAtualizarCliente extends JPanel {
@@ -44,6 +46,51 @@ public class PanelAtualizarCliente extends JPanel {
 		setOp(op);
 		
 		fachada = FachadaCadastro.getInstance();
+		
+		JMenuBar menuBar = new JMenuBar();
+		menuBar.setBounds(0, 0, 600, 21);
+		add(menuBar);
+		
+		JMenu mnCliente = new JMenu("Cliente");
+		menuBar.add(mnCliente);
+		
+		JMenuItem mntmCadastrarCliente = new JMenuItem("Cadastrar");
+		mnCliente.add(mntmCadastrarCliente);
+		mntmCadastrarCliente.addActionListener(new EvntMntmCadastrarCliente());
+		
+		JMenuItem mntmAtualizarCliente = new JMenuItem("Atualizar");
+		mnCliente.add(mntmAtualizarCliente);
+		mntmAtualizarCliente.addActionListener(new EvntMntmAtualizarCliente());
+		
+		JMenuItem mntmRemoverCliente = new JMenuItem("Remover");
+		mnCliente.add(mntmRemoverCliente);
+		mntmRemoverCliente.addActionListener(new EvntMntmRemoverCliente());
+		
+		JMenu mnAnimal = new JMenu("Animal");
+		menuBar.add(mnAnimal);
+		
+		JMenuItem mntmCadastrarAnimal = new JMenuItem("Cadastrar");
+		mnAnimal.add(mntmCadastrarAnimal);
+		mntmCadastrarAnimal.addActionListener(new EvntMntmCadastrarAnimal());
+		
+		JMenuItem mntmAtualizarAnimal = new JMenuItem("Atualizar");
+		mnAnimal.add(mntmAtualizarAnimal);
+		mntmAtualizarAnimal.addActionListener(new EvntMntmAtualizarAnimal());
+		
+		JMenuItem mntmRemoverAnimal = new JMenuItem("Remover");
+		mnAnimal.add(mntmRemoverAnimal);
+		mntmRemoverAnimal.addActionListener(new EvntMntmRemoverAnimal());
+		
+		JMenu mnConsultas = new JMenu("Consultas");
+		menuBar.add(mnConsultas);
+		
+		JMenuItem mntmAgendarConsulta = new JMenuItem("Agendar Consulta");
+		mnConsultas.add(mntmAgendarConsulta);
+		mntmAgendarConsulta.addActionListener(new EvtnMntmAgendarConsulta());
+		
+		JMenuItem mntmCancelarConsulta = new JMenuItem("Cancelar Consulta");
+		mnConsultas.add(mntmCancelarConsulta);
+		mntmCancelarConsulta.addActionListener(new EvtnMntmCancelarConsulta());
 		
 		JLabel lblTitulo = new JLabel("Atualizar Cliente");
 		lblTitulo.setFont(new Font("Tahoma", Font.BOLD, 15));
@@ -116,7 +163,7 @@ public class PanelAtualizarCliente extends JPanel {
 		this.frame = frame;
 	}
 	
-	public OperadorSistema getOp() {
+	public OperadorSistema getOperadorSistema() {
 		return op;
 	}
 
@@ -185,9 +232,79 @@ public class PanelAtualizarCliente extends JPanel {
 		public void actionPerformed(ActionEvent e) {			
 				
 			frame.getContentPane().setVisible(false);
-			frame.setContentPane(new PanelOperadorSistema(frame, getOp()));
+			frame.setContentPane(new PanelOperadorSistema(frame, getOperadorSistema()));
 			frame.getContentPane().setVisible(true);	
 			
+		}
+	}
+	
+	private class EvntMntmCadastrarCliente implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarCliente(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmAtualizarCliente implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelAtualizarCliente(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
+			
+		}
+	}
+	
+	private class EvntMntmRemoverCliente implements ActionListener {
+		public void actionPerformed(ActionEvent e) {			
+				
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverCliente(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);	
+			
+		}
+	}
+	
+	private class EvntMntmCadastrarAnimal implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCadastrarAnimal(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
+		}
+	}
+	
+	private class EvntMntmAtualizarAnimal implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelAtualizarAnimal(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
+		}
+	}
+	
+	private class EvntMntmRemoverAnimal implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelRemoverAnimal(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
+		}
+	}
+	
+	private class EvtnMntmAgendarConsulta implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelAgendarConsulta(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
+		}
+	}
+	
+	private class EvtnMntmCancelarConsulta implements ActionListener {
+		public void actionPerformed(ActionEvent e) {
+			frame.getContentPane().setVisible(false);
+			frame.setContentPane(new PanelCancelarConsulta(frame, getOperadorSistema()));
+			frame.getContentPane().setVisible(true);
 		}
 	}
 }
